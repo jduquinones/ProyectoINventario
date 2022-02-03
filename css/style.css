@@ -1,0 +1,96 @@
+:root {
+    --funtePrincipal: 'Rajdhani', sans-serif;
+    --color1: #318CE7; 
+    --colorEncabezadoTabla: #F3AD21;
+    --colorFondo: #F6F8FD;
+}
+html {
+    box-sizing: border-box;
+    font-size: 62.5%;
+ }
+ *, *::before, *::after {
+     box-sizing: inherit;
+ }
+ body{
+     font-family: var(--funtePrincipal);
+     background-color: var(--colorFondo);
+ }
+
+ .contenido {
+     width: 120rem;
+     margin: 0 auto;
+ }
+.contenido__login {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 2rem;
+    margin-top: 15rem;
+}
+.contenido__imagen {
+    background-image: url(../img/inventory-management-system.png);
+    height: 50rem;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.contenido__formulario {   
+    text-align: center;    
+    border-left: 1px solid var(--color);    
+}
+.formulario {
+    margin-left: 20rem;
+    margin-top: 2rem;
+    font-size: 3rem;      
+}
+
+legend {
+    font-size: 3rem;
+    margin: 0 0 10rem 0;
+    font-size: 8rem;
+    text-transform: uppercase;
+
+}
+.formulario__input {
+    margin: 3rem ;    
+    border-bottom: 1px solid black;  
+
+}
+.formulario__submit {
+    text-align: right;
+    margin-top: 2rem;
+    outline: none;
+}
+.formulario__input--no {
+    border: none;
+    outline: none;
+}
+.formulario__submit--cambio {
+    background-color: black;
+    border-radius: 1rem;
+    color: white;
+    width: 20rem;
+}
+
+/*Principal*/
+.table {
+    width: 100%;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th {
+    background-color: var(--colorEncabezadoTabla);
+    font-size: 2rem;    
+}
+th, td{
+    width: 20%;
+    text-align: center;
+    vertical-align: top; 
+    border: 1px solid #000;    
+}
+.contenido__table {
+    margin-top: -2rem;
+    border-radius: 5rem;
+}
+.imagen {
+    background-color: var(--color1);
+    height: 20rem;
+}
