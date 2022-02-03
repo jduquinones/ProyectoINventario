@@ -75,6 +75,7 @@ legend {
     width: 100%;
     border: 1px solid black;
     border-collapse: collapse;
+    margin-top: -2rem;
 }
 th {
     background-color: var(--colorEncabezadoTabla);
@@ -85,6 +86,9 @@ th, td{
     text-align: center;
     vertical-align: top; 
     border: 1px solid #000;    
+}
+tbody tr {
+    width: 2rem;
 }
 .contenido__table {
     margin-top: -2rem;

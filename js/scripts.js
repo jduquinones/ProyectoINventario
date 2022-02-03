@@ -3,6 +3,8 @@ let table = document.createElement('table');
 let thead = document.createElement('thead');
 let tbody =document.createElement('tbody');
 
+table.setAttribute("class", "table");
+
 table.appendChild(thead);
 table.appendChild(tbody);
 
@@ -20,7 +22,9 @@ encabezado_3.innerHTML = "Serial";
 let encabezado_4 = document.createElement('th');
 encabezado_4.innerHTML = "Activo Fijo";
 let encabezado_5 = document.createElement('th');
-encabezado_5.innerHTML = "imagen";
+encabezado_5.innerHTML = "Imagen";
+
+
 
 //se creo el texto del encabezado  y se coloco el encabezado en la fila
 fila_1.append(encabezado_1);
