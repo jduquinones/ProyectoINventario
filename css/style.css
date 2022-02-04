@@ -7,6 +7,7 @@
 html {
     box-sizing: border-box;
     font-size: 62.5%;
+    background-color: var(--colorFondo);
  }
  *, *::before, *::after {
      box-sizing: inherit;
@@ -88,7 +89,7 @@ th, td{
     border: 1px solid #000;    
 }
 tbody tr {
-    width: 2rem;
+    height: 3rem;
 }
 .contenido__table {
     margin-top: -2rem;
@@ -97,4 +98,40 @@ tbody tr {
 .imagen {
     background-color: var(--color1);
     height: 20rem;
+}
+.contenedor__button {
+    margin: -13rem 0 10rem 0;
+}
+.button {    
+    width: 10%;
+    height: 3rem;
+    font-size: 1.5rem;
+    background-color: #fff;
+    color: #000;
+    font-family: var(--funtePrincipal);
+    font-weight: 700;
+}
+
+/*REGISTRO DATOS*/
+.form {    
+    box-shadow: -1px 2px 13px 6px rgba(0,0,0,0.75);
+    padding: 3rem;
+    margin-top:20rem;
+}
+.contenedor__div {
+    margin-top: 2rem;
+}
+.boton__registro {
+    margin-top: 5rem;
+}
+.imagen__registro {
+    margin-top: -2rem;
+}
+.titulo {
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+.tamaño {
+    font-size: 2rem;
 }

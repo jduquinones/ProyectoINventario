@@ -42,7 +42,7 @@ for (let j = 0; j < 10; j++) {
   let tbody_tr = document.createElement('tr');
   for (let i = 0; i <5; i++) {
     let dato_1 = document.createElement('td');
-    dato_1.innerHTML = "q";
+    dato_1.innerHTML = "";
     tbody_tr.appendChild(dato_1);
     tbody.appendChild(tbody_tr);
   }

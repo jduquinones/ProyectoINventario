@@ -28,18 +28,19 @@
                 </legend>
                 <div class="formulario__border">  
                     <div class="formulario__input" >
-                        <input class="formulario__input--no" type="text" placeholder="Usuario*">
+                        <input id="correo" class="formulario__input--no" type="text" placeholder="Usuario*">
                     </div>
 
                     <div class="formulario__input">
-                        <input class="formulario__input--no" type="password" placeholder="Contraseña*">
+                        <input id="contraseña" class="formulario__input--no" type="password" placeholder="Contraseña*">
                     </div>                
                 </div>
                 <div class="formulario__submit">
-                    <input class="formulario__submit--cambio" type="submit" value="Ingresar">
+                    <input onclick="ingreso(correo, contraseña)" class="formulario__submit--cambio" type="submit" value="Ingresar">
                 </div>             
             </form>
         </div>       
     </main> 
+    <script src="ingreso.js"></script>
 </body>
 </html>
