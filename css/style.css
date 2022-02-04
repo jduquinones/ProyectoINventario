@@ -19,6 +19,10 @@ html {
      font-family: var(--funtePrincipal);
      background-color: var(--colorFondo);
  }
+ .contenido h1 {
+     font-family: var(--fuenteSecundaria);
+     font-size: 3rem;
+ }
  p {
      margin: 0;
  }
@@ -148,6 +152,14 @@ tbody tr {
 }
 .contenedor__div {
     margin-top: 2rem;
+    display: flex;
+    justify-content: space-between; 
+    width: 70%;
+    margin: 0 auto;   
+    padding: 1rem;
+}
+.tamaño__input {
+    width: 80%;    
 }
 .boton__registro {
     margin-top: 5rem;
