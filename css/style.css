@@ -1,8 +1,11 @@
 :root {
     --funtePrincipal: 'Rajdhani', sans-serif;
+    --fuenteSecundaria: 'Roboto', sans-serif;
     --color1: #318CE7; 
     --colorEncabezadoTabla: #F3AD21;
-    --colorFondo: #F6F8FD;
+    --colorFondo: #eceaea ;
+    --blanco: #fff;
+    --negro: #000;
 }
 html {
     box-sizing: border-box;
@@ -16,7 +19,31 @@ html {
      font-family: var(--funtePrincipal);
      background-color: var(--colorFondo);
  }
-
+ p {
+     margin: 0;
+ }
+ 
+.header {
+    background-color: var(--color1);
+    height: 20rem;
+    background-size: cover;
+    margin: 0;
+}
+.header__info {
+    padding: 3rem;
+    text-align: right;
+    font-size: 1.8rem;
+    line-height: 1.5;
+    color: var(--blanco);
+    margin-right: 4rem;
+}    
+.header__info a  {
+    text-decoration: none;
+    color: var(--blanco);
+}
+.background-color {
+    background-color: var(--blanco);
+}
  .contenido {
      width: 120rem;
      margin: 0 auto;
@@ -53,7 +80,6 @@ legend {
 .formulario__input {
     margin: 3rem ;    
     border-bottom: 1px solid black;  
-
 }
 .formulario__submit {
     text-align: right;
@@ -77,6 +103,11 @@ legend {
     border: 1px solid black;
     border-collapse: collapse;
     margin-top: -2rem;
+    background-color: var(--blanco);
+    box-shadow: -1px 2px 13px 6px rgba(0,0,0,0.75);
+}
+tr th {
+    font-family: var(--fuenteSecundaria);
 }
 th {
     background-color: var(--colorEncabezadoTabla);
@@ -95,15 +126,11 @@ tbody tr {
     margin-top: -2rem;
     border-radius: 5rem;
 }
-.imagen {
-    background-color: var(--color1);
-    height: 20rem;
-}
 .contenedor__button {
     margin: -13rem 0 10rem 0;
 }
 .button {    
-    width: 10%;
+    width: 11%;
     height: 3rem;
     font-size: 1.5rem;
     background-color: #fff;
@@ -116,7 +143,8 @@ tbody tr {
 .form {    
     box-shadow: -1px 2px 13px 6px rgba(0,0,0,0.75);
     padding: 3rem;
-    margin-top:20rem;
+    margin-top:8rem;
+    background-color: var(--blanco);
 }
 .contenedor__div {
     margin-top: 2rem;
