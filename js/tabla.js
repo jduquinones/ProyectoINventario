@@ -38,7 +38,7 @@ thead.appendChild(fila_1);
 
 
 // AGrego 10 filas y 4 columnas automaticamente
-for (let j = 0; j < 10; j++) {
+for (let j = 0; j < 15; j++) {
   let tbody_tr = document.createElement('tr');
   for (let i = 0; i <5; i++) {
     let dato_1 = document.createElement('td');

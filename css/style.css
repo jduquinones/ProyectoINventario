@@ -163,6 +163,8 @@ tbody tr {
 }
 .boton__registro {
     margin-top: 5rem;
+    display: block;
+    justify-content: right;
 }
 .imagen__registro {
     margin-top: -2rem;
