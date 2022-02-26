@@ -1,0 +1,43 @@
+.header {
+    background-color: $gris;
+    height: 20rem;
+    display: flex;   
+    justify-content: space-between;
+    padding-right: 12rem;   
+}
+.header__info, p{
+    margin-top: 1rem;
+    color: $blanco;
+    font-family: $fuente-principal;
+    text-decoration: none;
+    font-size: 2rem;
+    line-height: 1;  
+    text-transform: uppercase;
+}
+.cerrar-sesion, a {
+    margin-top: 5rem;
+    color: $blanco;
+    font-family: $fuente-principal;
+    text-decoration: none;
+    font-size: 1.5rem;
+}
+.menu-header{
+    margin: -2rem 0 0 5rem;  
+    display: flex;
+    flex-direction: column;  
+    align-items: center;
+    justify-content: center; 
+}
+.navegacion {
+    visibility: hidden;  // esta propiedad es igual a display: none solo que esta se puede animar
+    opacity: 0;
+    transition: visibility .3s ease-in-out, opacity 0.5s linear, height .5s linear;
+    height: auto;
+    text-align: end;
+}
+
+.mostrar {
+    visibility: visible;   
+    opacity: 1;
+    height: auto;
+}

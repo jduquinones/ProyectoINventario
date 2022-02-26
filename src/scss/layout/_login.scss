@@ -1,0 +1,55 @@
+.bg-login{
+    background-color: $gris;
+}
+.contenido__formulario {
+    background-color: $blanco;
+    border-radius: 2rem;
+    padding: 3rem;
+}
+.contenido__login {
+    @include grid(2, 2);    
+    margin-top:  20rem;
+    .formulario {
+        padding: 5rem;
+        input {
+            margin-top: 2rem;
+            width: 100%;
+            height: 3rem;   
+            border: 1px solid $azul; 
+            border-radius: 1rem;  
+        }              
+    }
+    
+    .contenido__imagen {
+        max-width: 70%;
+        margin: 0 auto;
+    }
+    legend {
+        font-size: 5rem;
+        text-transform: uppercase;
+        color: $negroClaro;
+        display: block;
+        text-align: center;
+        font-weight: $bold;
+        margin-top: -4rem;
+    }    
+}
+.formulario__submit{
+    width: 30%;
+    position: relative;
+    
+    .formulario__submit--cambio {
+        background-color: $negroClaro;
+        color: $blanco;              
+        margin-top: 1rem;
+        position: absolute;                     
+        top: 1rem;
+        &:hover {
+            cursor: pointer;
+            background-color: $azul ;
+            align-items: center;
+        }
+    }
+    
+}
+        

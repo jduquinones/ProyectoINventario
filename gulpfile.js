@@ -14,7 +14,7 @@ const webp = require('gulp-webp');
 
 const patch = {
     scss: 'src/scss/**/*.scss',
-    js: 'src/js/**/*.jks',
+    js: 'src/js/**/*.js',
     imagenes: 'src/img/**/*'
 }
 
@@ -27,7 +27,7 @@ function css() {
         .pipe(postcss([autoprefixer(), cssnano()]))
         // .pipe(postcss([autoprefixer()]))
         .pipe(sourcemaps.write('.'))
-        .pipe( dest('./build/css') );
+        .pipe( dest('build/css') );
 }
 
 function javascript() {
@@ -37,7 +37,7 @@ function javascript() {
         .pipe(terser())
         .pipe(sourcemaps.write('.'))
         .pipe(rename({suffix: '.min'}))
-        .pipe(dest('./build/js'));
+        .pipe(dest('build/js'));
 }
 
 function imagenes() {

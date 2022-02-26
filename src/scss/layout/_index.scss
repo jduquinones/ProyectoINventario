@@ -1,0 +1,35 @@
+
+.tabla{
+    width: 100%;
+    border: 1px solid $negro;
+    margin: 3rem 0 0 0;
+    border-collapse: collapse;
+    thead {
+        background-color: $azulClaro;
+        color: $negro;
+    }
+    thead,
+    tbody,
+    th,
+    td {
+       text-align: center;
+       border: 1px solid $negro;
+       
+    }
+    .boton {
+        display: block;
+        margin-top: 1rem;        
+        width: 100%;
+        color: $negro;
+        font-weight: $bold;
+        font-family: $fuente-principal;
+        border-radius: 2rem;
+    }
+    .boton-eliminar {
+        background-color: red;    
+    }
+    .boton-actualizar {
+        background-color: green;    
+    }
+    
+}

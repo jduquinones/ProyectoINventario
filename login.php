@@ -7,9 +7,13 @@
     <title>Login</title>
     <link rel="stylesheet" href="/build/css/app.css">   
 </head>
-<body class="contenido  background-color">
-    <main class="contenido__login">
+<body class="contenido  background-color bg-login">
+    <main class="contenido__login contenedor">
         <div class="contenido__imagen">
+            <picture>
+                <source srcset="build/img/inventory-management-system.webp" type="imagen/webp">
+                <img  loadin="lazy" src="build/img/inventory-management-system.png" alt="Imagen login">
+            </picture>
         </div>
         <div class="contenido__formulario">
             <form action="" class="formulario">
@@ -26,7 +30,7 @@
                     </div>                
                 </div>
                 <div class="formulario__submit">
-                    <input onclick="ingreso(correo, contraseña)" class="formulario__submit--cambio" type="submit" value="Ingresar">
+                    <input class="formulario__submit--cambio" type="submit" value="Ingresar">
                 </div>             
             </form>
         </div>       
