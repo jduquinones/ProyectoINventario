@@ -5,16 +5,17 @@
     margin: 3rem 0 0 0;
     border-collapse: collapse;
     thead {
-        background-color: $azulClaro;
-        color: $negro;
+        background-color: $azulClaro;        
+    }
+    thead th {
+        color: $blanco;
     }
     thead,
     tbody,
     th,
     td {
        text-align: center;
-       border: 1px solid $negro;
-       
+       border: 1px solid $negro;       
     }
     .boton {
         display: block;
