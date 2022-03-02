@@ -18,13 +18,14 @@
                 <line x1="4" y1="18" x2="20" y2="18" />
             </svg>
             <nav class="navegacion" >
-                <a href="#">Registrar Equipo</a>
+                <a href="index.php">Ver Registros de Equipos</a>
+                <a href="crearEquipo.php">Registrar Equipo</a>                
             </nav>
         </div>
         <div class="header__info">
             <p>Bienvenido: <span>xxxxxxxx</span></p>
-            <p>Dti Acopi</p>
-            <p>04/02/2022</p> 
+            <p>Dti <span>Acopi</span></p>
+            <p><?php echo $fecha = date('d/m/Y'); ?></p> 
             <div  class="cerrar-sesion">
                  <a href="">Cerra Sesión</a> 
             </div>

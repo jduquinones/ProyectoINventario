@@ -9,7 +9,6 @@ function menuheader(){
     menu.addEventListener('click', desplegar);
 
     function desplegar() {
-        console.log('si despliega')
         const verclase = document.querySelector('.navegacion');
         verclase.classList.toggle('mostrar');
     }

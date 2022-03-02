@@ -33,11 +33,20 @@
     opacity: 0;
     transition: visibility .3s ease-in-out, opacity 0.5s linear, height .5s linear;
     height: auto;
-    text-align: end;
+    text-align: end;    
+    a {
+        display: block;
+        margin: 0;
+        text-align: start;
+    }
 }
 
 .mostrar {
     visibility: visible;   
     opacity: 1;
     height: auto;
+}
+.header__info span {
+    font-weight: 700;
+    color: red;
 }

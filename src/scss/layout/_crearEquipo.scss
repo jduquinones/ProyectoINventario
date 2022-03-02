@@ -1,0 +1,23 @@
+
+.formulario{
+    margin-top: 5rem;  
+}
+fieldset{ 
+    text-transform: uppercase;
+}
+.orden {
+    display: flex;
+    padding: 0 5rem;
+    label {
+        width: 20%;
+        margin-bottom: 2rem;
+        text-transform: initial;
+    }
+    input {
+        width: 90%;
+        margin-bottom: 2rem;
+    }
+    textarea {
+        width: 90%;
+    }
+}
