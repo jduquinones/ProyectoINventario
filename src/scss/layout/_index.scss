@@ -32,5 +32,27 @@
     .boton-actualizar {
         background-color: green;    
     }
-    
+    .resultado-imagen {
+        max-width: 100%;
+        width: 10rem;
+        &.resultado-imagen:hover {
+            cursor: pointer;
+        }
+    }    
+}
+.overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;  
+    height: 100%;
+    display: grid;
+    place-items: center;
+    background-color: rbg(0 0 0 /.5);
+    img {
+        display: block;
+        max-width: 10rem;
+    }
 }

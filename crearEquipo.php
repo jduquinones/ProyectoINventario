@@ -12,41 +12,41 @@
     $observaciones = '';
 
     // convierte el value del input a una cadena legal para la base de datos, este dato lo captura de $_POST el cual es un metodo post
-    $activo = mysqli_real_escape_string($db, $_POST['activo']);
-    $serie = mysqli_real_escape_string($db, $_POST['serie']);
-    $inventario = mysqli_real_escape_string($db, $_POST['inventario']);
-    $descripcion = mysqli_real_escape_string($db, $_POST['descripcion']);
-    $observaciones = mysqli_real_escape_string($db, $_POST['observaciones']);    
 
-    // echo '<pre>';
-    // var_dump($_POST);
-    // echo '</pre>';
-
-    //Subir imagenes al servidor
-    $imagen = $_FILES['imagen'];
-
-
-    // echo '<pre>';
-    // var_dump($_FILES);
-    // echo '</pre>';
-
-    //Creamos la carpeta en donde se va a alojar las imagenes en el servidos
-    $carpetaImagen = 'imagenesSubmit/';
-    if (!is_dir($carpetaImagen) ) {
-       mkdir($carpetaImagen);
-    }
-
-    // Generamos un nombre unico para las imagenes
-    $nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
-    echo $nombreImagen;
+    // echo $_SERVER (Comparamos este metodo para cuando sea igual a post realice los pasos que estan en el if)
     
-    // Subimos la imagen
-    move_uploaded_file($imagen['tmp_name'], $carpetaImagen . $nombreImagen);
+   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    
+        $activo = mysqli_real_escape_string($db, $_POST['activo']);
+        $serie = mysqli_real_escape_string($db, $_POST['serie']);
+        $inventario = mysqli_real_escape_string($db, $_POST['inventario']);
+        $descripcion = mysqli_real_escape_string($db, $_POST['descripcion']);
+        $observaciones = mysqli_real_escape_string($db, $_POST['observaciones']);    
 
-    // echo $_SERVER;    
+        // echo '<pre>';
+        // var_dump($_SERVER);
+        // echo '</pre>';
 
-    $query = "INSERT INTO activos (activoFijo, serie, inventario, descripcion, imagen, observaciones) VALUES ('${activo}','${serie}','${inventario}','${descripcion}', '${nombreImagen}', '${observaciones}')";
-    $resultado = mysqli_query($db, $query);
+        //Subir imagenes al servidor
+        $imagen = $_FILES['imagen'];
+    
+        //Creamos la carpeta en donde se va a alojar las imagenes en el servidos
+        $carpetaImagen = 'imagenesSubmit/';
+        if (!is_dir($carpetaImagen) ) {
+        mkdir($carpetaImagen);
+        }
+
+        // Generamos un nombre unico para las imagenes
+        $nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
+        
+        // Subimos la imagen
+        move_uploaded_file($imagen['tmp_name'], $carpetaImagen . $nombreImagen);
+
+        
+
+        $query = "INSERT INTO activos (activoFijo, serie, inventario, descripcion, imagen, observaciones) VALUES ('${activo}','${serie}','${inventario}','${descripcion}', '${nombreImagen}', '${observaciones}')";
+        $resultado = mysqli_query($db, $query);
+   }
 
 ?>
 

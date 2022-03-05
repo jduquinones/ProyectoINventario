@@ -1,0 +1,68 @@
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+-- -----------------------------------------------------
+-- Schema inventario
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema inventario
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `inventario` DEFAULT CHARACTER SET utf8 ;
+USE `inventario` ;
+
+-- -----------------------------------------------------
+-- Table `inventario`.`ubicacion`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `inventario`.`ubicacion` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `centro` VARCHAR(5) NULL,
+  `area` VARCHAR(20) NULL,
+  `idUbicacion` INT(11) NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `inventario`.`activos`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `inventario`.`activos` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `activoFijo` VARCHAR(10) NOT NULL,
+  `serie` VARCHAR(10) NULL,
+  `inventario` VARCHAR(10) NULL,
+  `decripciones` VARCHAR(30) NULL,
+  `imagen` VARCHAR(200) NULL,
+  `observaciones` LONGTEXT NULL,
+  `idActivos` INT(11) NULL,
+  PRIMARY KEY (`id`),
+  INDEX `idActivos_idx` (`idActivos` ASC),
+  CONSTRAINT `idActivos`
+    FOREIGN KEY (`idActivos`)
+    REFERENCES `inventario`.`ubicacion` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `inventario`.`usuarios`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `inventario`.`usuarios` (
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `correo` VARCHAR(50) NOT NULL,
+  `contraseña` VARCHAR(100) NOT NULL,
+  `nombreUsuario` VARCHAR(30) NULL,
+  `regional` VARCHAR(20) NULL,
+  `idUsuario` INT(11) NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `correo_UNIQUE` (`correo` ASC))
+ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

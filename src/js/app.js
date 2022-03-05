@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     menuheader();
+    ampliarImagen();
 
 })
 
@@ -12,4 +13,21 @@ function menuheader(){
         const verclase = document.querySelector('.navegacion');
         verclase.classList.toggle('mostrar');
     }
+}
+
+function ampliarImagen(id){
+
+
+    var imagen = document.querySelectorAll('resultado-imagen');
+    imagen = document.images;
+
+    imagen.innerHTML = imagen[0].src;
+
+    const overlay = document.createElement('DIV');
+    overlay.appendChild(imagen[0]);
+    overlay.classList.add('overlay');
+
+    const body = document.querySelector('body');
+    body.appendChild(overlay);
+    
 }

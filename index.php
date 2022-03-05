@@ -34,7 +34,7 @@
                     <td><?php echo $row['serie']; ?></td>
                     <td><?php echo $row['inventario']; ?></td>
                     <td><?php echo $row['descripcion']; ?></td>
-                    <td><?php echo $row['imagen']; ?></td>
+                    <td class="resultado-imagen"><img onclick="ampliarImagen()"  src="imagenesSubmit/<?php echo $row['imagen']; ?>" alt=""></td>
                     <td><?php echo $row['observaciones']; ?></td>                
                     <td class="accion">
                         <a class="boton boton-actualizar" href="#">Actualizar</a>
