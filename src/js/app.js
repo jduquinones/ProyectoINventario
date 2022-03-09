@@ -29,11 +29,13 @@ function ampliarImagen(id){
         for (let i = 0; i < imagen.length; i++) {
 
             if (imagen.item(i).src.includes(img)) {
-                const overlay = document.createElement('DIV');
+                
+                const overlay = document.createElement('DIV');                
                 overlay.appendChild(imagen[i]);
                 overlay.classList.add('overlay');   
                 const body = document.querySelector('body');
                 body.appendChild(overlay);
+                
 
                 const x = document.createElement('P');
                 x.textContent = 'X';
@@ -47,7 +49,7 @@ function ampliarImagen(id){
                     overlay.remove();
                     
                 }
-
+                overlay.toggle();
 
             }            
         }        
