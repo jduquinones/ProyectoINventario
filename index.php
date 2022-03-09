@@ -10,8 +10,7 @@
 
     // echo '<pre>';
     // var_dump($resultado);
-    // echo '<pre>';    
-
+    // echo '<pre>';   
 ?>
 
     <main class="contenedor">
@@ -34,7 +33,7 @@
                     <td><?php echo $row['serie']; ?></td>
                     <td><?php echo $row['inventario']; ?></td>
                     <td><?php echo $row['descripcion']; ?></td>
-                    <td class="resultado-imagen"><img onclick="ampliarImagen()"  src="imagenesSubmit/<?php echo $row['imagen']; ?>" alt=""></td>
+                    <td><img class="resultado-imagen" onclick="ampliarImagen('imagenesSubmit/<?php echo $row['imagen'];?>')"  src="imagenesSubmit/<?php echo $row['imagen']; ?>" > </td>
                     <td><?php echo $row['observaciones']; ?></td>                
                     <td class="accion">
                         <a class="boton boton-actualizar" href="#">Actualizar</a>
@@ -44,9 +43,7 @@
                <?php endwhile; ?>
             </tbody>
         </table>
-    </main>
-        
-    <script src="js/tabla.js"></script>
+    </main>      
     
 <?php
     require 'includes/templates/footer.php';
