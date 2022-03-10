@@ -17,7 +17,6 @@
         <table class="tabla">
             <thead>
                 <tr>
-                    <th>Id</th>
                     <th>Activo fijo</th>
                     <th>Número de serie</th>
                     <th>Número de inventario</th>
@@ -30,7 +29,6 @@
             <tbody>
             <?php while($row = mysqli_fetch_assoc($resultado)): ?>                                
                <tr> 
-                    <td><?php echo $row['id']; ?></td>                  
                     <td><?php echo $row['activoFijo']; ?></td>                    
                     <td><?php echo $row['serie']; ?></td>
                     <td><?php echo $row['inventario']; ?></td>
