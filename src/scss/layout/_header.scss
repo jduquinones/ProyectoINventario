@@ -1,5 +1,5 @@
 .header {
-    background-color: $gris;
+    background-color: $azulClaro;
     height: 20rem;
     display: flex;   
     justify-content: space-between;
@@ -20,6 +20,9 @@
     font-family: $fuente-principal;
     text-decoration: none;
     font-size: 1.5rem;
+    & a:hover {
+        font-weight: 900;
+    }
 }
 .menu-header{
     margin: -2rem 0 0 20rem;  
@@ -37,16 +40,21 @@
     transition: visibility .3s ease-in-out, opacity 0.5s linear, height .5s linear;
     height: auto;
     text-align: left;  
-    background-color: $azulClaro;
+    background-color: $blanco;
+    padding: 1rem 0;
+    
 
-  
     a {
         display: block;
-        margin: 0;
+        margin: 0 0 0 1rem;
         text-align: start;
         color: $negro;
         font-weight: 900;
-        padding: 0 3rem 0 1rem ;
+        padding: 0 3rem 0 1rem ;      
+        &:hover {
+            background-color: $azulClaro;
+            color: $blanco;
+        } 
     }
 }
 
