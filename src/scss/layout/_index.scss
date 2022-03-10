@@ -14,8 +14,11 @@
     tbody,
     th,
     td {
-       text-align: center;
-       border: 1px solid $negro;       
+       text-align: center;       
+       border: 1px solid $negro;     
+       img{
+            margin: auto;
+       }  
     }
     .boton {
         display: block;
