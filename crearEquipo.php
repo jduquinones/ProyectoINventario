@@ -46,6 +46,14 @@
 
         $query = "INSERT INTO activos (activoFijo, serie, inventario, descripcion, imagen, observaciones) VALUES ('${activo}','${serie}','${inventario}','${descripcion}', '${nombreImagen}', '${observaciones}')";
         $resultado = mysqli_query($db, $query);
+        if ($resultado) {
+            $activo = '';
+            $serie = '';
+            $inventario = '';
+            $descripcion = '';
+            $imagen = '';
+            $observaciones = '';
+        } 
    }
 
 ?>

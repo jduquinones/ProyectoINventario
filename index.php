@@ -8,9 +8,27 @@
 
     $resultado = mysqli_query($db, $query);
 
-    // echo '<pre>';
-    // var_dump($resultado);
-    // echo '<pre>';   
+    // $resultado = $_GET['resulyado'];
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $id = $_POST['id'];
+        $id = filter_var($id, FILTER_VALIDATE_INT);
+
+        if ($id) {
+            // Elimina el archivo en la carpeta de imagenes
+            $query = "SELECT imagen FROM activos WHERE id = ${id}";
+            $resultado = mysqli_query($db, $query);
+            $dato = mysqli_fetch_assoc($resultado);
+
+            unlink('imagenesSubmit/' . $dato['imagen']);
+
+            $query = "DELETE FROM activos WHERE id = ${id}";
+            $resultado = mysqli_query($db, $query);
+            if ($resultado) {
+               header('Location: index.php');
+            }
+        }
+    }
 ?>
 
     <main class="contenedor">
