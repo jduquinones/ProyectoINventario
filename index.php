@@ -17,6 +17,7 @@
         <table class="tabla">
             <thead>
                 <tr>
+                    <th>Id</th>
                     <th>Activo fijo</th>
                     <th>Número de serie</th>
                     <th>Número de inventario</th>
@@ -28,7 +29,8 @@
             </thead>
             <tbody>
             <?php while($row = mysqli_fetch_assoc($resultado)): ?>                                
-               <tr>                   
+               <tr> 
+                    <td><?php echo $row['id']; ?></td>                  
                     <td><?php echo $row['activoFijo']; ?></td>                    
                     <td><?php echo $row['serie']; ?></td>
                     <td><?php echo $row['inventario']; ?></td>
@@ -36,8 +38,11 @@
                     <td><img class="resultado-imagen" onclick="ampliarImagen('imagenesSubmit/<?php echo $row['imagen'];?>')"  src="imagenesSubmit/<?php echo $row['imagen']; ?>" > </td>
                     <td><?php echo $row['observaciones']; ?></td>                
                     <td class="accion">
-                        <a class="boton boton-actualizar" href="#">Actualizar</a>
-                        <a class="boton boton-eliminar" href="#">Eliminar</a>                    
+                        <form method="POST">
+                            <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+                            <input type="submit" class="boton boton-eliminar" value="Eliminar">
+                        </form>
+                        <a class="boton boton-actualizar" href="actualizar.php?id=<?php echo $row['id']; ?>">Actualizar</a>
                     </td>                    
                </tr>               
                <?php endwhile; ?>

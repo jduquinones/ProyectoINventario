@@ -22,22 +22,31 @@
     font-size: 1.5rem;
 }
 .menu-header{
-    margin: -2rem 0 0 5rem;  
+    margin: -2rem 0 0 20rem;  
     display: flex;
     flex-direction: column;  
-    align-items: center;
+    align-items: flex-start;
     justify-content: center; 
+    &.menu-header:hover{
+        cursor: pointer;
+    }
 }
 .navegacion {
     visibility: hidden;  // esta propiedad es igual a display: none solo que esta se puede animar
     opacity: 0;
     transition: visibility .3s ease-in-out, opacity 0.5s linear, height .5s linear;
     height: auto;
-    text-align: end;    
+    text-align: left;  
+    background-color: $azulClaro;
+
+  
     a {
         display: block;
         margin: 0;
         text-align: start;
+        color: $negro;
+        font-weight: 900;
+        padding: 0 3rem 0 1rem ;
     }
 }
 
