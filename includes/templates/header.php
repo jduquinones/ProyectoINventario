@@ -10,25 +10,35 @@
 </head>
 <body>
     <header class="header">
-        <div class="menu-header">
-            <svg class="menu" xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-menu-2" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                <line x1="4" y1="6" x2="20" y2="6" />
-                <line x1="4" y1="12" x2="20" y2="12" />
-                <line x1="4" y1="18" x2="20" y2="18" />
-            </svg>
             <nav class="navegacion" >
-                <a href="index.php">Ver Registros de Equipos</a>
-                <a href="crearEquipo.php">Registrar Equipo</a>                
+                <ul>
+                    <li class="lista activo">
+                        <a class="activa" href="index.php"> <!--index.php-->
+                            <span class="icono"><ion-icon name="eye-outline"></ion-icon></span>
+                            <span class="titulo">Ver Equipos</span>
+                        </a>
+                    </li>
+
+                    <li class="lista ">
+                        <a class="activa" href="crearEquipo.php"> <!--crearEquipo.php-->
+                            <span class="icono"><ion-icon name="server-outline"></ion-icon></span>
+                            <span class="titulo">Registrar Equipo</span>
+                        </a>  
+                    </li>
+
+                    <li class="cerrar-sesion">
+                        <a href="">
+                            <span class="icono"><ion-icon name="log-out-outline"></ion-icon></span>    
+                            <span class="titulo">Cerra Sesión</span>    
+                        </a>   
+                    </li>
+                    <div class="indicador"></div>  
+                </ul>      
             </nav>
-        </div>
         <div class="header__info">
             <p>Bienvenido: <span>xxxxxxxx</span></p>
             <p>Dti <span>Acopi</span></p>
-            <p><?php echo $fecha = date('d/m/Y'); ?></p> 
-            <div  class="cerrar-sesion">
-                 <a href="">Cerra Sesión</a> 
-            </div>
+            <p><?php echo $fecha = date('d/m/Y'); ?></p>             
         </div>       
     </header>
 
