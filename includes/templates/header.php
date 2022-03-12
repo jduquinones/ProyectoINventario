@@ -1,4 +1,8 @@
-
+<?php     
+    if (!isset($_SESSION)) {
+        session_start();
+    }
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -12,7 +16,7 @@
     <header class="header">
             <nav class="navegacion" >
                 <ul>
-                    <li class="lista activo">
+                    <li class="lista">
                         <a class="activa" href="index.php"> <!--index.php-->
                             <span class="icono"><ion-icon name="eye-outline"></ion-icon></span>
                             <span class="titulo">Ver Equipos</span>
@@ -26,8 +30,31 @@
                         </a>  
                     </li>
 
+                    <li class="lista">
+                        <a class="activa "> <!--crearEquipo.php-->
+                            <span class="icono"><ion-icon name="cog-outline"></ion-icon></span>
+                            <span class="titulo">Configuracion</span>                            
+                        </a> 
+                        <ul>                            
+                            <li class="lista desplegable-hijo">
+                                <a href="gestionUsuario.php">
+                                    <span class="icono"><ion-icon name="people-circle-outline"></ion-icon></span>
+                                    <span class="titulo">Gestinar Usuario</span>
+                                </a>
+                            </li>
+                            
+                            <li class="lista desplegable-hijo">
+                                <a href="crearUsuarios.php">
+                                    <span class="icono"><ion-icon name="person-add-outline"></ion-icon></span>
+                                    <span class="titulo">Crear Usuarios</span>
+                                    
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
                     <li class="cerrar-sesion">
-                        <a href="">
+                        <a href="cerrar-sesion.php">
                             <span class="icono"><ion-icon name="log-out-outline"></ion-icon></span>    
                             <span class="titulo">Cerra Sesión</span>    
                         </a>   
@@ -36,9 +63,9 @@
                 </ul>      
             </nav>
         <div class="header__info">
-            <p>Bienvenido: <span>xxxxxxxx</span></p>
+            <p>Bienvenido: <span><?php echo $_SESSION['usuario']; ?></span></p>
             <p>Dti <span>Acopi</span></p>
-            <p><?php echo $fecha = date('d/m/Y'); ?></p>             
+            <p class="fecha-header" ><?php echo $fecha = date('d/m/Y'); ?></p>             
         </div>       
     </header>
 

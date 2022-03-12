@@ -20,10 +20,12 @@
     .boton {
         display: block;
         margin-top: 1rem;        
-        width: 100%;
+        width: 12rem;
+        height: 5rem;
         color: $negro;
-        font-weight: $bold;
+        font-weight: 500;
         font-family: $fuente-principal;
+        font-size: 2rem;
         border-radius: 2rem;
         text-decoration: none;
         border: 1px solid $gris;
@@ -36,7 +38,7 @@
         background-color: red;    
     }
     .boton-actualizar {
-        background-color: green;   
+        background-color: $verde;   
     }
     .resultado-imagen {
         width: 10rem;

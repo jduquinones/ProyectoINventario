@@ -1,4 +1,10 @@
 <?php
+    session_start();    
+    var_dump($_SESSION);
+    $autenticacion = $_SESSION['login'];
+    if(!$autenticacion){
+        header('Location: login.php');
+    }
 
     $id = $_GET['id'];    
     $id = filter_var($id, FILTER_VALIDATE_INT);

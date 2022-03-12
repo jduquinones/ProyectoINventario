@@ -1,6 +1,6 @@
 .header {
     background-color: $azulClaro;
-    height: 20rem;
+    height: auto;
     display: flex;   
     justify-content: space-between;
     padding-right: 12rem;   
@@ -13,30 +13,34 @@
     margin-top: 1rem;
     color: $blanco;
     font-family: $fuente-principal;
+    font-weight: 900;
     text-decoration: none;
     font-size: 2rem;
     line-height: 1;  
-    text-transform: uppercase;
 }
-.header__info span {
-    font-weight: 700;
-    color: red;
+
+.header__info p span {
+    font-weight: 400;
+    color: $verde;
 }
 
 .navegacion {
     margin: 2rem 0 2rem 15rem;
-    background-color: $azulClaro;
-    border-radius: 1rem;
+    background-color: $azulClaro;  
+    margin-left: 25rem;
     ul {
         padding: 0;
-        width: auto;
-
-
+        width: auto; 
+        border: 2px solid $verde;
+        background-color: $azulClaro;
+        border-radius: 1rem;
+        padding: 1rem 0 1rem 0;
         li {
             list-style: none;
             display: block;
             padding: .8rem 2rem 0 0;
             line-height: 1;
+            margin: auto;
             a {
                 color: $blanco;
                 padding: 0 2rem 0 1rem;
@@ -50,21 +54,29 @@
                 
                 &:hover {
                     color: $azulClaro;
-                    background-color: $blanco;
+                    background-color: $verde;
                 }
             }
         }
     }    
 }
-.navegacion:hover  {
-    border: 2px solid $blanco;
+.navegacion ul:hover  {
+    border: 2px solid $verde;
+}
+.navegacion ul li:first-child {
+    padding-top: 0;
+}
+.navegacion ul li:nth-child(4) {
+    padding-bottom: 1rem;
 }
 a .titulo {
     font-size: 1.5rem;
     margin-left: 1rem;
+    cursor: pointer;
 }
 a .icono {
     font-size: 2.5rem;
+    cursor: pointer;
 }
 .cerrar-sesion{
     color: $blanco;
@@ -74,4 +86,12 @@ a .icono {
     &:hover {
         font-weight: 900;
     }
+}
+.navegacion li ul{   
+    position: absolute;
+    left: 40rem;
+    display: none;
+}
+.navegacion li:hover ul{   
+    display: block;
 }

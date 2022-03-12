@@ -1,3 +1,66 @@
+<?php
+       
+    require 'includes/config/database.php';
+    $db = connectDB();
+
+    // Crea usuario y contraseña
+    $correo = '';
+    $contraseña = '';       
+    $error = [];
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+        $correo = mysqli_real_escape_string($db, $_POST['correo']);
+        $password = mysqli_real_escape_string($db, $_POST['password']);
+
+        $correo = filter_var($correo, FILTER_VALIDATE_EMAIL); // Validamos correo
+        $paswordHash = password_hash($password,PASSWORD_DEFAULT); // Validamos password    
+           
+        if (!$correo) {
+            $error[] = 'Debe ingresar un Correo';
+        }
+        
+        if (!$password) {
+            $error[] = 'Debe ingresar una Contraseña';
+        }
+
+        if (empty($error)) {
+            
+            // Revisar si existe el usuario
+            $query = "SELECT * FROM usuarios WHERE correo = '${correo}'";
+            $resultado = mysqli_query($db, $query);
+
+            if ($resultado->num_rows) {
+                // Revisar si la password es correcta
+                $usuario = mysqli_fetch_assoc($resultado);
+                $autenticacion = password_verify($password, $usuario['password']);
+
+                if ($autenticacion) {
+
+                    // Ingreso del usuario y contraseña autenticado
+                    session_start();
+
+                    // Llenar el arreglo de la sesion
+                    $_SESSION['usuario'] = $usuario['correo'];
+                    $_SESSION['login'] = true;
+                    // echo '<pre>';
+                    // var_dump($_SESSION);
+                    // echo '<pre>';
+                    header('Location: index.php');
+                    $correo = '';
+                    $contraseña = '';
+                }else {
+                    $error[] = 'Usuario o Contraseña incorrecta';
+                }
+            }else {
+                $error[] = 'Usuario o Contraseña incorrecta';
+            }
+            
+        }
+    }  
+
+?>
+
 <!DOCTYPE html>
 <html lang="es" class="background-color">
 <head>
@@ -16,17 +79,20 @@
             </picture>
         </div>
         <div class="contenido__formulario">
-            <form action="" class="formulario">
-                <legend>
-                    Bienvenido 
-                </legend>
+            <form class="formulario" method="POST" enctype="multipart/form-data">
+                <legend>Bienvenido</legend>
+                <?php foreach($error as $er) :?>
+                    <div class="error alerta">
+                        <?php echo $er ;?>
+                    </div>
+                <?php endforeach; ?>
                 <div class="formulario__border">  
                     <div class="formulario__input" >
-                        <input id="correo" class="formulario__input--no" type="text" placeholder="Usuario*">
+                        <input id="correo" name="correo" class="formulario__input--no" type="text" placeholder="Usuario*">
                     </div>
 
                     <div class="formulario__input">
-                        <input id="contraseña" class="formulario__input--no" type="password" placeholder="Contraseña*">
+                        <input id="password" name="password" class="formulario__input--no" type="password" placeholder="Contraseña*">
                     </div>                
                 </div>
                 <div class="formulario__submit">
