@@ -8,7 +8,8 @@
 }
 .contenido__login {
     @include grid(2, 2);    
-    margin-top:  20rem;
+    margin-top:  15rem;
+
     .formulario {
         padding: 5rem;
         input {

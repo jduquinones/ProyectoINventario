@@ -15,7 +15,7 @@
     th,
     td {
        text-align: center;       
-       border: 1px solid $negro; 
+       border: 1px solid $negro;       
     }
     .boton {
         display: block;
@@ -25,12 +25,18 @@
         font-weight: $bold;
         font-family: $fuente-principal;
         border-radius: 2rem;
+        text-decoration: none;
+        border: 1px solid $gris;
+        height: 3rem;
+        &:hover {
+            cursor: pointer;
+        }
     }
     .boton-eliminar {
         background-color: red;    
     }
     .boton-actualizar {
-        background-color: green;    
+        background-color: green;   
     }
     .resultado-imagen {
         width: 10rem;
@@ -41,6 +47,7 @@
         }
     }    
 }
+
 .overlay {
     position: fixed;
     top: 0;

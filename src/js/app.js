@@ -26,7 +26,7 @@ function ampliarImagen(id){
 function trae(){
     const div = document.createElement('DIV');    
     const imagen = document.createElement('IMG');
-    imagen.setAttribute('src', img);
+    imagen.setAttribute('src',` imagenesSubmit/${img}`);
     div.appendChild(imagen);   
     div.classList.add('overlay'); 
     // Boton para cerrar el Modal 
