@@ -34,11 +34,6 @@
                 // Revisar si la password es correcta
                 $usuario = mysqli_fetch_assoc($resultado);
                 $autenticacion = password_verify($password, $usuario['password']);
-                var_dump($autenticacion);
-                var_dump($password);  
-
-                var_dump($usuario['password']);                
-
                 if ($autenticacion) {
 
                     // Ingreso del usuario y contraseña autenticado

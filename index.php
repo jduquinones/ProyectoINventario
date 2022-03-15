@@ -13,16 +13,35 @@
     $query = "SELECT * FROM activos";
 
     $resultado = mysqli_query($db, $query);
+
+    $productosPorPagina = 2;
+    // Por defecto es la página 1; pero si está presente en la URL, tomamos esa
+        if (isset($_GET["pagina"])) {
+        $pagina = $_GET["pagina"];
+    }else{
+        $pagina = 1;
+    }
+    var_dump($_GET);
+    $query = "SELECT imagen FROM activos LIMIT" . (($pagina - 1 * $productosPorPagina) . "," . $productosPorPagina);
+    $resultado = mysqli_query($db, $query);
+    $resultado = "SELECT count(*) as num_personas FROM activos";
+    var_dump($resultado);
+    var_dump($query);
+    exit;
+
     
+        
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $id = $_POST['id'];
         $id = filter_var($id, FILTER_VALIDATE_INT);
 
         if ($id) {
-            // Elimina el archivo en la carpeta de imagenes
             $query = "SELECT imagen FROM activos WHERE id = ${id}";
             $resultado = mysqli_query($db, $query);
             $dato = mysqli_fetch_assoc($resultado);
+            var_dump($dato);
+            var_dump($query);
+            exit;
 
             unlink('imagenesSubmit/' . $dato['imagen']);
 
@@ -66,6 +85,30 @@
                     </td>                    
                </tr>               
                <?php endwhile; ?>
+            </tbody>
+        </table>
+        <table>
+            <tbody>
+                <tr>
+                    <td>
+                        <span><a href="">Anterior</a></span>
+                    </td>
+                    <td>
+                        <span><a href="">1</a></span>
+                    </td>
+                    <td>
+                        <span><a href="">2</a></span>
+                    </td>
+                    <td>
+                        <span><a href="">3</a></span>
+                    </td>
+                    <td>
+                        <span><a href="">4</a></span>
+                    </td>
+                    <td>
+                        <span><a href="">Siguiente</a></span>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </main>      
