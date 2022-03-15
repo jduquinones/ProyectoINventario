@@ -32,34 +32,37 @@
         $nombreUsuario = mysqli_real_escape_string($db, $_POST['nombreUsuario']);
         $regional = mysqli_real_escape_string($db, $_POST['regional']);
 
-        // if (empty($password) && empty($password1)){
+       if (empty($password) && empty($password1)){
             
-        //     if (empty($error)) {
-        //         $correo = filter_var($correo, FILTER_VALIDATE_EMAIL); // Validamos que sea un correo
-        //         $query = "UPDATE usuarios SET correo = '${correo}', nombreUsuario = '${nombreUsuario}', regional = '${regional}'WHERE id = ${id}";    
-        //         $resultado = mysqli_query($db, $query);   
+           if (empty($error)) {
+               $correo = filter_var($correo, FILTER_VALIDATE_EMAIL); //Validamos que sea un correo
+               $query = "UPDATE usuarios SET correo = '${correo}', nombreUsuario = '${nombreUsuario}', regional = '${regional}'WHERE id = ${id}";    
+               $resultado = mysqli_query($db, $query);   
 
-        //         var_dump($resultado);
-        //         if ($resultado) {
-        //             header('Location: gestionUsuario.php');
-        //         }    
-        //     }
-        // }
+               var_dump($password);
+               var_dump($password1);
+               var_dump($resultado);
+               var_dump($query);               
+               if ($resultado) {
+                   header('Location: gestionUsuario.php');
+               }    
+           }
+       }else {
         if ($password !==  $password1) {
             $error[] = 'Las contraseñas no coinciden';
         }else {
             if (empty($error)) {                
-                $correo = filter_var($correo, FILTER_VALIDATE_EMAIL); // Validamos que sea un correo
-                $paswordHash = password_hash($password,PASSWORD_DEFAULT); // hashamos el password  
-                $query = "UPDATE usuarios SET correo = '${correo}', password = '${$paswordHash}', nombreUsuario = '${nombreUsuario}', regional = '${regional}'WHERE id = ${id}";    
+                $correo = filter_var($correo, FILTER_VALIDATE_EMAIL); //Validamos que sea un correo
+                $passwordHash = password_hash($password,PASSWORD_DEFAULT); //hasheamos el password  
+                $query = "UPDATE usuarios SET correo = '${correo}', password = '${passwordHash}', nombreUsuario = '${nombreUsuario}', regional = '${regional}'WHERE id = ${id}";    
                 $resultado = mysqli_query($db, $query);   
-                var_dump($resultado);
-                exit;
+                
                 if ($resultado) {
                     header('Location: gestionUsuario.php');
                 }             
             }   
         }    // Validacion de contraseñas
+       }        
     }
 ?>
 

@@ -22,7 +22,7 @@
             $query = "DELETE FROM usuarios WHERE id = ${id}";
             $resultado = mysqli_query($db, $query);
             if ($resultado) {
-               header('Location: editarUsuario.php');
+               header('Location: gestionUsuario.php');
             }
         }
     }
@@ -45,12 +45,12 @@
                     <td><?php echo $row['nombreUsuario']; ?></td>
                     <td><?php echo $row['regional']; ?></td>             
                     <td class="accion">
-                        <form method="POST">
+                        <form method="POST" action="gestionUsuario.php">
                             <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
                             <input type="submit" class="boton boton-eliminar" value="Eliminar">
                         </form>
                         <a class="boton boton-actualizar" href="actualizarUsuario.php?id=<?php echo $row['id']; ?>" >Actualizar</a>
-                    </td>                    
+                    </td>                                
                </tr>               
                <?php endwhile; ?>
             </tbody>

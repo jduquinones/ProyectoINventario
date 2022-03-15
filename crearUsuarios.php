@@ -41,7 +41,7 @@
         }
         $correo = filter_var($correo, FILTER_VALIDATE_EMAIL); // Validamos que sea un correo
         $paswordHash = password_hash($password,PASSWORD_DEFAULT); // hashamos el password    
-           
+       
         if (!$correo) {
             $error[] = 'Debe de ingresar un correo valido';
         }
