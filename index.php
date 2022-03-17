@@ -10,25 +10,29 @@
 
     $db = connectDB();
 
-    $query = "SELECT * FROM activos";
+    // $tamañoPagina = 1;
+    // $pagina = $_GET['pagina'];
+    // if (!$pagina) {
+    //     $inicio = 0;
+    //     $pagina = 1;
+    // }else {
+    //     $inicio = ($pagina-1) * $tamañoPagina;
+    // }
 
+    //******Paginacion**********// 
+
+    $tamañoPaginas = 1;
+    $pagina = 1;
+    $empezarDesde = ($pagina -1) * $tamañoPaginas;
+
+    $query = "SELECT * FROM activos ";
     $resultado = mysqli_query($db, $query);
+    $numeroFilas = $resultado->num_rows;
+    $totalPaginas = ceil($numeroFilas / $tamañoPaginas);
+    var_dump($totalPaginas);
 
-    $productosPorPagina = 2;
-    // Por defecto es la página 1; pero si está presente en la URL, tomamos esa
-        if (isset($_GET["pagina"])) {
-        $pagina = $_GET["pagina"];
-    }else{
-        $pagina = 1;
-    }
-    var_dump($_GET);
-    $query = "SELECT imagen FROM activos LIMIT" . (($pagina - 1 * $productosPorPagina) . "," . $productosPorPagina);
-    $resultado = mysqli_query($db, $query);
-    $resultado = "SELECT count(*) as num_personas FROM activos";
-    var_dump($resultado);
-    var_dump($query);
-    exit;
-
+    $queryLimit = "SELECT * FROM activos LIMIT $empezarDesde, $tamañoPaginas ";
+    $resultadoLimit = mysqli_query($db, $queryLimit);
     
         
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -68,7 +72,7 @@
                 </tr>
             </thead>
             <tbody>
-            <?php while($row = mysqli_fetch_assoc($resultado)): ?>                                
+            <?php while($row = mysqli_fetch_assoc($resultadoLimit)): ?>                                
                <tr> 
                     <td><?php echo $row['activoFijo']; ?></td>                    
                     <td><?php echo $row['serie']; ?></td>
@@ -89,6 +93,7 @@
         </table>
         <table>
             <tbody>
+                <!-- <?php // foreach($totalPaginas as $pag) : ?> -->
                 <tr>
                     <td>
                         <span><a href="">Anterior</a></span>
@@ -109,8 +114,17 @@
                         <span><a href="">Siguiente</a></span>
                     </td>
                 </tr>
-            </tbody>
+                <!-- <?php //endforeach; ?> -->                
+            </tbody>            
         </table>
+        <div class="datos__registros">
+            <p>Cantidad de registros: <?php echo $numeroFilas; ?></p>
+            <?php 
+                    for ($i=1; $i < $totalPaginas; $i++) { 
+                        echo  "<a href='?pagina=" . $i ."'>0</a>";
+                    }
+                ?>
+        </div>
     </main>      
     
 <?php
