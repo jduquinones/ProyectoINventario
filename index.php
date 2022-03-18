@@ -10,26 +10,26 @@
 
     $db = connectDB();
 
-    // $tamañoPagina = 1;
-    // $pagina = $_GET['pagina'];
-    // if (!$pagina) {
-    //     $inicio = 0;
-    //     $pagina = 1;
-    // }else {
-    //     $inicio = ($pagina-1) * $tamañoPagina;
-    // }
-
+   
     //******Paginacion**********// 
 
     $tamañoPaginas = 1;
-    $pagina = 1;
+    
+    if (isset($_GET['pagina'])) {
+        if ($_GET['pagina'] === 1) {
+            header('Location: index.php');        
+        }else {
+            $pagina = $_GET['pagina'];
+        }
+    }else {
+        $pagina = 1;
+    }
     $empezarDesde = ($pagina -1) * $tamañoPaginas;
 
     $query = "SELECT * FROM activos ";
     $resultado = mysqli_query($db, $query);
     $numeroFilas = $resultado->num_rows;
     $totalPaginas = ceil($numeroFilas / $tamañoPaginas);
-    var_dump($totalPaginas);
 
     $queryLimit = "SELECT * FROM activos LIMIT $empezarDesde, $tamañoPaginas ";
     $resultadoLimit = mysqli_query($db, $queryLimit);
@@ -93,37 +93,23 @@
         </table>
         <table>
             <tbody>
-                <!-- <?php // foreach($totalPaginas as $pag) : ?> -->
                 <tr>
                     <td>
-                        <span><a href="">Anterior</a></span>
-                    </td>
+                        <span><a href="<?php echo'?pagina= $pagina - 1" '?>">Anterior</a></span>
+                    </td>                
+                    <?php for ($i=1; $i < $totalPaginas; $i++) : ?>                   
                     <td>
-                        <span><a href="">1</a></span>
+                        <span> <?php echo  "<a href='?pagina=" . $i ."'>" . $i . "</a>" ?></span>
                     </td>
-                    <td>
-                        <span><a href="">2</a></span>
-                    </td>
-                    <td>
-                        <span><a href="">3</a></span>
-                    </td>
-                    <td>
-                        <span><a href="">4</a></span>
-                    </td>
+                    <?php endfor ;?>  
                     <td>
                         <span><a href="">Siguiente</a></span>
                     </td>
-                </tr>
-                <!-- <?php //endforeach; ?> -->                
+                </tr>            
             </tbody>            
         </table>
         <div class="datos__registros">
             <p>Cantidad de registros: <?php echo $numeroFilas; ?></p>
-            <?php 
-                    for ($i=1; $i < $totalPaginas; $i++) { 
-                        echo  "<a href='?pagina=" . $i ."'>0</a>";
-                    }
-                ?>
         </div>
     </main>      
     
