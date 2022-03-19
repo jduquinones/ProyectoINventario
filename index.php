@@ -30,6 +30,8 @@
     $resultado = mysqli_query($db, $query);
     $numeroFilas = $resultado->num_rows;
     $totalPaginas = ceil($numeroFilas / $tamañoPaginas);
+    $anterior = $pagina - 1;
+    $siguiente = $pagina + 1;
 
     $queryLimit = "SELECT * FROM activos LIMIT $empezarDesde, $tamañoPaginas ";
     $resultadoLimit = mysqli_query($db, $queryLimit);
@@ -91,11 +93,11 @@
                <?php endwhile; ?>
             </tbody>
         </table>
-        <table>
+        <table class="paginador contenedor">
             <tbody>
                 <tr>
                     <td>
-                        <span><a href="<?php echo'?pagina= $pagina - 1" '?>">Anterior</a></span>
+                        <span class="anterior"> <?php echo "<a href=' ?pagina=" . $anterior . "'>Anterior</a>" ?> </span>
                     </td>                
                     <?php for ($i=1; $i < $totalPaginas; $i++) : ?>                   
                     <td>
@@ -103,7 +105,7 @@
                     </td>
                     <?php endfor ;?>  
                     <td>
-                        <span><a href="">Siguiente</a></span>
+                        <span class="siguiente"><?php echo "<a href=' ?pagina=" . $siguiente . "'>Siguiente</a>" ?></span>
                     </td>
                 </tr>            
             </tbody>            
