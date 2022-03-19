@@ -29,7 +29,7 @@
 ?>
 
     <main class="contenedor">
-        <table class="tabla">
+        <table class="tabla tabla__color">
             <thead>
                 <tr>
                     <th>Correo</th>

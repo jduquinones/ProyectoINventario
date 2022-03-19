@@ -1,6 +1,5 @@
 <?php
     session_start();    
-    var_dump($_SESSION);
     $autenticacion = $_SESSION['login'];
     if(!$autenticacion){
         header('Location: login.php');
@@ -76,7 +75,7 @@
 
 <main class="contenedor">
     <form class="formulario" method="POST" enctype="multipart/form-data">
-        <fieldset>
+        <fieldset class="tabla__color">
             <legend>Actualizar Equipos</legend>
             <div class="orden">
                 <label for="">Activo Fijo</label>

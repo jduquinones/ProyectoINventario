@@ -100,3 +100,35 @@
 .datos__registros p {
     color: $negro;
 }
+.paginador {
+    margin: 5rem auto 0 auto;
+    .anterior {        
+        margin-right: .5rem;
+        a {            
+            text-decoration: none;
+            color: $negro;
+        }
+    }
+    .pagina {
+        a {   
+            margin-right: .5rem;         
+            text-decoration: none;
+            color: $negro;
+        }
+    }
+    .siguiente {
+        a {            
+            text-decoration: none;
+            color: $negro;
+        }
+    }
+}
+
+.datos__registros span { 
+    font-weight: 900;
+    margin-left: 1rem;
+}
+.datos__registros p { 
+    font-size: 1.5rem;
+    font-weight: 400;
+}

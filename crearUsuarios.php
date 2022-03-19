@@ -90,7 +90,7 @@
         </div>
      <?php endforeach; ?>
     <form class="formulario" method="POST" enctype="multipart/form-data">
-        <fieldset>
+        <fieldset class="tabla__color">
             <legend>Creacion Usuarios</legend>
             <div class="orden">
                 <label for="">Email</label>

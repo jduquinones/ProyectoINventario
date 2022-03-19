@@ -38,8 +38,12 @@
 
                     // Ingreso del usuario y contraseña autenticado
                     session_start();
-
+                    $query = "SELECT regional FROM usuarios WHERE correo = '${correo}'";
+                    $resultado = mysqli_query($db,$query);
+                    $dato = mysqli_fetch_assoc($resultado);
+                   
                     // Llenar el arreglo de la sesion
+                    $_SESSION['id'] = $dato['regional'];
                     $_SESSION['usuario'] = $usuario['correo'];
                     $_SESSION['login'] = true;
                     

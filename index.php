@@ -3,7 +3,7 @@
      $autenticacion = estaAutenticado();
      if(!$autenticacion){
          header('Location: login.php');
-     }
+    }
 
     require 'includes/templates/header.php';
     require 'includes/config/database.php';
@@ -13,7 +13,7 @@
    
     //******Paginacion**********// 
 
-    $tamañoPaginas = 1;
+    $tamañoPaginas = 10;
     
     if (isset($_GET['pagina'])) {
         if ($_GET['pagina'] === 1) {
@@ -45,9 +45,6 @@
             $query = "SELECT imagen FROM activos WHERE id = ${id}";
             $resultado = mysqli_query($db, $query);
             $dato = mysqli_fetch_assoc($resultado);
-            var_dump($dato);
-            var_dump($query);
-            exit;
 
             unlink('imagenesSubmit/' . $dato['imagen']);
 
@@ -61,7 +58,7 @@
 ?>
 
     <main class="contenedor">
-        <table class="tabla">
+        <table class="tabla tabla__color">
             <thead>
                 <tr>
                     <th>Activo fijo</th>
@@ -93,7 +90,7 @@
                <?php endwhile; ?>
             </tbody>
         </table>
-        <table class="paginador contenedor">
+        <table class="paginador">
             <tbody>
                 <tr>
                     <td>
@@ -101,7 +98,7 @@
                     </td>                
                     <?php for ($i=1; $i < $totalPaginas; $i++) : ?>                   
                     <td>
-                        <span> <?php echo  "<a href='?pagina=" . $i ."'>" . $i . "</a>" ?></span>
+                        <span class="pagina"> <?php echo  "<a href='?pagina=" . $i ."'>" . $i . "</a>" ?></span>
                     </td>
                     <?php endfor ;?>  
                     <td>
@@ -111,7 +108,7 @@
             </tbody>            
         </table>
         <div class="datos__registros">
-            <p>Cantidad de registros: <?php echo $numeroFilas; ?></p>
+            <p>Cantidad total de registros: <span> <?php echo $numeroFilas; ?> </span></p>
         </div>
     </main>      
     

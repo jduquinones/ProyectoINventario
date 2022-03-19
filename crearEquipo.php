@@ -66,7 +66,7 @@
 
 <main class="contenedor">
     <form class="formulario" action="crearEquipo.php" method="POST" enctype="multipart/form-data">
-        <fieldset>
+        <fieldset class="tabla__color">
             <legend>Creacion Equipos</legend>
             <div class="orden">
                 <label for="">Activo Fijo</label>
