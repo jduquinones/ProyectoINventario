@@ -38,11 +38,7 @@
                $correo = filter_var($correo, FILTER_VALIDATE_EMAIL); //Validamos que sea un correo
                $query = "UPDATE usuarios SET correo = '${correo}', nombreUsuario = '${nombreUsuario}', regional = '${regional}'WHERE id = ${id}";    
                $resultado = mysqli_query($db, $query);   
-
-               var_dump($password);
-               var_dump($password1);
-               var_dump($resultado);
-               var_dump($query);               
+               
                if ($resultado) {
                    header('Location: gestionUsuario.php');
                }    

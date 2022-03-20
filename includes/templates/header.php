@@ -63,8 +63,8 @@
             </ul>      
         </nav>
 
-        <div>
-            <a href="">
+        <div class="logo">
+            <a href="index.php">
                 <picture>
                     <source srcset="build/img/logo.webp" type="image/webp">
                     <img loadin="lazy" src="build/img/logo.png" alt="Logo Macpollo">
