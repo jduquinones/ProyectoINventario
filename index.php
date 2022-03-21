@@ -58,6 +58,13 @@
 ?>
 
     <main class="contenedor">
+        <div class="buscador">
+           <form action="buscar.php" method="POST">
+                <input type="text" name="buscar" placeholder="Ingrese Activo...">
+                <i class="fa-solid fa-magnifying-glass"></i> 
+                <input class="buscar" type="submit" value="Buscar">          
+           </form>
+        </div>
         <table class="tabla tabla__color">
             <thead>
                 <tr>

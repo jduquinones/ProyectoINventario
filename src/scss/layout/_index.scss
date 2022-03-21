@@ -1,8 +1,42 @@
 
+.buscador {
+    position: absolute;
+    top: 27rem;
+    right: 0;
+    bottom: 0;
+    left: 100rem;
+    input[type="text"] {
+        height: 3rem;
+        width: 25rem;
+    }
+    i {
+        position: relative;
+        right:3rem;  
+        width: 2rem;
+        height: 2rem;
+        &:hover{
+            cursor: pointer;
+        }
+    }
+    .buscar {
+        position: relative;
+        top: -3rem;
+        left: 16.5rem;
+        background-color: transparent;
+        width: 7.5rem;
+        padding-right: 3rem;
+        border: none;   
+        z-index: 1000;
+    }
+}
+.buscar:hover,i {
+    color: $verde;
+    cursor: pointer;
+}
 .tabla{
     width: 100%;
     border: 1px solid $negro;
-    margin: 3rem 0 0 0;
+    margin: 8rem 0 0 0;
     border-collapse: collapse;
     thead {
         background-color: $azulClaro;        
@@ -20,6 +54,7 @@
     .boton {
         display: block;
         margin-top: 1rem;        
+        margin-bottom: 1rem;  
         width: 12rem;
         height: 5rem;
         color: $negro;
@@ -28,6 +63,7 @@
         font-size: 2rem;
         border-radius: 2rem;
         text-decoration: none;
+        text-align: center;    
         border: 1px solid $gris;
         height: 3rem;
         &:hover {

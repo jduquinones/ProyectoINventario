@@ -1,12 +1,16 @@
 .footer {
     background-color: $azulClaro;
     padding: 3rem 0;
-    margin-top: 17.2rem;
+    margin-top: 5rem;
     width: 100%;
-
     p {
+        font-weight: 400;
         color: $blanco;
         text-align: center;
         text-transform: initial;
+        span {
+            color: $verde;
+            font-size: 2rem;            
+        }
     }
 }
