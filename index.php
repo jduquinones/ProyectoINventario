@@ -10,6 +10,8 @@
 
     $db = connectDB();
 
+    $limpiarBuscar = '';
+
    
     //******Paginacion**********// 
 
@@ -35,7 +37,6 @@
 
     $queryLimit = "SELECT * FROM activos LIMIT $empezarDesde, $tamañoPaginas ";
     $resultadoLimit = mysqli_query($db, $queryLimit);
-    
         
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $id = $_POST['id'];
@@ -45,7 +46,6 @@
             $query = "SELECT imagen FROM activos WHERE id = ${id}";
             $resultado = mysqli_query($db, $query);
             $dato = mysqli_fetch_assoc($resultado);
-
             unlink('imagenesSubmit/' . $dato['imagen']);
 
             $query = "DELETE FROM activos WHERE id = ${id}";
@@ -60,7 +60,7 @@
     <main class="contenedor">
         <div class="buscador">
            <form action="buscar.php" method="POST">
-                <input type="text" name="buscar" placeholder="Ingrese Activo...">
+                <input type="text" name="buscar" placeholder="Ingrese Activo..." autocomplete="off" value="<?php echo $limpiarBuscar; ?>">
                 <i class="fa-solid fa-magnifying-glass"></i> 
                 <input class="buscar" type="submit" value="Buscar">          
            </form>

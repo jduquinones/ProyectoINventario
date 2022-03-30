@@ -19,14 +19,10 @@
         }
     }
     .buscar {
-        position: relative;
-        top: -3rem;
-        left: 16.5rem;
-        background-color: transparent;
-        width: 7.5rem;
-        padding-right: 3rem;
-        border: none;   
-        z-index: 1000;
+       transform: translateX(-11.5rem);
+       background-color: transparent;
+       border: none;
+       padding-right: 3rem;
     }
 }
 .buscar:hover,i {
@@ -173,4 +169,14 @@
 }
 .accion form input,a {
     margin: auto auto;
+}
+.error {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    margin-top: 10rem;
+    background-color: $rojo;
+    padding: 1rem;
+    color: $negro;
+    font-weight: 400;
 }
