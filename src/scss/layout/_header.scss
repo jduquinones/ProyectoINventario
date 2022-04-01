@@ -1,101 +1,92 @@
 .header {
+    display: grid;
+    grid-template-columns: 3;
+    grid-template-rows: 0;
     background-color: $azulClaro;
-    height: auto;
-    display: flex;
-    justify-content: space-between;
-}
-.header .header__info {
-    margin: 5rem 10rem 0 0;
+    padding: 5rem 0;
+    height: 5rem;
 
-}
-.header__info, p{
-    margin-top: 1rem;
-    color: $blanco;
-    font-family: $fuente-principal;
-    font-weight: 900;
-    text-decoration: none;
-    font-size: 2rem;
-    line-height: 1;
-}
-
-.header__info p span {
-    font-weight: 400;
-    color: $verde;
-}
-
-.navegacion {
-    margin: 2rem 0 2rem 10rem;
-    background-color: $azulClaro;
-    ul {
-        padding: 0;
-        width: auto;
-        border: 2px solid $verde;
-        background-color: $azulClaro;
-        border-radius: 1rem;
-        padding: 1rem 0 1rem 0;
-        li {
-            list-style: none;
-            display: block;
-            padding: .8rem 2rem 0 0;
-            line-height: 1;
-            margin: auto;
-            a {
-                color: $blanco;
-                padding: 0 2rem 0 1rem;
-                text-decoration: none;
-                margin: 0;
-                display: flex;
-                align-items: center;
-                align-content: space-between;
-                border-top-right-radius: 1rem;
-                border-bottom-right-radius: 1rem;
-
-                &:hover {
-                    color: $azulClaro;
-                    background-color: $verde;
-                }
-            }
+    .logo {
+        grid-column: 1 / 2;
+        width: 10rem;
+        height: 10rem;
+        margin-left : 5rem;
+        a picture img {
+            border-radius: 50rem;
         }
     }
-}
-.navegacion ul:hover  {
-    border: 2px solid $verde;
-}
-.navegacion ul li:first-child {
-    padding-top: 0;
-}
-.navegacion ul li:nth-child(4) {
-    padding-bottom: 1rem;
-}
-a .titulo {
-    font-size: 1.5rem;
-    margin-left: 1rem;
-    cursor: pointer;
-}
-a .icono {
-    font-size: 2.5rem;
-    cursor: pointer;
-}
-.cerrar-sesion{
-    color: $blanco;
-    font-family: $fuente-principal;
-    text-decoration: none;
-    font-size: 1.5rem;
-    &:hover {
-        font-weight: 900;
+    
+    .navegacion {
+        grid-column: 2 / 3;
+        background-color: $azulClaro;
+        margin: -3rem auto 0 auto;         
+        ul {
+            width: auto;
+            background-color: $azulClaro;
+            display: flex;
+            padding: 0;             
+            li {
+                list-style: none;
+                display: block;
+                margin-right: 3rem;
+                
+                ul {
+                    display: none;
+                    border: 1px solid red;    
+                    li {
+                        border: 1px solid green;
+                    }
+                }
+                a {
+                    color: $blanco;
+                    text-decoration: none;
+                    display: flex;
+                    align-items: center;
+                    &:hover {
+                        color: $azulClaro;
+                        background-color: $verde;
+                    }
+                }
+            }            
+        } 
     }
+
+    .header__info {
+        grid-column: 3 / 4;
+        display: flex;
+        width: 40rem;
+        align-content: flex-end;
+        justify-content: space-between;
+        margin: -3rem auto 0 auto;
+
+
+        .cerrar-sesion a {
+            color: $blanco;
+            font-family: $fuente-principal;
+            text-decoration: none;
+            font-size: 1.5rem;
+            &:hover {
+            font-weight: 900;
+            } 
+        }
+        p{
+            margin-top: 1rem;
+            color: $blanco;
+            font-family: $fuente-principal;
+            font-weight: 900;
+            text-decoration: none;
+            font-size: 2rem;
+            line-height: 1;
+        }
+        span {
+            font-weight: 400;
+            color: $verde;
+        }
+    }
+
 }
-.navegacion li ul{
-    position: absolute;
-    left: 20rem;
-    display: none;
-}
-.navegacion li:hover ul{
+
+.navegacion ul li ul:hover, li {
     display: block;
-}
-.logo a picture img {
-    margin: 5rem 1rem 0 0 ;
-    width: 10rem;
-    height: 10rem;
-    border-radius: 50rem;
+    margin: 1px solid red;   
 }

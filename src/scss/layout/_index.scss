@@ -34,6 +34,7 @@
     border: 1px solid $negro;
     margin: 8rem 0 0 0;
     border-collapse: collapse;
+    min-height: calc(100% - 4rem);
     thead {
         background-color: $azulClaro;        
     }
@@ -179,4 +180,5 @@
     padding: 1rem;
     color: $negro;
     font-weight: 400;
+    border-radius: 50rem;
 }

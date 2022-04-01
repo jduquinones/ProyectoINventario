@@ -30,6 +30,29 @@
                     </a>  
                 </li>
 
+                <li class="lista desplegable ">
+                    <a class="activa" href="crearEquipo.php"> <!--crearEquipo.php-->
+                        <span class="icono"><ion-icon name="server-outline"></ion-icon></span>
+                        <span class="titulo">Responsable</span>
+                    </a>
+                    <ul class="">                            
+                        <li class="lista desplegable-hijo">
+                            <a href="responsable.php">
+                                <span class="icono"><ion-icon name="people-circle-outline"></ion-icon></span>
+                                <span class="titulo">Ver Reponsable</span>
+                            </a>
+                        </li>
+                            
+                        <li class="lista desplegable-hijo">
+                            <a href="crearResponsable.php">
+                                <span class="icono"><ion-icon name="person-add-outline"></ion-icon></span>
+                                <span class="titulo">Crear Reponsable</span>
+                                  
+                            </a>
+                        </li>
+                    </ul>  
+                </li>
+
                 <li class="lista">
                     <a class="activa "> <!--crearEquipo.php-->
                         <span class="icono"><ion-icon name="cog-outline"></ion-icon></span>
@@ -52,13 +75,6 @@
                         </li>
                     </ul>
                 </li>
-
-                <li class="cerrar-sesion">
-                    <a href="cerrar-sesion.php">
-                        <span class="icono"><ion-icon name="log-out-outline"></ion-icon></span>    
-                        <span class="titulo">Cerra Sesión</span>    
-                    </a>   
-                </li>
                 <div class="indicador"></div>  
             </ul>      
         </nav>
@@ -73,9 +89,16 @@
         </div>
 
         <div class="header__info">
-            <p>Bienvenido: <span><?php echo $_SESSION['usuario']; ?></span></p>
-            <p>Dti <span><?php echo $_SESSION['id']; ?></span></p>
-            <p class="fecha-header" ><?php echo $fecha = date('d/m/Y'); ?></p>             
+            <div class="info-sesion">
+                <p><span><?php echo $_SESSION['usuario']; ?></span></p>
+                <p><span><?php echo $_SESSION['id']; ?></span></p>
+            </div>
+            <div class="cerrar-sesion">
+                <a href="cerrar-sesion.php">
+                    <span class="icono"><ion-icon name="log-out-outline"></ion-icon></span>    
+                    <span class="titulo">Cerra Sesión</span>    
+                </a>
+            </div>         
         </div>       
     </header>
 
