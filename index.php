@@ -11,8 +11,6 @@
     $db = connectDB();
 
     $limpiarBuscar = '';
-    $limpiarBuscar = '';
-
    
     //******Paginacion**********// 
 
