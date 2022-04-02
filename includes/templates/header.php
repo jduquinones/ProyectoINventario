@@ -15,27 +15,35 @@
 <body>
     <header class="header">
         <nav class="navegacion" >
-            <ul>
+            <ul class="menu">
                 <li class="lista">
                     <a class="activa" href="index.php"> <!--index.php-->
-                        <span class="icono"><ion-icon name="eye-outline"></ion-icon></span>
-                        <span class="titulo">Ver Equipos</span>
+                        <span class="icono"><ion-icon name="eye-outline"><i class="fa-solid fa-computer-classic"></i></ion-icon></span> 
+                        <span class="titulo">Equipos de Sistema</span>
                     </a>
-                </li>
+                    <ul>
+                        <li class="lista">
+                            <a class="activa" href="index.php"> <!--index.php-->
+                                <span class="icono"><ion-icon name="eye-outline"></ion-icon></span>
+                                <span class="titulo">Ver Equipos</span>
+                            </a>
+                        </li>
 
-                <li class="lista ">
-                    <a class="activa" href="crearEquipo.php"> <!--crearEquipo.php-->
-                        <span class="icono"><ion-icon name="server-outline"></ion-icon></span>
-                        <span class="titulo">Registrar Equipo</span>
-                    </a>  
-                </li>
+                        <li class="lista ">
+                            <a class="activa" href="crearEquipo.php"> <!--crearEquipo.php-->
+                                <span class="icono"><ion-icon name="server-outline"></ion-icon></span>
+                                <span class="titulo">Registrar Equipo</span>
+                            </a>  
+                        </li>
+                    </ul>
+                </li>                
 
                 <li class="lista desplegable ">
                     <a class="activa" href="crearEquipo.php"> <!--crearEquipo.php-->
                         <span class="icono"><ion-icon name="server-outline"></ion-icon></span>
                         <span class="titulo">Responsable</span>
                     </a>
-                    <ul class="">                            
+                    <ul class="submenu">                            
                         <li class="lista desplegable-hijo">
                             <a href="responsable.php">
                                 <span class="icono"><ion-icon name="people-circle-outline"></ion-icon></span>
@@ -58,7 +66,7 @@
                         <span class="icono"><ion-icon name="cog-outline"></ion-icon></span>
                         <span class="titulo">Configuracion</span>                            
                     </a> 
-                    <ul>                            
+                    <ul class="submenu">                            
                         <li class="lista desplegable-hijo">
                             <a href="gestionUsuario.php">
                                 <span class="icono"><ion-icon name="people-circle-outline"></ion-icon></span>
@@ -91,7 +99,6 @@
         <div class="header__info">
             <div class="info-sesion">
                 <p><span><?php echo $_SESSION['usuario']; ?></span></p>
-                <p><span><?php echo $_SESSION['id']; ?></span></p>
             </div>
             <div class="cerrar-sesion">
                 <a href="cerrar-sesion.php">
