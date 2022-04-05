@@ -1,10 +1,6 @@
 
 .buscador {
-    position: absolute;
-    top: 27rem;
-    right: 0;
-    bottom: 0;
-    left: 100rem;
+    transform: translateY(5rem);
     input[type="text"] {
         height: 3rem;
         width: 25rem;

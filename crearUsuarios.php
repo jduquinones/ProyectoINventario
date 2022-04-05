@@ -1,11 +1,5 @@
 <?php
 
-    require 'includes/funciones.php';
-    $autenticacion = estaAutenticado();
-    if(!$autenticacion){
-        header('Location: login.php');
-    }
-
     require 'includes/config/database.php';
     require 'includes/templates/header.php';
     $db = connectDB();

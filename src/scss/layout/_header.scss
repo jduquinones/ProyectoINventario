@@ -47,6 +47,7 @@
                     padding: 1rem;
                     border-radius: .5rem;
                     width: 100%;
+                    cursor: pointer;
                     &:hover {
                         transition: all .3s;
                         color: $azulClaro;
@@ -77,6 +78,8 @@
             margin-top: -4rem;
             position: absolute;
             right: 2rem;
+            top: -1rem;
+            margin-bottom: 1rem;
             a {
                 color: $blanco;
                 font-family: $fuente-principal;
@@ -88,7 +91,7 @@
                 } 
             }
             .icono {
-                font-size: 2rem;
+                font-size: 2rem;                
             }
         }
         p{
@@ -102,7 +105,8 @@
         }        
     }
 }
-.navegacion ul li:hover ul{
+.navegacion ul li:hover ul  {
+    z-index: 1000;
     display: inline-block;
     transition: all .3s;
     margin: 0;

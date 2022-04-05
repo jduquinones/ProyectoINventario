@@ -43,7 +43,6 @@
                     $dato = mysqli_fetch_assoc($resultado);
                    
                     // Llenar el arreglo de la sesion
-                    $_SESSION['id'] = $dato['regional'];
                     $_SESSION['usuario'] = $usuario['correo'];
                     $_SESSION['login'] = true;
                     

@@ -1,8 +1,11 @@
-<?php     
-    if (!isset($_SESSION)) {
-        session_start();
-    }
-?>
+<?php
+   require 'includes/funciones.php';
+   $autenticacion = estaAutenticado();
+   if(!$autenticacion){
+       header('Location: login.php');
+   }
+
+?>    
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -17,9 +20,9 @@
         <nav class="navegacion" >
             <ul class="menu">
                 <li class="lista">
-                    <a class="activa" href="index.php"> <!--index.php-->
+                    <a class="activa"> <!--index.php-->
                         <span class="icono"><ion-icon name="eye-outline"><i class="fa-solid fa-computer-classic"></i></ion-icon></span> 
-                        <span class="titulo">Equipos de Sistema</span>
+                        <span class="titulo">Equipos</span>
                     </a>
                     <ul>
                         <li class="lista">
@@ -39,7 +42,7 @@
                 </li>                
 
                 <li class="lista desplegable ">
-                    <a class="activa" href="crearEquipo.php"> <!--crearEquipo.php-->
+                    <a class="activa"> <!--crearEquipo.php-->
                         <span class="icono"><ion-icon name="server-outline"></ion-icon></span>
                         <span class="titulo">Responsable</span>
                     </a>
@@ -55,6 +58,29 @@
                             <a href="crearResponsable.php">
                                 <span class="icono"><ion-icon name="person-add-outline"></ion-icon></span>
                                 <span class="titulo">Crear Reponsable</span>
+                                  
+                            </a>
+                        </li>
+                    </ul>  
+                </li>
+
+                <li class="lista desplegable ">
+                    <a class="activa"> <!--crearEquipo.php-->
+                        <span class="icono"><ion-icon name="server-outline"></ion-icon></span>
+                        <span class="titulo">Ubicacion</span>
+                    </a>
+                    <ul class="submenu">                            
+                        <li class="lista desplegable-hijo">
+                            <a href="ubicacion.php">
+                                <span class="icono"><ion-icon name="people-circle-outline"></ion-icon></span>
+                                <span class="titulo">Ver Ubicacion</span>
+                            </a>
+                        </li>
+                            
+                        <li class="lista desplegable-hijo">
+                            <a href="crearUbicacion.php">
+                                <span class="icono"><ion-icon name="person-add-outline"></ion-icon></span>
+                                <span class="titulo">Crear Ubicacion</span>
                                   
                             </a>
                         </li>

@@ -23,17 +23,18 @@
     }
     $empezarDesde = ($pagina -1) * $tamañoPaginas;
 
-    $query = "SELECT * FROM responsables ";
+    $query = "SELECT * FROM ubicacion ";
     $resultado = mysqli_query($db, $query);
     $numeroFilas = $resultado->num_rows;
     $totalPaginas = ceil($numeroFilas / $tamañoPaginas);
     $anterior = $pagina - 1;
     $siguiente = $pagina + 1;
 
-    $queryLimit = "SELECT * FROM responsables LIMIT $empezarDesde, $tamañoPaginas ";
+    $queryLimit = "SELECT * FROM ubicacion LIMIT $empezarDesde, $tamañoPaginas ";
     $resultado = mysqli_query($db, $queryLimit);
         
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
         if (empty($_POST['buscar'])) {
             $buscar = false;
             $error[] = 'Debe ingresar un dato';
@@ -42,7 +43,8 @@
             $buscar = $_POST['buscar'];
             
             if ($buscar) {
-                $query = "SELECT * FROM responsables WHERE nombreEquipo LIKE '%${buscar}%' OR area LIKE '%${buscar}%' OR responsable LIKE '%${buscar}%' OR tipo LIKE '%${buscar}%' OR ip LIKE '%${buscar}%' OR sistemaOperativo LIKE '%${buscar}%' OR serial LIKE '%${buscar}%' OR extencion LIKE '%${buscar}%' OR ofimatica LIKE '%${buscar}%'";                
+
+                $query = "SELECT * FROM ubicacion WHERE centro LIKE '%${buscar}%' OR area LIKE '%${buscar}%' OR descripcion LIKE '%${buscar}%'";                
                 $resultado = mysqli_query($db, $query);
 
                 if ($resultado->num_rows) {
@@ -57,10 +59,10 @@
             $id = filter_var($id, FILTER_VALIDATE_INT);
 
             if ($id) {
-                $query = "DELETE FROM responsables WHERE id = ${id}";
+                $query = "DELETE FROM ubicacion WHERE id = ${id}";
                 $resultado = mysqli_query($db, $query);
                 if ($resultado) {
-                header('Location: responsable.php');
+                header('Location: ubicacion.php');
                 }
             }
         }
@@ -70,7 +72,7 @@
     <main class="contenedor">
         <div class="buscador">
            <form method="POST">
-                <input type="text" name="buscar" placeholder="Ingrese Activo..." autocomplete="off" >
+                <input type="text" name="buscar" placeholder="Ingrese Activo..." autocomplete="off">
                 <i class="fa-solid fa-magnifying-glass"></i> 
                 <input class="buscar" type="submit" value="Buscar">          
            </form>
@@ -82,36 +84,24 @@
         <table class="tabla tabla__color">
             <thead>
                 <tr>
-                    <th>Nombre Equipo</th>
+                    <th>Centro</th>
                     <th>Area</th>
-                    <th>Responsable</th>
-                    <th>Tipo</th>
-                    <th>Ip</th>
-                    <th>Sistema Operativo</th>
-                    <th>serial</th>
-                    <th>Extencion</th>
-                    <th>Ofimatica</th>
+                    <th>Descripcion</th>
                     <th>Accion</th>
                 </tr>
             </thead>
             <tbody>
             <?php while($row = mysqli_fetch_assoc($resultado)): ?>                                
                <tr> 
-                    <td><?php echo $row['nombreEquipo']; ?></td>                    
+                    <td><?php echo $row['centro']; ?></td>                    
                     <td><?php echo $row['area']; ?></td>
-                    <td><?php echo $row['responsable']; ?></td>
-                    <td><?php echo $row['tipo']; ?></td>
-                    <td><?php echo $row['ip']; ?></td>
-                    <td><?php echo $row['sistemaOperativo']; ?></td>
-                    <td><?php echo $row['serial']; ?></td>
-                    <td><?php echo $row['extencion']; ?></td>
-                    <td><?php echo $row['ofimatica']; ?></td>
+                    <td><?php echo $row['descripcion']; ?></td>
                     <td class="accion">
                         <form method="POST">
                             <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
                             <input type="submit" class="boton boton-eliminar" value="Eliminar">
                         </form>
-                        <a class="boton boton-actualizar" href="actualizarResponsable.php?id=<?php echo $row['id']; ?>" >Actualizar</a>
+                        <a class="boton boton-actualizar" href="actualizarUbicacion.php?id=<?php echo $row['id']; ?>" >Actualizar</a>
                     </td>                    
                </tr>               
                <?php endwhile; ?>
