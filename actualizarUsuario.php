@@ -1,14 +1,19 @@
 <?php
 
+    require 'includes/funciones.php';
+    require 'includes/config/database.php';   
+
+    $auth = estaAutenticado();
+    if (!$auth) {
+        header('Location: login.php');
+    }
+
     $id = $_GET['id'];    
     $id = filter_var($id, FILTER_VALIDATE_INT);
     if(!$id){
         header('Location: index.php');
     }
-
-    require 'includes/templates/header.php';
-    require 'includes/config/database.php';   
-
+    
     $db = connectDB(); 
     $query = "SELECT * FROM usuarios WHERE id = ${id}";
     $resultadoConsulta = mysqli_query($db, $query);

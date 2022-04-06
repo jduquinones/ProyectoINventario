@@ -7,8 +7,9 @@
 
     function estaAutenticado() : bool {
         session_start();   
-        $autenticacion = $_SESSION['login'];
-        if ($autenticacion) {
+
+        $auth = $_SESSION['login'];
+        if ($auth) {
             return true;
         } 
         return false;

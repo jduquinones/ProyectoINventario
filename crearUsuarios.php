@@ -1,7 +1,14 @@
 <?php
 
-    require 'includes/config/database.php';
+    require 'includes/funciones.php';
     require 'includes/templates/header.php';
+    require 'includes/config/database.php';   
+
+    $auth = estaAutenticado();
+    if (!$auth) {
+        header('Location: login.php');
+    }
+    
     $db = connectDB();
 
     // Crea usuario y contraseña

@@ -1,11 +1,3 @@
-<?php
-   require 'includes/funciones.php';
-   $autenticacion = estaAutenticado();
-   if(!$autenticacion){
-       header('Location: login.php');
-   }
-
-?>    
 <!DOCTYPE html>
 <html lang="es">
 <head>
