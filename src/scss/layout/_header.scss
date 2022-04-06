@@ -18,12 +18,10 @@
     
     .navegacion {
         grid-column: 2 / 3;
-        background-color: $azulClaro;
         margin: -4rem auto 0 auto;         
         ul {
             position: relative;
             width: auto;
-            background-color: $azulClaro;
             display: flex;
             padding: 0;  
             li {
@@ -34,6 +32,7 @@
                     position: absolute;
                     display: none;
                     width: auto;
+                    background-color: $azulClaro;
                     li {
                         margin: 0;
                         display: block;

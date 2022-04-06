@@ -1,13 +1,12 @@
 <?php
      
     require 'includes/funciones.php';
-    require 'includes/config/database.php';   
-
     $auth = estaAutenticado();
-    if (!$auth) {
-        header('Location: login.php');
+    if(!$auth) {
+        header('Location: /');
     }
 
+    require 'includes/config/database.php';
     $db = connectDB();
 
     $buscar = true;
@@ -60,9 +59,13 @@
                     $error[] = 'No se encontraron datos';
                 }
             }
-        }elseif ($id = $_POST['id']) {
-            $id = filter_var($id, FILTER_VALIDATE_INT);
+        }
+        
+        if (isset($_POST['id'])) {
 
+            $id = $_POST['id'];           
+            $id = filter_var($id, FILTER_VALIDATE_INT);
+            
             if ($id) {
                 $query = "SELECT imagen FROM activos WHERE id = ${id}";
                 $resultado = mysqli_query($db, $query);
@@ -77,6 +80,8 @@
             }
         } 
     }
+
+    incluirTemplate('header');
 ?>
 
 <main class="contenedor">

@@ -1,14 +1,12 @@
 <?php
 
     require 'includes/funciones.php';
-    require 'includes/templates/header.php';
-    require 'includes/config/database.php';
-
     $auth = estaAutenticado();
     if (!$auth) {
         header('Location: login.php');
-    }    
+    }   
 
+    require 'includes/config/database.php';
     $db = connectDB();
 
     $query = "SELECT * FROM usuarios";
@@ -27,6 +25,7 @@
             }
         }
     }
+    incluirTemplate('header');
 ?>
 
     <main class="contenedor">

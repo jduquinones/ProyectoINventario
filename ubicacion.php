@@ -1,14 +1,12 @@
 <?php
     
     require 'includes/funciones.php';
-    require 'includes/templates/header.php';
-    require 'includes/config/database.php';   
-
     $auth = estaAutenticado();
     if (!$auth) {
         header('Location: login.php');
     }    
 
+    require 'includes/config/database.php';  
     $db = connectDB();
 
     $buscar = true;
@@ -41,7 +39,7 @@
         
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-        if (empty($_POST['buscar'])) {
+        if ( empty($_POST['buscar']) ) {
             $buscar = false;
             $error[] = 'Debe ingresar un dato';
         }elseif ($_POST['buscar']) {
@@ -49,7 +47,6 @@
             $buscar = $_POST['buscar'];
             
             if ($buscar) {
-
                 $query = "SELECT * FROM ubicacion WHERE centro LIKE '%${buscar}%' OR area LIKE '%${buscar}%' OR descripcion LIKE '%${buscar}%'";                
                 $resultado = mysqli_query($db, $query);
 
@@ -61,9 +58,12 @@
                     $error[] = 'No se encontraron datos';
                 }
             }
-        }elseif ($id = $_POST['id']) {
-            $id = filter_var($id, FILTER_VALIDATE_INT);
+        }
 
+        if (  isset($_POST['id'])) {
+            $id = $_POST['id'];  
+            $id = filter_var($id, FILTER_VALIDATE_INT);
+    
             if ($id) {
                 $query = "DELETE FROM ubicacion WHERE id = ${id}";
                 $resultado = mysqli_query($db, $query);
@@ -73,6 +73,7 @@
             }
         }
     }
+    incluirTemplate('header');
 ?>
 
     <main class="contenedor">
@@ -113,7 +114,7 @@
                <?php endwhile; ?>
             </tbody>
         </table>
-        <?php }?> 
+         
         <table class="paginador">
             <tbody>
                 <tr>
@@ -134,6 +135,7 @@
         <div class="datos__registros">
             <p>Cantidad total de registros: <span> <?php echo $numeroFilas; ?> </span></p>
         </div>
+        <?php }?>
     </main>      
     
 <?php

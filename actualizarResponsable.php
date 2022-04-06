@@ -1,8 +1,5 @@
 <?php
     require 'includes/funciones.php';
-    require 'includes/templates/header.php';
-    require 'includes/config/database.php';   
-
     $auth = estaAutenticado();
     if (!$auth) {
         header('Location: login.php');
@@ -14,7 +11,9 @@
         header('Location: responsable.php');
     }
 
+    require 'includes/config/database.php';
     $db = connectDB(); 
+
     $query = "SELECT * FROM responsables WHERE id = ${id}";
     $resultadoConsulta = mysqli_query($db, $query);
     $dato = mysqli_fetch_assoc($resultadoConsulta);
@@ -48,10 +47,11 @@
             $resultado = mysqli_query($db, $query);
             
             if ($resultado) {
-                header('Location: responsable.php');
+                header('Location: /responsable.php');
             }             
         }            
     }
+    incluirTemplate('header');
 ?>
 
 <main class="contenedor">

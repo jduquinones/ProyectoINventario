@@ -1,14 +1,12 @@
 <?php
 
     require 'includes/funciones.php';
-    require 'includes/templates/header.php';
-    require 'includes/config/database.php';   
-
     $auth = estaAutenticado();
     if (!$auth) {
         header('Location: login.php');
     }
-    
+
+    require 'includes/config/database.php';
     $db = connectDB();
 
     // Crea usuario y contraseña
@@ -78,6 +76,7 @@
 
         }
     }
+    incluirTemplate('header');
 ?>
 <main class="contenedor">
     <?php foreach($error as $e) : ?>

@@ -1,14 +1,12 @@
 <?php
     
     require 'includes/funciones.php';
-    require 'includes/templates/header.php';
-    require 'includes/config/database.php';   
-
     $auth = estaAutenticado();
     if (!$auth) {
         header('Location: login.php');
     }
 
+    require 'includes/config/database.php';   
     $db = connectDB();
 
     $buscar = true;
@@ -40,7 +38,9 @@
     $resultado = mysqli_query($db, $queryLimit);
         
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        if (empty($_POST['buscar'])) {
+        
+
+        if ( empty($_POST['buscar']) ) {
             $buscar = false;
             $error[] = 'Debe ingresar un dato';
         }elseif ($_POST['buscar']) {
@@ -48,8 +48,9 @@
             $buscar = $_POST['buscar'];
             
             if ($buscar) {
-                $query = "SELECT * FROM responsables WHERE nombreEquipo LIKE '%${buscar}%' OR area LIKE '%${buscar}%' OR responsable LIKE '%${buscar}%' OR tipo LIKE '%${buscar}%' OR ip LIKE '%${buscar}%' OR sistemaOperativo LIKE '%${buscar}%' OR serial LIKE '%${buscar}%' OR extencion LIKE '%${buscar}%' OR ofimatica LIKE '%${buscar}%'";                
-                $resultado = mysqli_query($db, $query);
+                $query = "SELECT * FROM responsables WHERE nombreEquipo LIKE '%${buscar}%' OR area LIKE '%${buscar}%' OR responsable LIKE '%${buscar}%' OR tipo LIKE '%${buscar}%' OR ip LIKE '%${buscar}%' OR sistemaOperativo LIKE '%${buscar}%' OR serial LIKE '%${buscar}%' OR extencion LIKE '%${buscar}%' OR ofimatica LIKE '%${buscar}%'";     
+
+                $resultado = mysqli_query($db, $query);              
 
                 if ($resultado->num_rows) {
                     $resultado;
@@ -59,9 +60,13 @@
                     $error[] = 'No se encontraron datos';
                 }
             }
-        }elseif ($id = $_POST['id']) {
-            $id = filter_var($id, FILTER_VALIDATE_INT);
+        }
 
+        if (  isset($_POST['id'])) {
+            
+            $id = $_POST['id'];             
+            $id = filter_var($id, FILTER_VALIDATE_INT);
+    
             if ($id) {
                 $query = "DELETE FROM responsables WHERE id = ${id}";
                 $resultado = mysqli_query($db, $query);
@@ -71,6 +76,7 @@
             }
         }
     }
+    incluirTemplate('header');
 ?>
 
     <main class="contenedor">
