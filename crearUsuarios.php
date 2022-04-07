@@ -14,7 +14,8 @@
     // Crea usuario y contraseña
     $correo = '';
     $contraseña = '';
-    $nombreUsuario = '';
+    $nombre = '';
+    $apellido = '';
     $regional = '';
     
     $error = [];
@@ -26,7 +27,8 @@
         $correo = mysqli_real_escape_string($db, $_POST['correo']);
         $password = mysqli_real_escape_string($db, $_POST['password']);
         $password1 = mysqli_real_escape_string($db, $_POST['password1']);
-        $nombreUsuario = mysqli_real_escape_string($db, $_POST['nombreUsuario']);
+        $nombre = mysqli_real_escape_string($db, $_POST['nombre']);
+        $apellido = mysqli_real_escape_string($db, $_POST['apellido']);
         $regional = mysqli_real_escape_string($db, $_POST['regional']);
 
         // Validacion para saber si el correo a registrar ya existe
@@ -55,23 +57,26 @@
             $error[] = 'Debe de confirmar la contraseña ingresada';
         }
 
-        if (!$nombreUsuario) {
+        if (!$nombre) {
             $error[] = 'Debe ingresar un nombre de usuario';
+        }
+
+        if (!$apellido) {
+            $error[] = 'Debe ingresar un apellido de usuario';
         }
 
         if (empty($error)) {
             
-            $query = "INSERT INTO usuarios (correo,password,nombreUsuario,regional) VALUES ('${correo}','${paswordHash}','${nombreUsuario}','${regional}')";  
+            $query = "INSERT INTO usuarios (correo,password,nombre,apellido,regional) VALUES ('${correo}','${paswordHash}','${nombre}', '${apellido}','${regional}')";  
                         
             $resultado = mysqli_query($db, $query);
 
             if ($resultado) {
-                $activo = '';
-                $serie = '';
-                $inventario = '';
-                $descripcion = '';
-                $imagen = '';
-                $observaciones = '';
+                $correo = '';
+                $password = '';
+                $nombre = '';
+                $apellido = '';
+                $regional = '';
             } 
 
             $mensaje[] = 'Usuario creado correctamente';
@@ -107,7 +112,11 @@
             </div>
             <div class="orden">
                 <label for="">Nombre</label>
-                <input type="text" placeholder="Nombre" name="nombreUsuario" id="nombreUsuario" required >
+                <input type="text" placeholder="Nombre" name="nombre" id="nombre" required >
+            </div>
+            <div class="orden">
+                <label for="">Apellido</label>
+                <input type="text" placeholder="Apellido" name="apellido" id="apellido" required >
             </div>
             <div class="orden">
                 <label for="">Regional</label>
