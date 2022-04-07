@@ -27,7 +27,12 @@
     }
     $empezarDesde = ($pagina -1) * $tamañoPaginas;
 
-    $query = "SELECT * FROM responsables ";
+    $query = "SELECT r.nombre, u.area, e.ip, e.sistemaOperativo, e.serial, u.extencion, e.ofimatica 
+    FROM responsables AS r
+    JOIN equipos AS e 
+        ON r.id = e.id 
+    JOIN ubicacion AS u 
+        ON r.id = u.id";
     $resultado = mysqli_query($db, $query);
     $numeroFilas = $resultado->num_rows;
     $totalPaginas = ceil($numeroFilas / $tamañoPaginas);
@@ -37,8 +42,7 @@
     $queryLimit = "SELECT * FROM responsables LIMIT $empezarDesde, $tamañoPaginas ";
     $resultado = mysqli_query($db, $queryLimit);
         
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {        
 
         if ( empty($_POST['buscar']) ) {
             $buscar = false;
@@ -48,7 +52,7 @@
             $buscar = $_POST['buscar'];
             
             if ($buscar) {
-                $query = "SELECT * FROM responsables WHERE nombreEquipo LIKE '%${buscar}%' OR area LIKE '%${buscar}%' OR responsable LIKE '%${buscar}%' OR tipo LIKE '%${buscar}%' OR ip LIKE '%${buscar}%' OR sistemaOperativo LIKE '%${buscar}%' OR serial LIKE '%${buscar}%' OR extencion LIKE '%${buscar}%' OR ofimatica LIKE '%${buscar}%'";     
+                $query = "SELECT * FROM responsables WHERE nombre LIKE '%${buscar}%' OR apellido LIKE '%${buscar}%' OR cargo LIKE '%${buscar}%' OR responsable LIKE '%${buscar}%' OR tipo LIKE '%${buscar}%' OR ip LIKE '%${buscar}%' OR sistemaOperativo LIKE '%${buscar}%' OR serial LIKE '%${buscar}%' OR extencion LIKE '%${buscar}%' OR ofimatica LIKE '%${buscar}%'";     
 
                 $resultado = mysqli_query($db, $query);              
 
@@ -94,25 +98,23 @@
         <table class="tabla tabla__color">
             <thead>
                 <tr>
-                    <th>Nombre Equipo</th>
-                    <th>Area</th>
-                    <th>Responsable</th>
-                    <th>Tipo</th>
-                    <th>Ip</th>
-                    <th>Sistema Operativo</th>
-                    <th>serial</th>
-                    <th>Extencion</th>
-                    <th>Ofimatica</th>
+                    <th>Nombre</th>
+                    <th>Cargo</th>                    
+                    <th>Area</th>                    
+                    <th>Ip</th>                    
+                    <th>Sistema Operativo</th>                    
+                    <th>Serial</th>                    
+                    <th>Extencion</th>                    
+                    <th>Ofimatica</th>                    
                     <th>Accion</th>
                 </tr>
             </thead>
             <tbody>
             <?php while($row = mysqli_fetch_assoc($resultado)): ?>                                
                <tr> 
-                    <td><?php echo $row['nombreEquipo']; ?></td>                    
+                    <td><?php echo $row['nombre'] . " " . $row['apellido']; ?></td>    
+                    <td><?php echo $row['cargo']; ?></td>
                     <td><?php echo $row['area']; ?></td>
-                    <td><?php echo $row['responsable']; ?></td>
-                    <td><?php echo $row['tipo']; ?></td>
                     <td><?php echo $row['ip']; ?></td>
                     <td><?php echo $row['sistemaOperativo']; ?></td>
                     <td><?php echo $row['serial']; ?></td>

@@ -33,7 +33,7 @@
             <thead>
                 <tr>
                     <th>Correo</th>
-                    <th>Nombre de Usuario</th>
+                    <th>Nombre</th>
                     <th>Regional</th>
                     <th>Accion</th>
                 </tr>
@@ -42,7 +42,7 @@
             <?php while($row = mysqli_fetch_assoc($resultado)): ?>                                
                <tr> 
                     <td><?php echo $row['correo']; ?></td>                    
-                    <td><?php echo $row['nombreUsuario']; ?></td>
+                    <td><?php echo $row['nombre'] . " " . $row['apellido'] ; ?></td>
                     <td><?php echo $row['regional']; ?></td>             
                     <td class="accion">
                         <form method="POST" action="gestionUsuario.php">

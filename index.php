@@ -28,14 +28,14 @@
     }
     $empezarDesde = ($pagina -1) * $tamañoPaginas;
 
-    $query = "SELECT * FROM activos ";
+    $query = "SELECT * FROM equipos ";
     $resultado = mysqli_query($db, $query);
     $numeroFilas = $resultado->num_rows;
     $totalPaginas = ceil($numeroFilas / $tamañoPaginas);
     $anterior = $pagina - 1;
     $siguiente = $pagina + 1;
 
-    $queryLimit = "SELECT * FROM activos LIMIT $empezarDesde, $tamañoPaginas ";
+    $queryLimit = "SELECT * FROM equipos LIMIT $empezarDesde, $tamañoPaginas ";
     $resultado = mysqli_query($db, $queryLimit);
         
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -48,7 +48,7 @@
             $buscar = $_POST['buscar'];
             
             if ($buscar) {
-                $query = "SELECT * FROM activos WHERE activoFijo LIKE '%${buscar}%' OR serie LIKE '%${buscar}%' OR inventario LIKE '%${buscar}%' OR descripcion LIKE '%${buscar}%'";                
+                $query = "SELECT * FROM equipos WHERE tipo LIKE '%${buscar}%' OR ip LIKE '%${buscar}%' OR sistemaOperativo LIKE '%${buscar}%' OR serial LIKE '%${buscar}%' OR ofimatica LIKE '%${buscar}%' OR nombre LIKE '%${buscar}%'";                
                 $resultado = mysqli_query($db, $query);
 
                 if ($resultado->num_rows) {
@@ -67,12 +67,12 @@
             $id = filter_var($id, FILTER_VALIDATE_INT);
             
             if ($id) {
-                $query = "SELECT imagen FROM activos WHERE id = ${id}";
+                $query = "SELECT imagen FROM equipos WHERE id = ${id}";
                 $resultado = mysqli_query($db, $query);
                 $dato = mysqli_fetch_assoc($resultado);
                 unlink('imagenesSubmit/' . $dato['imagen']);
 
-                $query = "DELETE FROM activos WHERE id = ${id}";
+                $query = "DELETE FROM equipos WHERE id = ${id}";
                 $resultado = mysqli_query($db, $query);
                 if ($resultado) {
                 header('Location: index.php');
@@ -99,24 +99,30 @@
     <table class="tabla tabla__color">
         <thead>
             <tr>
-                <th>Activo fijo</th>
-                <th>Número de serie</th>
-                <th>Número de inventario</th>
-                <th>Descripcion</th>
+                <th>Tipo</th>
                 <th>Imagen</th>
-                <th>Observaciones</th>
+                <th>Ip</th>
+                <th>S. Operativo</th>
+                <th>Serial</th>
+                <th>Ofimatica</th> 
+                <th>Marca</th>
+                <th>Modelo</th>
+                <th>Nombre</th>
                 <th>Accion</th>
             </tr>
         </thead>
         <tbody>
         <?php while($row = mysqli_fetch_assoc($resultado)): ?>                                
             <tr> 
-                <td><?php echo $row['activoFijo']; ?></td>                    
-                <td><?php echo $row['serie']; ?></td>
-                <td><?php echo $row['inventario']; ?></td>
-                <td><?php echo $row['descripcion']; ?></td>
-                <td><img class="resultado-imagen" onclick="ampliarImagen('<?php echo $row['imagen'];?>')"  src="imagenesSubmit/<?php echo $row['imagen']; ?>" > </td>
-                <td><?php echo $row['observaciones']; ?></td>                
+                <td><?php echo $row['tipo']; ?></td>   
+                <td><img class="resultado-imagen" onclick="ampliarImagen('<?php echo $row['imagen'];?>')"  src="imagenesSubmit/<?php echo $row['imagen']; ?>" > </td>                 
+                <td><?php echo $row['ip']; ?></td>
+                <td><?php echo $row['sistemaOperativo']; ?></td>
+                <td><?php echo $row['serial']; ?></td>
+                <td><?php echo $row['ofimatica']; ?></td>
+                <td><?php echo $row['marca']; ?></td>                
+                <td><?php echo $row['modelo']; ?></td>                
+                <td><?php echo $row['nombre']; ?></td>                
                 <td class="accion">
                     <form method="POST">
                         <input type="hidden" name="id" value="<?php echo $row['id']; ?>">

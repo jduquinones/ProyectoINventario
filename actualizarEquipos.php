@@ -15,27 +15,31 @@
     require 'includes/config/database.php';
     $db = connectDB(); 
 
-    $query = "SELECT * FROM activos WHERE id = ${id}";
+    $query = "SELECT * FROM equipos WHERE id = ${id}";
     $resultadoConsulta = mysqli_query($db, $query);
     $dato = mysqli_fetch_assoc($resultadoConsulta);
 
-    $activo = $dato['activoFijo'];
-    $serie = $dato['serie'];
-    $inventario = $dato['inventario'];
-    $descripcion = $dato['descripcion'];
-    $imagen = $dato['imagen'];
-    $observaciones = $dato['observaciones'];
+    $tipo = $dato['tipo'];
+    $ip = $dato['ip'];
+    $sistemaOperativo = $dato['sistemaOperativo'];
+    $serial = $dato['serial'];
+    $ofimatica = $dato['ofimatica'];
+    $marca = $dato['marca'];
+    $modelo = $dato['modelo'];
+    $nombre = $dato['nombre'];
 
     $error = [];
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-        $activo = mysqli_real_escape_string($db, $_POST['activo']);
-        $serie = mysqli_real_escape_string($db, $_POST['serie']);
-        $inventario = mysqli_real_escape_string($db, $_POST['inventario']);
-        $descripcion = mysqli_real_escape_string($db, $_POST['descripcion']);
-        $imagen = $_FILES['imagen'];
-        $observaciones = mysqli_real_escape_string($db, $_POST['observaciones']);
+        $tipo = mysqli_real_escape_string($db, $_POST['tipo']);
+        $ip = mysqli_real_escape_string($db, $_POST['ip']);
+        $sistemaOperativo = mysqli_real_escape_string($db, $_POST['sistemaOperativo']);
+        $serial = mysqli_real_escape_string($db, $_POST['serial']);
+        $ofimatica = mysqli_real_escape_string($db, $_POST['ofimatica']);
+        $marca = mysqli_real_escape_string($db, $_POST['marca']);    
+        $modelo = mysqli_real_escape_string($db, $_POST['modelo']);    
+        $nombre = mysqli_real_escape_string($db, $_POST['nombre']);    
        
         // Crear carpeta
         $carpetaImagen = 'imagenesSubmit/';
@@ -64,7 +68,7 @@
             $error[] = 'La imagen es muy pesada';
         }
 
-        $query = "UPDATE activos SET activoFijo = '${activo}', serie = '${serie}', inventario = '${inventario}', descripcion = '${descripcion}', imagen = '${nombreImagen}', observaciones = '${observaciones}' WHERE id = ${id}";    
+        $query = "UPDATE equipos SET tipo = '${tipo}', ip = '${ip}', sistemaOperativo = '${sistemaOperativo}', serial = '${serial}', ofimatica = '${ofimatica}', imagen = '${nombreImagen}', marca = '${marca}', modelo = '${modelo}', nombre = '${nombre}' WHERE id = ${id}";    
 
         $resultado = mysqli_query($db, $query);   
         if ($resultado) {
@@ -79,20 +83,24 @@
         <fieldset class="tabla__color">
             <legend>Actualizar Equipos</legend>
             <div class="orden">
-                <label for="">Activo Fijo</label>
-                <input type="text" placeholder="Numero Fijo" name="activo" id="activo" value="<?php echo $activo ;?>">
+                <label for="">Tipo</label>
+                <input type="text" placeholder="Tipo de Equipo" name="tipo" id="tipo" value="<?php echo $tipo; ?>">
             </div>
             <div class="orden">
-                <label for="">Número de serie</label>
-                <input type="text" placeholder="Numero serie" name="serie" id="serie" value="<?php echo $serie ;?>">
+                <label for="">Ip</label>
+                <input type="text" placeholder="Numero de Ip" name="ip" id="ip" value="<?php echo $ip; ?>">
             </div>
             <div class="orden">
-                <label for="">Número de inventario</label>
-                <input type="text" placeholder="Numero inventario" name="inventario" id="inventario" value="<?php echo $inventario ;?>">
+                <label for="">Sistema Operativo</label>
+                <input type="text" placeholder="Sistema Operativo" name="sistemaOperativo" id="sistemaOperativo" value="<?php echo $sistemaOperativo; ?>">
             </div>
             <div class="orden">
-                <label for="">Descripcion</label>
-                <input type="text" placeholder="Descripcion del Equipo" name="descripcion" id="descripcion" value="<?php echo $descripcion ;?>">
+                <label for="">Serial</label>
+                <input type="text" placeholder="Serial" name="serial" id="serial" value="<?php echo $serial; ?>">
+            </div>
+            <div class="orden">
+                <label for="">Ofimatica</label>
+                <input type="text" placeholder="Ofimatica del Equipo" name="ofimatica" id="ofimatica" value="<?php echo $ofimatica; ?>">
             </div>
             <div class="orden bloque">
                 <label for="">Imagen</label>
@@ -100,9 +108,21 @@
                 <img src="imagenesSubmit/<?php echo $imagen ;?>" class="imagen-small" alt="">
             </div>
             <div class="orden">
-                <label for="">Observaciones</label>
-                <textarea name="observaciones" id="observaciones" ><?php echo $observaciones ;?></textarea>
+                <label for="">Marca</label>
+                <input name="marca" placeholder="Marca" id="marca" value="<?php echo $marca; ?>"></input>
             </div>
+            <div class="orden">
+                <label for="">Modelo</label>
+                <input name="modelo" placeholder="Marca" id="modelo" value="<?php echo $modelo; ?>"></input>
+            </div>
+            <div class="orden">
+                <label for="">Nombre</label>
+                <input name="nombre" placeholder="Nombre" id="nombre" value="<?php echo $nombre; ?>"></input>
+            </div>
+            <!-- <div class="orden">
+                <label for="">marca</label>
+                <textarea name="marca" id="marca" ><?php echo $marca ;?></textarea>
+            </div> -->
             <input class="boton boton-eliminar" type="submit" value="Enviar">
         </fieldset>
     </form>
