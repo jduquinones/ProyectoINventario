@@ -1,12 +1,10 @@
 <?php
-     require 'includes/funciones.php';
-     require 'includes/templates/header.php';
-     require 'includes/config/database.php';   
- 
-     $auth = estaAutenticado();
-     if (!$auth) {
-         header('Location: login.php');
-     }
+
+    require 'includes/funciones.php';
+    $auth = estaAutenticado();
+    if (!$auth) {
+        header('Location: ubicacion.php');
+    }
 
     $id = $_GET['id'];    
     $id = filter_var($id, FILTER_VALIDATE_INT);
@@ -14,7 +12,9 @@
         header('Location: index.php');
     }
 
+    require 'includes/config/database.php';   
     $db = connectDB(); 
+
     $query = "SELECT * FROM ubicacion WHERE id = ${id}";
     $resultadoConsulta = mysqli_query($db, $query);
     $dato = mysqli_fetch_assoc($resultadoConsulta);
@@ -35,10 +35,12 @@
             $resultado = mysqli_query($db, $query);   
             
             if ($resultado) {
-                header('Location: gestionUsuario.php');
+                header('Location: ubicacion.php');
             }             
         }                        
     }
+
+    incluirTemplate('header');
 ?>
 
 <main class="contenedor">

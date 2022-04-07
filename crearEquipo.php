@@ -1,13 +1,12 @@
 <?php
-     require 'includes/funciones.php';
-     require 'includes/templates/header.php';
-     require 'includes/config/database.php';   
- 
-     $auth = estaAutenticado();
-     if (!$auth) {
+
+    require 'includes/funciones.php';
+    $auth = estaAutenticado();
+    if (!$auth) {
         header('Location: login.php');
     }
 
+    require 'includes/config/database.php';
     $db = connectDB();
         
     // Se crean los datos vacios para que al enviarse a la base de datos no se envie lo que esta en el place holder
@@ -62,6 +61,7 @@
         } 
    }
 
+   incluirTemplate('header');
 ?>
 
 <main class="contenedor">

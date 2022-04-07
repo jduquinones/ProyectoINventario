@@ -1,14 +1,12 @@
 <?php
 
     require 'includes/funciones.php';
-    require 'includes/templates/header.php';
-    require 'includes/config/database.php';   
-
     $auth = estaAutenticado();
     if (!$auth) {
         header('Location: login.php');
     }
 
+    require 'includes/config/database.php';  
     $db = connectDB();
         
     $centro = '';
@@ -19,9 +17,9 @@
     
         $centro = mysqli_real_escape_string($db, $_POST['centro']);
         $area = mysqli_real_escape_string($db, $_POST['area']);
+        $descripcion = mysqli_real_escape_string($db, $_POST['descripcion']);
 
         $query = "INSERT INTO ubicacion (centro, area, descripcion) VALUES ('${centro}', '${area}', '${descripcion}')";
-        
         $resultado = mysqli_query($db, $query);
         if ($resultado) {            
             $centro = '';
@@ -29,7 +27,7 @@
             $descripcion = '';
         } 
    }
-
+   incluirTemplate('header');
 ?>
 
 <main class="contenedor">

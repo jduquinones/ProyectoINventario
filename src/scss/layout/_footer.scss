@@ -1,10 +1,8 @@
 .footer {
-    // position:absolute; 
-    // bottom:0 !important;
-    // left:0; 
+    position: fixed;
+    bottom: 0;
     background-color: $azulClaro;
     padding: 3rem 0;
-    margin-top: 5rem;
     width: 100%;
     p {
         font-weight: 400;

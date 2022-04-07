@@ -1,20 +1,18 @@
 <?php
 
     require 'includes/funciones.php';
-    require 'includes/templates/header.php';
-    require 'includes/config/database.php';   
-
     $auth = estaAutenticado();
     if (!$auth) {
         header('Location: login.php');
     }
 
+    require 'includes/config/database.php';
     $db = connectDB();
         
     // Se crean los datos vacios para que al enviarse a la base de datos no se envie lo que esta en el place holder    
     $nombreEquipo = '';
     $area = '';
-    $respoansable = '';
+    $responsable = '';
     $tipo = '';
     $ip = '';
     $sistemaOperativo = '';    
@@ -31,7 +29,7 @@
     
         $nombreEquipo = mysqli_real_escape_string($db, $_POST['nombreEquipo']);
         $area = mysqli_real_escape_string($db, $_POST['area']);
-        $respoansable = mysqli_real_escape_string($db, $_POST['respoansable']);
+        $responsable = mysqli_real_escape_string($db, $_POST['responsable']);
         $tipo = mysqli_real_escape_string($db, $_POST['tipo']);
         $ip = mysqli_real_escape_string($db, $_POST['ip']);
         $sistemaOperativo = mysqli_real_escape_string($db, $_POST['sistemaOperativo']);    
@@ -39,7 +37,7 @@
         $extencion = mysqli_real_escape_string($db, $_POST['extencion']);    
         $ofimatica = mysqli_real_escape_string($db, $_POST['ofimatica']);    
 
-        $query = "INSERT INTO responsables (nombreEquipo, area, respoansable, tipo, ip, sistemaOperativo, serial, extencion, ofimatica  ) VALUES ('${nombreEquipo}','${area}','${respoansable}', '${tipo}', '${ip}', '${sistemaOperativo}', '${serial}', '${extencion}', '${ofimatica}')";
+        $query = "INSERT INTO responsables (nombreEquipo, area, responsable, tipo, ip, sistemaOperativo, serial, extencion, ofimatica  ) VALUES ('${nombreEquipo}','${area}','${responsable}', '${tipo}', '${ip}', '${sistemaOperativo}', '${serial}', '${extencion}', '${ofimatica}')";
         
         $resultado = mysqli_query($db, $query);
         if ($resultado) {            
@@ -54,7 +52,7 @@
             $ofimatica = '';
         } 
    }
-
+   incluirTemplate('header');
 ?>
 
 <main class="contenedor">
@@ -70,8 +68,8 @@
                 <input type="text" placeholder="Area" name="area" id="area" value="<?php echo $area; ?>">
             </div>
             <div class="orden">
-                <label for="">Respoansable</label>
-                <input type="text" placeholder="Respoansable" name="respoansable" id="respoansable" value="<?php echo $respoansable; ?>">
+                <label for="">Responsable</label>
+                <input type="text" placeholder="Responsable" name="responsable" id="responsable" value="<?php echo $responsable; ?>">
             </div>
             <div class="orden">
                 <label for="">Tipo</label>
