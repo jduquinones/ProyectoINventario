@@ -27,12 +27,13 @@
     }
     $empezarDesde = ($pagina -1) * $tamañoPaginas;
 
-    $query = "SELECT r.nombre, u.area, e.ip, e.sistemaOperativo, e.serial, u.extencion, e.ofimatica 
-    FROM responsables AS r
-    JOIN equipos AS e 
-        ON r.id = e.id 
-    JOIN ubicacion AS u 
-        ON r.id = u.id";
+    $query = "SELECT r.nombre, r.cargo, u.area, e.ip, e.sistemaOperativo, e.serial, u.extencion, e.ofimatica  
+    FROM responsables AS r 
+    LEFT JOIN ubicacion AS u 
+        ON r.id = u.responsables_id 
+    LEFT JOIN equipos AS e 
+        ON r.id = e.id";
+        
     $resultado = mysqli_query($db, $query);
     $numeroFilas = $resultado->num_rows;
     $totalPaginas = ceil($numeroFilas / $tamañoPaginas);
@@ -110,7 +111,8 @@
                 </tr>
             </thead>
             <tbody>
-            <?php while($row = mysqli_fetch_assoc($resultado)): ?>                                
+            <?php while($row = mysqli_fetch_assoc($resultado)): ?>    
+                <?php var_dump($row); ?>                            
                <tr> 
                     <td><?php echo $row['nombre'] . " " . $row['apellido']; ?></td>    
                     <td><?php echo $row['cargo']; ?></td>
