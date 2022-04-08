@@ -24,9 +24,10 @@
     $sistemaOperativo = $dato['sistemaOperativo'];
     $serial = $dato['serial'];
     $ofimatica = $dato['ofimatica'];
+    $activo = $dato['activo'];
     $marca = $dato['marca'];
     $modelo = $dato['modelo'];
-    $nombre = $dato['nombre'];
+    $nombreEquipo = $dato['nombreEquipo'];
 
     $error = [];
 
@@ -37,9 +38,10 @@
         $sistemaOperativo = mysqli_real_escape_string($db, $_POST['sistemaOperativo']);
         $serial = mysqli_real_escape_string($db, $_POST['serial']);
         $ofimatica = mysqli_real_escape_string($db, $_POST['ofimatica']);
+        $activo = mysqli_real_escape_string($db, $_POST['activo']);
         $marca = mysqli_real_escape_string($db, $_POST['marca']);    
         $modelo = mysqli_real_escape_string($db, $_POST['modelo']);    
-        $nombre = mysqli_real_escape_string($db, $_POST['nombre']);    
+        $nombreEquipo = mysqli_real_escape_string($db, $_POST['nombreEquipo']);    
        
         // Crear carpeta
         $carpetaImagen = 'imagenesSubmit/';
@@ -68,7 +70,7 @@
             $error[] = 'La imagen es muy pesada';
         }
 
-        $query = "UPDATE equipos SET tipo = '${tipo}', ip = '${ip}', sistemaOperativo = '${sistemaOperativo}', serial = '${serial}', ofimatica = '${ofimatica}', imagen = '${nombreImagen}', marca = '${marca}', modelo = '${modelo}', nombre = '${nombre}' WHERE id = ${id}";    
+        $query = "UPDATE equipos SET tipo = '${tipo}', ip = '${ip}', sistemaOperativo = '${sistemaOperativo}', serial = '${serial}', ofimatica = '${ofimatica}', activo = '${activo}', imagen = '${nombreImagen}', marca = '${marca}', modelo = '${modelo}', nombreEquipo = '${nombreEquipo}' WHERE id = ${id}";    
 
         $resultado = mysqli_query($db, $query);   
         if ($resultado) {
@@ -102,6 +104,10 @@
                 <label for="">Ofimatica</label>
                 <input type="text" placeholder="Ofimatica del Equipo" name="ofimatica" id="ofimatica" value="<?php echo $ofimatica; ?>">
             </div>
+            <div class="orden">
+                <label for="">Activo</label>
+                <input type="text" placeholder="Activo del Equipo" name="activo" id="activo" value="<?php echo $activo; ?>">
+            </div>
             <div class="orden bloque">
                 <label for="">Imagen</label>
                 <input class="ancho"  type="file" name="imagen" id="imagen" accept="image/jpg, image/png">
@@ -116,13 +122,9 @@
                 <input name="modelo" placeholder="Marca" id="modelo" value="<?php echo $modelo; ?>"></input>
             </div>
             <div class="orden">
-                <label for="">Nombre</label>
-                <input name="nombre" placeholder="Nombre" id="nombre" value="<?php echo $nombre; ?>"></input>
+                <label for="">Nombre Equipo</label>
+                <input name="nombreEquipo" placeholder="Nombre Equipo" id="nombreEquipo" value="<?php echo $nombreEquipo; ?>"></input>
             </div>
-            <!-- <div class="orden">
-                <label for="">marca</label>
-                <textarea name="marca" id="marca" ><?php echo $marca ;?></textarea>
-            </div> -->
             <input class="boton boton-eliminar" type="submit" value="Enviar">
         </fieldset>
     </form>

@@ -13,10 +13,14 @@
     $nombre = '';
     $apellido = '';
     $cargo = '';
-    $equipos_id = '';
+    $equiposId = '';
+    $responsablesId = '';
 
     $queryEquipo = "SELECT * FROM equipos";
     $resultadoEquipo = mysqli_query($db, $queryEquipo);
+
+    $queryUbicacion = "SELECT * FROM ubicacion";
+    $resultadoUbicacion = mysqli_query($db, $queryUbicacion);
 
    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -24,16 +28,18 @@
         $nombre = mysqli_real_escape_string($db, $_POST['nombre']);
         $apellido = mysqli_real_escape_string($db, $_POST['apellido']);
         $cargo = mysqli_real_escape_string($db, $_POST['cargo']);
-        $equipos_id = mysqli_real_escape_string($db, $_POST['equipos_id']);
+        $equiposId = mysqli_real_escape_string($db, $_POST['equiposId']);
+        $responsablesId = mysqli_real_escape_string($db, $_POST['responsablesId']);
 
-        $query = "INSERT INTO responsables (nombre, apellido, cargo, equipos_id) VALUES ('${nombre}','${apellido}','${cargo}', '${equipos_id}')";
-        
-        $resultado = mysqli_query($db, $query);
+        $query = "INSERT INTO responsables (nombre, apellido, cargo, equiposId, responsablesId) VALUES ('${nombre}','${apellido}','${cargo}', ${equiposId}, ${responsablesId})";
+
+        $resultado = mysqli_query($db, $query);        
         if ($resultado) {            
             $nombre = '';
             $apellido = '';
             $cargo = '';
-            $equipos_id = '';
+            $equiposId = '';
+            $responsablesId = '';
         } 
    }
    incluirTemplate('header');
@@ -57,20 +63,23 @@
             </div>
             <div class="orden">
                 <label for="">Equipo Asignado</label>
-                <!-- <input type="text" placeholder="Equipo A" name="equipos_id" id="equipos_id" value="<?php echo $equipos_id; ?>"> -->
-                <select name="equipos_id" id="equipos_id">
+                <select name="equiposId"">
                     <option disabled selected>-- Seleccion --</option>
                     <?php while( $row = mysqli_fetch_assoc($resultadoEquipo)) : ?>
                     <option value="<?php echo $row['id']; ?>"><?php echo $row['serial']; ?></option>
                     <?php endwhile;?>
-                </select>
-                <!-- <div class="buscador">
-                    <form method="POST">
-                        <input type="text" name="buscar" placeholder="Ingrese Activo..." autocomplete="off" >
-                        <i class="fa-solid fa-magnifying-glass"></i> 
-                        <input class="buscar" type="submit" value="Buscar">          
-                    </form>
-                </div> -->
+                </select>               
+            </div>
+            <div class="orden">
+                <label for="">Area Asignada</label>
+                <select name="responsablesId"">
+                    <option disabled selected>-- Seleccion --</option>
+                    <div>
+                        <?php while( $row = mysqli_fetch_assoc($resultadoUbicacion)) : ?>
+                            <option value="<?php echo $row['id']; ?>"><?php echo $row['departamento']; ?></option>
+                        <?php endwhile;?>
+                    </div>
+                </select>               
             </div>
             <input type="submit" value="Enviar">
         </fieldset>

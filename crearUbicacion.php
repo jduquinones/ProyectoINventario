@@ -11,20 +11,23 @@
         
     $centro = '';
     $area = '';
-    $descripcion = '';
+    $departamento = '';
+    $extencion = '';
 
    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
         $centro = mysqli_real_escape_string($db, $_POST['centro']);
         $area = mysqli_real_escape_string($db, $_POST['area']);
-        $descripcion = mysqli_real_escape_string($db, $_POST['descripcion']);
+        $departamento = mysqli_real_escape_string($db, $_POST['departamento']);
+        $extencion = mysqli_real_escape_string($db, $_POST['extencion']);
 
-        $query = "INSERT INTO ubicacion (centro, area, descripcion) VALUES ('${centro}', '${area}', '${descripcion}')";
+        $query = "INSERT INTO ubicacion (centro, area, departamento, extencion) VALUES ('${centro}', '${area}', '${departamento}', '${extencion}')";
         $resultado = mysqli_query($db, $query);
         if ($resultado) {            
             $centro = '';
             $area = '';
-            $descripcion = '';
+            $departamento = '';
+            $extencion = '';
         } 
    }
    incluirTemplate('header');
@@ -43,9 +46,13 @@
                 <input type="text" placeholder="Area" name="area" id="area" value="<?php echo $area; ?>">
             </div>   
             <div class="orden">
-                <label for="">Descripcion</label>
-                <input type="text" placeholder="Descripcion" name="descripcion" id="descripcion" value="<?php echo $descripcion; ?>">
-            </div>          
+                <label for="">Departamento</label>
+                <input type="text" placeholder="Departamento" name="departamento" id="departamento" value="<?php echo $departamento; ?>">
+            </div> 
+            <div class="orden">
+                <label for="">Extencion</label>
+                <input type="text" placeholder="Extencion" name="extencion" id="extencion" value="<?php echo $extencion; ?>">
+            </div>         
             <input type="submit" value="Enviar">
         </fieldset>
     </form>

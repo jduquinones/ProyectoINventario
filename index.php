@@ -105,6 +105,7 @@
                 <th>S. Operativo</th>
                 <th>Serial</th>
                 <th>Ofimatica</th> 
+                <th>Activo</th> 
                 <th>Marca</th>
                 <th>Modelo</th>
                 <th>Nombre</th>
@@ -120,9 +121,10 @@
                 <td><?php echo $row['sistemaOperativo']; ?></td>
                 <td><?php echo $row['serial']; ?></td>
                 <td><?php echo $row['ofimatica']; ?></td>
+                <td><?php echo $row['activo']; ?></td>
                 <td><?php echo $row['marca']; ?></td>                
                 <td><?php echo $row['modelo']; ?></td>                
-                <td><?php echo $row['nombre']; ?></td>                
+                <td><?php echo $row['nombreEquipo']; ?></td>                
                 <td class="accion">
                     <form method="POST">
                         <input type="hidden" name="id" value="<?php echo $row['id']; ?>">

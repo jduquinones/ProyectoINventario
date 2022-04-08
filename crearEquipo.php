@@ -15,9 +15,10 @@
     $sistemaOperativo = '';
     $serial = '';
     $ofimatica = '';
+    $activo = '';
     $marca = '';
     $modelo = '';
-    $nombre = '';
+    $nombreEquipo = '';
 
     // convierte el value del input a una cadena legal para la base de datos, este dato lo captura de $_POST el cual es un metodo post
 
@@ -30,9 +31,10 @@
         $sistemaOperativo = mysqli_real_escape_string($db, $_POST['sistemaOperativo']);
         $serial = mysqli_real_escape_string($db, $_POST['serial']);
         $ofimatica = mysqli_real_escape_string($db, $_POST['ofimatica']);
+        $activo = mysqli_real_escape_string($db, $_POST['activo']);
         $marca = mysqli_real_escape_string($db, $_POST['marca']);    
         $modelo = mysqli_real_escape_string($db, $_POST['modelo']);    
-        $nombre = mysqli_real_escape_string($db, $_POST['nombre']);    
+        $nombreEquipo = mysqli_real_escape_string($db, $_POST['nombreEquipo']);    
 
         //Subir imagenes al servidor
         $imagen = $_FILES['imagen'];
@@ -51,7 +53,7 @@
 
         
 
-        $query = "INSERT INTO equipos (tipo, ip, sistemaOperativo, serial, ofimatica, imagen, marca, modelo, nombre) VALUES ('${tipo}','${ip}','${sistemaOperativo}','${serial}','${ofimatica}', '${nombreImagen}', '${marca}', '${modelo}', '${nombre}')";
+        $query = "INSERT INTO equipos (tipo, ip, sistemaOperativo, serial, ofimatica, imagen, marca, modelo, nombreEquipo) VALUES ('${tipo}','${ip}','${sistemaOperativo}','${serial}','${ofimatica}', '${nombreImagen}', '${marca}', '${modelo}', '${nombreEquipo}')";
         $resultado = mysqli_query($db, $query);
         if ($resultado) {
             $tipo = '';
@@ -59,10 +61,11 @@
             $sistemaOperativo = '';
             $serial = '';
             $ofimatica = '';
+            $activo = '';
             $imagen = '';
             $marca = '';
             $modelo = '';
-            $nombre = '';
+            $nombreEquipo = '';
         } 
    }
 
@@ -94,6 +97,10 @@
                 <input type="text" placeholder="Ofimatica del Equipo" name="ofimatica" id="ofimatica" value="<?php echo $ofimatica; ?>">
             </div>
             <div class="orden">
+                <label for="">Activo</label>
+                <input type="text" placeholder="Activo del Equipo" name="activo" id="activo" value="<?php echo $activo; ?>">
+            </div>
+            <div class="orden">
                 <label for="">Imagen</label>
                 <input type="file" name="imagen" id="imagen" accept="image/jpg, image/png">
             </div>
@@ -106,8 +113,8 @@
                 <input name="modelo" placeholder="Marca" id="modelo" value="<?php echo $modelo; ?>"></input>
             </div>
             <div class="orden">
-                <label for="">Nombre</label>
-                <input name="nombre" placeholder="Nombre" id="nombre" value="<?php echo $nombre; ?>"></input>
+                <label for="">Nombre Equipo</label>
+                <input name="nombreEquipo" placeholder="Nombre Equipo" id="nombreEquipo" value="<?php echo $nombreEquipo; ?>"></input>
             </div>
             <input type="submit" value="Enviar">
         </fieldset>

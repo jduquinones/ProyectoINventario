@@ -93,7 +93,8 @@
                 <tr>
                     <th>Centro</th>
                     <th>Area</th>
-                    <th>Descripcion</th>
+                    <th>Departamento</th>
+                    <th>Extencion</th>
                     <th>Accion</th>
                 </tr>
             </thead>
@@ -102,7 +103,8 @@
                <tr> 
                     <td><?php echo $row['centro']; ?></td>                    
                     <td><?php echo $row['area']; ?></td>
-                    <td><?php echo $row['descripcion']; ?></td>
+                    <td><?php echo $row['departamento']; ?></td>
+                    <td><?php echo $row['extencion']; ?></td>
                     <td class="accion">
                         <form method="POST">
                             <input type="hidden" name="id" value="<?php echo $row['id']; ?>">

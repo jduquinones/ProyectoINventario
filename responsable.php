@@ -27,12 +27,12 @@
     }
     $empezarDesde = ($pagina -1) * $tamañoPaginas;
 
-    $query = "SELECT r.nombre, r.cargo, u.area, e.ip, e.sistemaOperativo, e.serial, u.extencion, e.ofimatica  
+    $query = "SELECT r.id, r.nombre, r.apellido, r.cargo, u.area, e.ip, e.sistemaOperativo, e.serial, u.extencion, e.ofimatica, e.activo, e.marca, e.modelo, e.nombreEquipo  
     FROM responsables AS r 
     LEFT JOIN ubicacion AS u 
-        ON r.id = u.responsables_id 
+        ON r.responsablesId = u.id
     LEFT JOIN equipos AS e 
-        ON r.id = e.id";
+        ON r.equiposId = e.id";
         
     $resultado = mysqli_query($db, $query);
     $numeroFilas = $resultado->num_rows;
@@ -40,7 +40,14 @@
     $anterior = $pagina - 1;
     $siguiente = $pagina + 1;
 
-    $queryLimit = "SELECT * FROM responsables LIMIT $empezarDesde, $tamañoPaginas ";
+    $queryLimit = "SELECT r.id, r.nombre, r.apellido, r.cargo, u.area, e.ip, e.sistemaOperativo, e.serial, u.extencion, e.ofimatica, e.activo, e.marca, e.modelo, e.nombreEquipo  
+    FROM responsables AS r 
+    LEFT JOIN ubicacion AS u 
+        ON r.responsablesId = u.id
+    LEFT JOIN equipos AS e 
+        ON r.equiposId = e.id
+    LIMIT $empezarDesde, $tamañoPaginas ";
+
     $resultado = mysqli_query($db, $queryLimit);
         
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {        
@@ -53,7 +60,13 @@
             $buscar = $_POST['buscar'];
             
             if ($buscar) {
-                $query = "SELECT * FROM responsables WHERE nombre LIKE '%${buscar}%' OR apellido LIKE '%${buscar}%' OR cargo LIKE '%${buscar}%' OR responsable LIKE '%${buscar}%' OR tipo LIKE '%${buscar}%' OR ip LIKE '%${buscar}%' OR sistemaOperativo LIKE '%${buscar}%' OR serial LIKE '%${buscar}%' OR extencion LIKE '%${buscar}%' OR ofimatica LIKE '%${buscar}%'";     
+                $query = "SELECT r.id, r.nombre, r.apellido, r.cargo, u.area, e.ip, e.sistemaOperativo, e.serial, u.extencion, e.ofimatica, e.activo, e.marca, e.modelo, e.nombreEquipo  
+                FROM responsables AS r 
+                LEFT JOIN ubicacion AS u 
+                    ON r.responsablesId = u.id
+                LEFT JOIN equipos AS e 
+                    ON r.equiposId = e.id 
+                WHERE r.nombre LIKE '%${buscar}%' OR r.apellido LIKE '%${buscar}%' OR r.cargo LIKE '%${buscar}%' OR r.cargo LIKE '%${buscar}%' OR u.area LIKE '%${buscar}%' OR e.ip LIKE '%${buscar}%' OR sistemaOperativo LIKE '%${buscar}%' OR serial LIKE '%${buscar}%' OR extencion LIKE '%${buscar}%' OR ofimatica LIKE '%${buscar}%'";     
 
                 $resultado = mysqli_query($db, $query);              
 
@@ -73,7 +86,13 @@
             $id = filter_var($id, FILTER_VALIDATE_INT);
     
             if ($id) {
-                $query = "DELETE FROM responsables WHERE id = ${id}";
+                $query = "DELETE responsables, ubicacion, equipos  
+                FROM responsables AS r
+                LEFT JOIN ubicacion AS u
+                    ON r.id = u.ubicacionId 
+                LEFT JOIN equipos AS e
+                    ON r.id = e.id WHERE id = ${id}";
+
                 $resultado = mysqli_query($db, $query);
                 if ($resultado) {
                 header('Location: responsable.php');
@@ -107,12 +126,15 @@
                     <th>Serial</th>                    
                     <th>Extencion</th>                    
                     <th>Ofimatica</th>                    
+                    <th>Activo</th>                    
+                    <th>Marca</th>                    
+                    <th>Modelo</th>                    
+                    <th>Nombre Equipo</th>                    
                     <th>Accion</th>
                 </tr>
             </thead>
             <tbody>
-            <?php while($row = mysqli_fetch_assoc($resultado)): ?>    
-                <?php var_dump($row); ?>                            
+            <?php while($row = mysqli_fetch_assoc($resultado)): ?> 
                <tr> 
                     <td><?php echo $row['nombre'] . " " . $row['apellido']; ?></td>    
                     <td><?php echo $row['cargo']; ?></td>
@@ -122,6 +144,10 @@
                     <td><?php echo $row['serial']; ?></td>
                     <td><?php echo $row['extencion']; ?></td>
                     <td><?php echo $row['ofimatica']; ?></td>
+                    <td><?php echo $row['activo']; ?></td>
+                    <td><?php echo $row['marca']; ?></td>
+                    <td><?php echo $row['modelo']; ?></td>
+                    <td><?php echo $row['nombreEquipo']; ?></td>
                     <td class="accion">
                         <form method="POST">
                             <input type="hidden" name="id" value="<?php echo $row['id']; ?>">

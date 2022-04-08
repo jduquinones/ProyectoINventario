@@ -18,9 +18,17 @@
     $resultadoConsulta = mysqli_query($db, $query);
     $dato = mysqli_fetch_assoc($resultadoConsulta);
 
+    $queryEquipo = "SELECT * FROM equipos";
+    $resultadoEquipo = mysqli_query($db, $queryEquipo);
+
+    $queryUbicacion = "SELECT * FROM ubicacion";
+    $resultadoUbicacion = mysqli_query($db, $queryUbicacion);
+
     $nombre = $dato['nombre'];
     $apellido = $dato['apellido'];
-    $cargo = $dato['cargo']; 
+    $cargo = $dato['cargo'];  
+    $equiposId = $dato['equiposId'];  
+    $responsablesId = $dato['responsablesId'];  
 
     $error = [];
 
@@ -28,12 +36,15 @@
 
         $nombre = mysqli_real_escape_string($db, $_POST['nombre']);
         $apellido = mysqli_real_escape_string($db, $_POST['apellido']);
-        $responsable = mysqli_real_escape_string($db, $_POST['responsable']);
         $cargo = mysqli_real_escape_string($db, $_POST['cargo']);
+        $equiposId = mysqli_real_escape_string($db, $_POST['equiposId']);
+        $responsablesId = mysqli_real_escape_string($db, $_POST['responsablesId']);
+        
 
         if (empty($error)) { 
-            $query = "UPDATE responsables SET nombre = '${nombre}', apellido = '${apellido}', cargo = '${cargo}' WHERE id = ${id}";    
-            $resultado = mysqli_query($db, $query);
+            $query = "UPDATE responsables
+            SET nombre = '${nombre}', apellido = '${apellido}', cargo = '${cargo}', equiposId = ${equiposId}, responsablesId = ${responsablesId} WHERE id = ${id}";    
+            $resultado = mysqli_query($db, $query);            
             
             if ($resultado) {
                 header('Location: /responsable.php');
@@ -63,6 +74,26 @@
             <div class="orden">
                 <label for="">cargo</label>
                 <input type="text" placeholder="cargo" name="cargo" id="cargo" value="<?php echo $cargo; ?>">
+            </div>
+            <div class="orden">
+                <label for="">Equipo Asignado</label>
+                <select name="equiposId"">
+                    <option disabled selected>-- Seleccion --</option>
+                    <?php while( $row = mysqli_fetch_assoc($resultadoEquipo)) : ?>
+                    <option value="<?php echo $row['id']; ?>"><?php echo $row['serial']; ?></option>
+                    <?php endwhile;?>
+                </select>               
+            </div>
+            <div class="orden">
+                <label for="">Area Asignada</label>
+                <select name="responsablesId"">
+                    <option disabled selected>-- Seleccion --</option>
+                    <div>
+                        <?php while( $row = mysqli_fetch_assoc($resultadoUbicacion)) : ?>
+                            <option value="<?php echo $row['id']; ?>"><?php echo $row['departamento']; ?></option>
+                        <?php endwhile;?>
+                    </div>
+                </select>               
             </div>
             <input class="boton boton-eliminar" type="submit" value="Enviar">
         </fieldset>

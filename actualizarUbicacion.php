@@ -21,17 +21,18 @@
 
     $centro = $dato['centro'];
     $area = $dato['area'];
-    $descripcion = $dato['descripcion'];
+    $departamento = $dato['departamento'];
+    $extencion = $dato['extencion'];
     $error = [];
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $centro = mysqli_real_escape_string($db, $_POST['centro']);
         $area = mysqli_real_escape_string($db, $_POST['area']);
-        $descripcion = mysqli_real_escape_string($db, $_POST['descripcion']);
-
+        $departamento = mysqli_real_escape_string($db, $_POST['departamento']);
+        $extencion = mysqli_real_escape_string($db, $_POST['extencion']);
         if (empty($error)) { 
-            $query = "UPDATE ubicacion SET centro = '${centro}', area = '${area}', descripcion = '${descripcion}' WHERE id = ${id}";    
+            $query = "UPDATE ubicacion SET centro = '${centro}', area = '${area}', departamento = '${departamento}', extencion = '${extencion}' WHERE id = ${id}";    
             $resultado = mysqli_query($db, $query);   
             
             if ($resultado) {
@@ -61,8 +62,12 @@
                 <input type="text" name="area" id="area" value="<?php echo $area ;?>" >
             </div>
             <div class="orden">
-                <label for="">Descripcion</label>
-                <input type="text" name="descripcion" id="descripcion" value="<?php echo $descripcion ;?>">
+                <label for="">Departamento</label>
+                <input type="text" name="Departamento" id="departamento" value="<?php echo $departamento ;?>">
+            </div>
+            <div class="orden">
+                <label for="">Extencion</label>
+                <input type="text" name="extencion" id="extencion" value="<?php echo $extencion ;?>">
             </div>
             <input class="boton boton-eliminar" type="submit" value="Enviar">
         </fieldset>
