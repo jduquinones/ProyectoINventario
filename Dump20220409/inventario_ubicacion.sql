@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: inventario
 -- ------------------------------------------------------
--- Server version	8.0.28
+-- Server version	5.7.37-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -23,13 +23,13 @@ DROP TABLE IF EXISTS `ubicacion`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ubicacion` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `centro` varchar(5) DEFAULT NULL,
   `area` varchar(20) DEFAULT NULL,
   `departamento` varchar(30) DEFAULT NULL,
   `extencion` varchar(15) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +38,7 @@ CREATE TABLE `ubicacion` (
 
 LOCK TABLES `ubicacion` WRITE;
 /*!40000 ALTER TABLE `ubicacion` DISABLE KEYS */;
-INSERT INTO `ubicacion` VALUES (6,'D503','Administracion','Sistemas','6220 - 6221'),(7,'D503','Comercial','Ventas','6215'),(8,'D503','Logistica','Despachos','6219'),(9,'D503','P508','Punto de Venta','6270');
+INSERT INTO `ubicacion` VALUES (10,'P508','Pdv','Delicias','6270'),(11,'P509','Pdv','Vallegrande','6271'),(12,'P510','Pdv','Floralia','6273'),(13,'P511','Pdv','Ciudad Jardin','6274'),(14,'P512','Pdv','Roosvelt','6275'),(15,'P513','Pdv','Floresta','6278'),(16,'P514','Pdv','Caney','6279');
 /*!40000 ALTER TABLE `ubicacion` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-08 19:59:43
+-- Dump completed on 2022-04-09  3:36:53

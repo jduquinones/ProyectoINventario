@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: inventario
 -- ------------------------------------------------------
--- Server version	8.0.28
+-- Server version	5.7.37-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -23,15 +23,15 @@ DROP TABLE IF EXISTS `responsables`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `responsables` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(45) DEFAULT NULL,
   `apellido` varchar(45) DEFAULT NULL,
   `cargo` varchar(45) DEFAULT NULL,
-  `ubicacionResponsables_id` int NOT NULL,
+  `ubicacionResponsables_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_responsables_ubicacion_idx` (`ubicacionResponsables_id`),
   CONSTRAINT `fk_responsables_ubicacion` FOREIGN KEY (`ubicacionResponsables_id`) REFERENCES `ubicacion` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +40,7 @@ CREATE TABLE `responsables` (
 
 LOCK TABLES `responsables` WRITE;
 /*!40000 ALTER TABLE `responsables` DISABLE KEYS */;
-INSERT INTO `responsables` VALUES (1,'Jose','Quiñones','Soporte Usuarios',6),(5,'Otoniel','Muñoz','Jefe de Bodega',8),(6,'Rigoberto','Garcia','jefe ventas',6),(7,'Jose','Quiñones','Soporte Usuarios',7),(8,'Jose','Quiñones','Developer',6);
+INSERT INTO `responsables` VALUES (12,'Erika','Marin','Gestor PDV',10),(17,'Erika','Marin','Gestor PDV',11);
 /*!40000 ALTER TABLE `responsables` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -53,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-08 19:59:43
+-- Dump completed on 2022-04-09  3:36:52

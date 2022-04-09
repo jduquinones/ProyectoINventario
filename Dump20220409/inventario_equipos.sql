@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: inventario
 -- ------------------------------------------------------
--- Server version	8.0.28
+-- Server version	5.7.37-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -23,7 +23,7 @@ DROP TABLE IF EXISTS `equipos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `equipos` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `tipo` varchar(20) DEFAULT NULL,
   `imagen` varchar(60) DEFAULT NULL,
   `ip` varchar(15) DEFAULT NULL,
@@ -34,11 +34,11 @@ CREATE TABLE `equipos` (
   `marca` varchar(20) DEFAULT NULL,
   `modelo` varchar(15) DEFAULT NULL,
   `nombreEquipo` varchar(15) DEFAULT NULL,
-  `ubicacionEquipo_id` int NOT NULL,
+  `idEquipos` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_equipos_ubicacion1_idx` (`ubicacionEquipo_id`),
-  CONSTRAINT `fk_equipos_ubicacion1` FOREIGN KEY (`ubicacionEquipo_id`) REFERENCES `ubicacion` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb3;
+  KEY `fk_equipos_ubicacion1_idx` (`idEquipos`),
+  CONSTRAINT `fk_equipos_ubicacion1` FOREIGN KEY (`idEquipos`) REFERENCES `ubicacion` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -47,7 +47,7 @@ CREATE TABLE `equipos` (
 
 LOCK TABLES `equipos` WRITE;
 /*!40000 ALTER TABLE `equipos` DISABLE KEYS */;
-INSERT INTO `equipos` VALUES (8,'Computador','f5aa607dc56608184ce12988585e6e9a.jpg','192.168.21.17','Windows 10','1111','Office 365','2222','Lenovo','10TP','DESKTOP',6),(9,'Computador','9ed58f1b5467f7cb435f1cb58a6db5dc.jpg','192.168.21.83','Windows 10','999','Office 365','0000','Lenovo','1','DESKTOP',8);
+INSERT INTO `equipos` VALUES (11,'Computador','asf','192.168.60.200','Windows 10','S1H05T1E','Open Office','N/A','Lenovo','10TP','Desktop',10),(12,'Computador','asf','192.168.162.141','Windows 10','S1H05T0X','Open Office','N/A','Lenovo','10TP','Desktop',11),(14,'Computador','asf','192.168.162.220','Windows 10','S1H05T13','Open Office','N/A','Lenovo','10TP','Desktop',13),(15,'Computador','asf','192.168.162.219','Windows 10','S1H05T1A','Open Office','N/A','Lenovo','10TP','Desktop',13),(18,'Computador','eadaf6a2834038e24afc30cc6b38410a.jpg','192.168.162.29','Windows 10','S1H05T1S','Open Office','N/A','Lenovo','10TP','Desktop',12),(19,'Computador','571ddfb474c83e79533f7704e07a64f6.jpg','192.168.161.106','Windows 10','S1H05T3H','Open Office','N/A','Lenovo','10TP','Desktop',NULL);
 /*!40000 ALTER TABLE `equipos` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -60,4 +60,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-08 19:59:42
+-- Dump completed on 2022-04-09  3:36:53
