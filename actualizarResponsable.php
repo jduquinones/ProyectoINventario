@@ -17,10 +17,10 @@
     $query = "SELECT * 
     FROM responsables AS r
     LEFT JOIN equipos AS e
-        ON r.ubicacionResponsables_id = e.ubicacionEquipo_id
+        ON r.ubicacionResponsables_id = e.id
     LEFT JOIN ubicacion AS u
-        ON r.ubicacionResponsables_id = u.id
-     WHERE id = ${id}";
+        ON r.ubicacionResponsables_id = u.id";
+        
      
     $resultadoConsulta = mysqli_query($db, $query);
     $dato = mysqli_fetch_assoc($resultadoConsulta);
@@ -35,7 +35,6 @@
     $apellido = $dato['apellido'];
     $cargo = $dato['cargo'];  
     $ubicacionResponsables_id = $dato['ubicacionResponsables_id'];  
-    $ubicacionEquipo_id = $dato['ubicacionEquipo_id'];  
 
     $error = [];
 
@@ -45,12 +44,11 @@
         $apellido = mysqli_real_escape_string($db, $_POST['apellido']);
         $cargo = mysqli_real_escape_string($db, $_POST['cargo']);
         $ubicacionResponsables_id = mysqli_real_escape_string($db, $_POST['ubicacionResponsables_id']);
-        $ubicacionEquipo_id = mysqli_real_escape_string($db, $_POST['ubicacionEquipo_id']);
 
         if (empty($error)) { 
             $query = "UPDATE responsables
-            SET nombre = '${nombre}', apellido = '${apellido}', cargo = '${cargo}', ubicacionResponsables_id = ${ubicacionResponsables_id}, ubicacion_id = ${ubicacion_id}, ubicacionEquipo_id = ${ubicacionEquipo_id} WHERE id = ${id}";    
-            $resultado = mysqli_query($db, $query);            
+            SET nombre = '${nombre}', apellido = '${apellido}', cargo = '${cargo}', ubicacionResponsables_id = ${ubicacionResponsables_id} WHERE id = ${id}";    
+            $resultado = mysqli_query($db, $query);
             
             if ($resultado) {
                 header('Location: /responsable.php');

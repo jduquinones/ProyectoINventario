@@ -19,6 +19,7 @@
     $marca = '';
     $modelo = '';
     $nombreEquipo = '';
+    $idEquipos = '';
 
     $queryUbicacion = "SELECT * FROM ubicacion";
     $resultadoUbicacion = mysqli_query($db, $queryUbicacion);
@@ -34,8 +35,7 @@
         $marca = mysqli_real_escape_string($db, $_POST['marca']);    
         $modelo = mysqli_real_escape_string($db, $_POST['modelo']);    
         $nombreEquipo = mysqli_real_escape_string($db, $_POST['nombreEquipo']);  
-        $ubicacion_id = mysqli_real_escape_string($db, $_POST['ubicacion_id']);
-  
+        $idEquipos = mysqli_real_escape_string($db, $_POST['idEquipos']);    
 
         //Subir imagenes al servidor
         $imagen = $_FILES['imagen'];
@@ -52,7 +52,7 @@
         // Subimos la imagen
         move_uploaded_file($imagen['tmp_name'], $carpetaImagen . $nombreImagen);  
 
-        $query = "INSERT INTO equipos (tipo, ip, sistemaOperativo, serial, ofimatica, activo, imagen, marca, modelo, nombreEquipo, ubicacion_id) VALUES ('${tipo}','${ip}','${sistemaOperativo}','${serial}','${ofimatica}', '${activo}', '${nombreImagen}', '${marca}', '${modelo}', '${nombreEquipo}', '${ubicacion_id}')";
+        $query = "INSERT INTO equipos (tipo, ip, sistemaOperativo, serial, ofimatica, activo, imagen, marca, modelo, nombreEquipo, idEquipos) VALUES ('${tipo}','${ip}','${sistemaOperativo}','${serial}','${ofimatica}', '${activo}', '${nombreImagen}', '${marca}', '${modelo}', '${nombreEquipo}', '${idEquipos}')";
 
         $resultado = mysqli_query($db, $query);
         if ($resultado) {
@@ -66,6 +66,7 @@
             $marca = '';
             $modelo = '';
             $nombreEquipo = '';
+            $idEquipos = '';
         } 
    }
 
@@ -118,7 +119,7 @@
             </div>
             <div class="orden">
                 <label for="">Area Asignada</label>
-                <select name="ubicacion_id"">
+                <select name="idEquipos"">
                     <option disabled selected>-- Seleccion --</option>
                     <div>
                         <?php while( $row = mysqli_fetch_assoc($resultadoUbicacion)) : ?>

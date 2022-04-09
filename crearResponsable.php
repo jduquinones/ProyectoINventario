@@ -28,9 +28,8 @@
         $apellido = mysqli_real_escape_string($db, $_POST['apellido']);
         $cargo = mysqli_real_escape_string($db, $_POST['cargo']);
         $ubicacionResponsables_id = mysqli_real_escape_string($db, $_POST['ubicacionResponsables_id']);
-        $ubicacionEquipo_id = mysqli_real_escape_string($db, $_POST['ubicacionEquipo_id']);
 
-        $query = "INSERT INTO responsables (nombre, apellido, cargo, ubicacionResponsables_id, ubicacionEquipo_id) VALUES ('${nombre}','${apellido}','${cargo}', ${ubicacionResponsables_id}, ${ubicacionEquipo_id})";
+        $query = "INSERT INTO responsables (nombre, apellido, cargo, ubicacionResponsables_id) VALUES ('${nombre}','${apellido}','${cargo}', ${ubicacionResponsables_id})";
 
         $resultado = mysqli_query($db, $query);        
         if ($resultado) {            
@@ -38,7 +37,6 @@
             $apellido = '';
             $cargo = '';
             $ubicacionResponsables_id = '';
-            $equipubicacionEquipo_idos_id = '';
         } 
    }
    incluirTemplate('header');

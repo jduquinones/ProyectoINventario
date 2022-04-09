@@ -28,20 +28,20 @@
     }
     $empezarDesde = ($pagina -1) * $tamañoPaginas;
 
-    $query = " SELECT  e.id, e.tipo, e.imagen, e.ip, e.sistemaOperativo, e.serial, e.ofimatica, e.activo, e.marca, e.modelo, e.nombreEquipo, u.area  
+    $query = "SELECT  e.id, e.tipo, e.imagen, e.ip, u.centro, u.departamento, e.sistemaOperativo, e.serial, e.ofimatica, e.activo, e.marca, e.modelo, e.nombreEquipo, u.area  
     FROM equipos AS e 
     LEFT JOIN ubicacion AS u 
-        ON  e.ubicacion_id = u.id";
+        ON  e.idEquipos = u.id";
     $resultado = mysqli_query($db, $query);
     $numeroFilas = $resultado->num_rows;
     $totalPaginas = ceil($numeroFilas / $tamañoPaginas);
     $anterior = $pagina - 1;
     $siguiente = $pagina + 1;
 
-    $queryLimit = " SELECT  e.id, e.tipo, e.imagen, e.ip, e.sistemaOperativo, e.serial, e.ofimatica, e.activo, e.marca, e.modelo, e.nombreEquipo, u.area  
+    $queryLimit = "SELECT  e.id, e.tipo, e.imagen, e.ip, u.centro, u.departamento, e.sistemaOperativo, e.serial, e.ofimatica, e.activo, e.marca, e.modelo, e.nombreEquipo, u.area  
     FROM equipos AS e 
     LEFT JOIN ubicacion AS u 
-        ON  e.ubicacion_id = u.id 
+        ON  e.idEquipos = u.id 
     LIMIT $empezarDesde, $tamañoPaginas ";
     $resultado = mysqli_query($db, $queryLimit);
         
@@ -55,10 +55,10 @@
             $buscar = $_POST['buscar'];
             
             if ($buscar) {
-                $query = " SELECT  e.id, e.tipo, e.imagen, e.ip, e.sistemaOperativo, e.serial, e.ofimatica, e.activo, e.marca, e.modelo, e.nombreEquipo, u.area  
+                $query = "SELECT  e.id, e.tipo, e.imagen, e.ip, u.centro, u.departamento, e.sistemaOperativo, e.serial, e.ofimatica, e.activo, e.marca, e.modelo, e.nombreEquipo, u.area  
                 FROM equipos AS e 
                 LEFT JOIN ubicacion AS u 
-                    ON  e.ubicacion_id = u.id 
+                    ON  e.idEquipos = u.id 
                 WHERE tipo LIKE '%${buscar}%' OR ip LIKE '%${buscar}%' OR sistemaOperativo LIKE '%${buscar}%' OR serial LIKE '%${buscar}%' OR ofimatica LIKE '%${buscar}%' OR nombre LIKE '%${buscar}%'";                
                 $resultado = mysqli_query($db, $query);
 
@@ -113,6 +113,8 @@
                 <th>Tipo</th>
                 <th>Imagen</th>
                 <th>Ip</th>
+                <th>Centro</th>
+                <th>Departamento</th>
                 <th>S. Operativo</th>
                 <th>Serial</th>
                 <th>Ofimatica</th> 
@@ -129,6 +131,8 @@
                 <td><?php echo $row['tipo']; ?></td>   
                 <td><img class="resultado-imagen" onclick="ampliarImagen('<?php echo $row['imagen'];?>')"  src="imagenesSubmit/<?php echo $row['imagen']; ?>" > </td>                 
                 <td><?php echo $row['ip']; ?></td>
+                <td><?php echo $row['centro']; ?></td>
+                <td><?php echo $row['departamento']; ?></td>
                 <td><?php echo $row['sistemaOperativo']; ?></td>
                 <td><?php echo $row['serial']; ?></td>
                 <td><?php echo $row['ofimatica']; ?></td>

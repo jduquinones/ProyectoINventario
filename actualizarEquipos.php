@@ -21,6 +21,7 @@
 
     $queryUbicacion = "SELECT * FROM ubicacion";
     $resultadoUbicacion = mysqli_query($db, $queryUbicacion);
+    $row = mysqli_fetch_assoc($resultadoUbicacion);
 
     $tipo = $dato['tipo'];
     $ip = $dato['ip'];
@@ -31,7 +32,7 @@
     $marca = $dato['marca'];
     $modelo = $dato['modelo'];
     $nombreEquipo = $dato['nombreEquipo'];
-    $ubicacion_id = $dato['ubicacion_id'];  
+    $idEquipos = $row['departamento'];
 
 
     $error = [];
@@ -47,8 +48,7 @@
         $marca = mysqli_real_escape_string($db, $_POST['marca']);    
         $modelo = mysqli_real_escape_string($db, $_POST['modelo']);    
         $nombreEquipo = mysqli_real_escape_string($db, $_POST['nombreEquipo']); 
-        $ubicacion_id = mysqli_real_escape_string($db, $_POST['ubicacion_id']);
-   
+        $idEquipos = mysqli_real_escape_string($db, $_POST['idEquipos']);    
        
         // Crear carpeta
         $carpetaImagen = 'imagenesSubmit/';
@@ -78,8 +78,9 @@
             $error[] = 'La imagen es muy pesada';
         }
 
-        $query = "UPDATE equipos SET tipo = '${tipo}', ip = '${ip}', sistemaOperativo = '${sistemaOperativo}', serial = '${serial}', ofimatica = '${ofimatica}', activo = '${activo}', imagen = '${nombreImagen}', marca = '${marca}', modelo = '${modelo}', nombreEquipo = '${nombreEquipo}' WHERE id = ${id}";    
-
+        $query = "UPDATE equipos SET tipo = '${tipo}', ip = '${ip}', sistemaOperativo = '${sistemaOperativo}', serial = '${serial}', ofimatica = '${ofimatica}', activo = '${activo}', imagen = '${nombreImagen}', marca = '${marca}', modelo = '${modelo}', nombreEquipo = '${nombreEquipo}', idEquipos = '${idEquipos}' WHERE id = ${id}";    
+        var_dump($query);
+       
         $resultado = mysqli_query($db, $query);   
         if ($resultado) {
             header('Location: index.php');
@@ -134,11 +135,11 @@
                 <input name="nombreEquipo" placeholder="Nombre Equipo" id="nombreEquipo" value="<?php echo $nombreEquipo; ?>"></input>
             </div>
             <div class="orden">
-                <label for="">Area Asignada</label>
-                <select name="ubicacion_id"">
+                <label for="">Departamento</label>
+                <select name="idEquipos"">
                     <option disabled >-- Seleccion --</option>
                     <div>
-                        <?php while( $row = mysqli_fetch_assoc($resultadoUbicacion)) : ?>
+                        <?php while( $row) : ?>
                             <option value="<?php echo $row['id']; ?>"><?php echo $row['departamento']; ?></option>
                         <?php endwhile;?>
                     </div>
