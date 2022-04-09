@@ -14,7 +14,14 @@
     require 'includes/config/database.php';
     $db = connectDB(); 
 
-    $query = "SELECT * FROM responsables WHERE id = ${id}";
+    $query = "SELECT * 
+    FROM responsables AS r
+    LEFT JOIN equipos AS e
+        ON r.ubicacionResponsables_id = e.ubicacionEquipo_id
+    LEFT JOIN ubicacion AS u
+        ON r.ubicacionResponsables_id = u.id
+     WHERE id = ${id}";
+     
     $resultadoConsulta = mysqli_query($db, $query);
     $dato = mysqli_fetch_assoc($resultadoConsulta);
 
@@ -27,8 +34,8 @@
     $nombre = $dato['nombre'];
     $apellido = $dato['apellido'];
     $cargo = $dato['cargo'];  
-    $equiposId = $dato['equiposId'];  
-    $responsablesId = $dato['responsablesId'];  
+    $ubicacionResponsables_id = $dato['ubicacionResponsables_id'];  
+    $ubicacionEquipo_id = $dato['ubicacionEquipo_id'];  
 
     $error = [];
 
@@ -37,13 +44,12 @@
         $nombre = mysqli_real_escape_string($db, $_POST['nombre']);
         $apellido = mysqli_real_escape_string($db, $_POST['apellido']);
         $cargo = mysqli_real_escape_string($db, $_POST['cargo']);
-        $equiposId = mysqli_real_escape_string($db, $_POST['equiposId']);
-        $responsablesId = mysqli_real_escape_string($db, $_POST['responsablesId']);
-        
+        $ubicacionResponsables_id = mysqli_real_escape_string($db, $_POST['ubicacionResponsables_id']);
+        $ubicacionEquipo_id = mysqli_real_escape_string($db, $_POST['ubicacionEquipo_id']);
 
         if (empty($error)) { 
             $query = "UPDATE responsables
-            SET nombre = '${nombre}', apellido = '${apellido}', cargo = '${cargo}', equiposId = ${equiposId}, responsablesId = ${responsablesId} WHERE id = ${id}";    
+            SET nombre = '${nombre}', apellido = '${apellido}', cargo = '${cargo}', ubicacionResponsables_id = ${ubicacionResponsables_id}, ubicacion_id = ${ubicacion_id}, ubicacionEquipo_id = ${ubicacionEquipo_id} WHERE id = ${id}";    
             $resultado = mysqli_query($db, $query);            
             
             if ($resultado) {
@@ -76,18 +82,20 @@
                 <input type="text" placeholder="cargo" name="cargo" id="cargo" value="<?php echo $cargo; ?>">
             </div>
             <div class="orden">
-                <label for="">Equipo Asignado</label>
-                <select name="equiposId"">
+                <label for="">Serial de Equipo</label>
+                <select name="ubicacionEquipo_id"">
                     <option disabled selected>-- Seleccion --</option>
-                    <?php while( $row = mysqli_fetch_assoc($resultadoEquipo)) : ?>
-                    <option value="<?php echo $row['id']; ?>"><?php echo $row['serial']; ?></option>
-                    <?php endwhile;?>
+                    <div>
+                        <?php while( $row = mysqli_fetch_assoc($resultadoEquipo)) : ?>
+                            <option value="<?php echo $row['id']; ?>"><?php echo $row['serial']; ?></option>
+                        <?php endwhile;?>
+                    </div>
                 </select>               
             </div>
             <div class="orden">
                 <label for="">Area Asignada</label>
-                <select name="responsablesId"">
-                    <option disabled selected>-- Seleccion --</option>
+                <select name="ubicacionResponsables_id"">
+                    <option disabled >-- Seleccion --</option>
                     <div>
                         <?php while( $row = mysqli_fetch_assoc($resultadoUbicacion)) : ?>
                             <option value="<?php echo $row['id']; ?>"><?php echo $row['departamento']; ?></option>

@@ -32,8 +32,10 @@
         $departamento = mysqli_real_escape_string($db, $_POST['departamento']);
         $extencion = mysqli_real_escape_string($db, $_POST['extencion']);
         if (empty($error)) { 
-            $query = "UPDATE ubicacion SET centro = '${centro}', area = '${area}', departamento = '${departamento}', extencion = '${extencion}' WHERE id = ${id}";    
+            $query = "UPDATE ubicacion SET centro = '${centro}', area = '${area}', departamento = '${departamento}', extencion = '${extencion}' WHERE id = ${id}"; 
+            
             $resultado = mysqli_query($db, $query);   
+
             
             if ($resultado) {
                 header('Location: ubicacion.php');
@@ -63,7 +65,7 @@
             </div>
             <div class="orden">
                 <label for="">Departamento</label>
-                <input type="text" name="Departamento" id="departamento" value="<?php echo $departamento ;?>">
+                <input type="text" name="departamento" id="departamento" value="<?php echo $departamento ;?>">
             </div>
             <div class="orden">
                 <label for="">Extencion</label>

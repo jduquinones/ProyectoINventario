@@ -28,14 +28,21 @@
     }
     $empezarDesde = ($pagina -1) * $tamañoPaginas;
 
-    $query = "SELECT * FROM equipos ";
+    $query = " SELECT  e.id, e.tipo, e.imagen, e.ip, e.sistemaOperativo, e.serial, e.ofimatica, e.activo, e.marca, e.modelo, e.nombreEquipo, u.area  
+    FROM equipos AS e 
+    LEFT JOIN ubicacion AS u 
+        ON  e.ubicacion_id = u.id";
     $resultado = mysqli_query($db, $query);
     $numeroFilas = $resultado->num_rows;
     $totalPaginas = ceil($numeroFilas / $tamañoPaginas);
     $anterior = $pagina - 1;
     $siguiente = $pagina + 1;
 
-    $queryLimit = "SELECT * FROM equipos LIMIT $empezarDesde, $tamañoPaginas ";
+    $queryLimit = " SELECT  e.id, e.tipo, e.imagen, e.ip, e.sistemaOperativo, e.serial, e.ofimatica, e.activo, e.marca, e.modelo, e.nombreEquipo, u.area  
+    FROM equipos AS e 
+    LEFT JOIN ubicacion AS u 
+        ON  e.ubicacion_id = u.id 
+    LIMIT $empezarDesde, $tamañoPaginas ";
     $resultado = mysqli_query($db, $queryLimit);
         
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -48,7 +55,11 @@
             $buscar = $_POST['buscar'];
             
             if ($buscar) {
-                $query = "SELECT * FROM equipos WHERE tipo LIKE '%${buscar}%' OR ip LIKE '%${buscar}%' OR sistemaOperativo LIKE '%${buscar}%' OR serial LIKE '%${buscar}%' OR ofimatica LIKE '%${buscar}%' OR nombre LIKE '%${buscar}%'";                
+                $query = " SELECT  e.id, e.tipo, e.imagen, e.ip, e.sistemaOperativo, e.serial, e.ofimatica, e.activo, e.marca, e.modelo, e.nombreEquipo, u.area  
+                FROM equipos AS e 
+                LEFT JOIN ubicacion AS u 
+                    ON  e.ubicacion_id = u.id 
+                WHERE tipo LIKE '%${buscar}%' OR ip LIKE '%${buscar}%' OR sistemaOperativo LIKE '%${buscar}%' OR serial LIKE '%${buscar}%' OR ofimatica LIKE '%${buscar}%' OR nombre LIKE '%${buscar}%'";                
                 $resultado = mysqli_query($db, $query);
 
                 if ($resultado->num_rows) {
@@ -108,7 +119,7 @@
                 <th>Activo</th> 
                 <th>Marca</th>
                 <th>Modelo</th>
-                <th>Nombre</th>
+                <th>Nombre Equipo</th>
                 <th>Accion</th>
             </tr>
         </thead>

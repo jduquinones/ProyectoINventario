@@ -30,9 +30,9 @@
     $query = "SELECT r.id, r.nombre, r.apellido, r.cargo, u.area, e.ip, e.sistemaOperativo, e.serial, u.extencion, e.ofimatica, e.activo, e.marca, e.modelo, e.nombreEquipo  
     FROM responsables AS r 
     LEFT JOIN ubicacion AS u 
-        ON r.responsablesId = u.id
+        ON r.ubicacionResponsables_id = u.id
     LEFT JOIN equipos AS e 
-        ON r.equiposId = e.id";
+        ON r.ubicacionResponsables_id = e.ubicacionEquipo_id";
         
     $resultado = mysqli_query($db, $query);
     $numeroFilas = $resultado->num_rows;
@@ -43,9 +43,9 @@
     $queryLimit = "SELECT r.id, r.nombre, r.apellido, r.cargo, u.area, e.ip, e.sistemaOperativo, e.serial, u.extencion, e.ofimatica, e.activo, e.marca, e.modelo, e.nombreEquipo  
     FROM responsables AS r 
     LEFT JOIN ubicacion AS u 
-        ON r.responsablesId = u.id
+        ON r.ubicacionResponsables_id = u.id
     LEFT JOIN equipos AS e 
-        ON r.equiposId = e.id
+        ON r.ubicacionResponsables_id = e.ubicacionEquipo_id
     LIMIT $empezarDesde, $tamañoPaginas ";
 
     $resultado = mysqli_query($db, $queryLimit);
@@ -63,9 +63,9 @@
                 $query = "SELECT r.id, r.nombre, r.apellido, r.cargo, u.area, e.ip, e.sistemaOperativo, e.serial, u.extencion, e.ofimatica, e.activo, e.marca, e.modelo, e.nombreEquipo  
                 FROM responsables AS r 
                 LEFT JOIN ubicacion AS u 
-                    ON r.responsablesId = u.id
+                    ON r.ubicacionResponsables_id = u.id
                 LEFT JOIN equipos AS e 
-                    ON r.equiposId = e.id 
+                    ON r.ubicacionResponsables_id = e.ubicacionEquipo_id
                 WHERE r.nombre LIKE '%${buscar}%' OR r.apellido LIKE '%${buscar}%' OR r.cargo LIKE '%${buscar}%' OR r.cargo LIKE '%${buscar}%' OR u.area LIKE '%${buscar}%' OR e.ip LIKE '%${buscar}%' OR sistemaOperativo LIKE '%${buscar}%' OR serial LIKE '%${buscar}%' OR extencion LIKE '%${buscar}%' OR ofimatica LIKE '%${buscar}%'";     
 
                 $resultado = mysqli_query($db, $query);              
@@ -149,10 +149,10 @@
                     <td><?php echo $row['modelo']; ?></td>
                     <td><?php echo $row['nombreEquipo']; ?></td>
                     <td class="accion">
-                        <form method="POST">
+                        <!-- <form method="POST">
                             <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
                             <input type="submit" class="boton boton-eliminar" value="Eliminar">
-                        </form>
+                        </form> -->
                         <a class="boton boton-actualizar" href="actualizarResponsable.php?id=<?php echo $row['id']; ?>" >Actualizar</a>
                     </td>                    
                </tr>               

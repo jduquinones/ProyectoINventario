@@ -20,7 +20,7 @@
         $area = mysqli_real_escape_string($db, $_POST['area']);
         $departamento = mysqli_real_escape_string($db, $_POST['departamento']);
         $extencion = mysqli_real_escape_string($db, $_POST['extencion']);
-
+        
         $query = "INSERT INTO ubicacion (centro, area, departamento, extencion) VALUES ('${centro}', '${area}', '${departamento}', '${extencion}')";
         $resultado = mysqli_query($db, $query);
         if ($resultado) {            

@@ -19,6 +19,9 @@
     $resultadoConsulta = mysqli_query($db, $query);
     $dato = mysqli_fetch_assoc($resultadoConsulta);
 
+    $queryUbicacion = "SELECT * FROM ubicacion";
+    $resultadoUbicacion = mysqli_query($db, $queryUbicacion);
+
     $tipo = $dato['tipo'];
     $ip = $dato['ip'];
     $sistemaOperativo = $dato['sistemaOperativo'];
@@ -28,6 +31,8 @@
     $marca = $dato['marca'];
     $modelo = $dato['modelo'];
     $nombreEquipo = $dato['nombreEquipo'];
+    $ubicacion_id = $dato['ubicacion_id'];  
+
 
     $error = [];
 
@@ -41,7 +46,9 @@
         $activo = mysqli_real_escape_string($db, $_POST['activo']);
         $marca = mysqli_real_escape_string($db, $_POST['marca']);    
         $modelo = mysqli_real_escape_string($db, $_POST['modelo']);    
-        $nombreEquipo = mysqli_real_escape_string($db, $_POST['nombreEquipo']);    
+        $nombreEquipo = mysqli_real_escape_string($db, $_POST['nombreEquipo']); 
+        $ubicacion_id = mysqli_real_escape_string($db, $_POST['ubicacion_id']);
+   
        
         // Crear carpeta
         $carpetaImagen = 'imagenesSubmit/';
@@ -50,6 +57,7 @@
         }
 
         $nombreImagen = '';
+        $imagen = $_FILES['imagen'];
 
         // Elimina la imgaen que esta en el servidor en caso de que se actulice 
         if ($imagen['name']) {
@@ -124,6 +132,17 @@
             <div class="orden">
                 <label for="">Nombre Equipo</label>
                 <input name="nombreEquipo" placeholder="Nombre Equipo" id="nombreEquipo" value="<?php echo $nombreEquipo; ?>"></input>
+            </div>
+            <div class="orden">
+                <label for="">Area Asignada</label>
+                <select name="ubicacion_id"">
+                    <option disabled >-- Seleccion --</option>
+                    <div>
+                        <?php while( $row = mysqli_fetch_assoc($resultadoUbicacion)) : ?>
+                            <option value="<?php echo $row['id']; ?>"><?php echo $row['departamento']; ?></option>
+                        <?php endwhile;?>
+                    </div>
+                </select>               
             </div>
             <input class="boton boton-eliminar" type="submit" value="Enviar">
         </fieldset>

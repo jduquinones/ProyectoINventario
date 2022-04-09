@@ -20,9 +20,8 @@
     $modelo = '';
     $nombreEquipo = '';
 
-    // convierte el value del input a una cadena legal para la base de datos, este dato lo captura de $_POST el cual es un metodo post
-
-    // echo $_SERVER (Comparamos este metodo para cuando sea igual a post realice los pasos que estan en el if)
+    $queryUbicacion = "SELECT * FROM ubicacion";
+    $resultadoUbicacion = mysqli_query($db, $queryUbicacion);
     
    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
@@ -34,7 +33,9 @@
         $activo = mysqli_real_escape_string($db, $_POST['activo']);
         $marca = mysqli_real_escape_string($db, $_POST['marca']);    
         $modelo = mysqli_real_escape_string($db, $_POST['modelo']);    
-        $nombreEquipo = mysqli_real_escape_string($db, $_POST['nombreEquipo']);    
+        $nombreEquipo = mysqli_real_escape_string($db, $_POST['nombreEquipo']);  
+        $ubicacion_id = mysqli_real_escape_string($db, $_POST['ubicacion_id']);
+  
 
         //Subir imagenes al servidor
         $imagen = $_FILES['imagen'];
@@ -49,11 +50,10 @@
         $nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
         
         // Subimos la imagen
-        move_uploaded_file($imagen['tmp_name'], $carpetaImagen . $nombreImagen);
+        move_uploaded_file($imagen['tmp_name'], $carpetaImagen . $nombreImagen);  
 
-        
+        $query = "INSERT INTO equipos (tipo, ip, sistemaOperativo, serial, ofimatica, activo, imagen, marca, modelo, nombreEquipo, ubicacion_id) VALUES ('${tipo}','${ip}','${sistemaOperativo}','${serial}','${ofimatica}', '${activo}', '${nombreImagen}', '${marca}', '${modelo}', '${nombreEquipo}', '${ubicacion_id}')";
 
-        $query = "INSERT INTO equipos (tipo, ip, sistemaOperativo, serial, ofimatica, imagen, marca, modelo, nombreEquipo) VALUES ('${tipo}','${ip}','${sistemaOperativo}','${serial}','${ofimatica}', '${nombreImagen}', '${marca}', '${modelo}', '${nombreEquipo}')";
         $resultado = mysqli_query($db, $query);
         if ($resultado) {
             $tipo = '';
@@ -115,6 +115,17 @@
             <div class="orden">
                 <label for="">Nombre Equipo</label>
                 <input name="nombreEquipo" placeholder="Nombre Equipo" id="nombreEquipo" value="<?php echo $nombreEquipo; ?>"></input>
+            </div>
+            <div class="orden">
+                <label for="">Area Asignada</label>
+                <select name="ubicacion_id"">
+                    <option disabled selected>-- Seleccion --</option>
+                    <div>
+                        <?php while( $row = mysqli_fetch_assoc($resultadoUbicacion)) : ?>
+                            <option value="<?php echo $row['id']; ?>"><?php echo $row['departamento']; ?></option>
+                        <?php endwhile;?>
+                    </div>
+                </select>               
             </div>
             <input type="submit" value="Enviar">
         </fieldset>
