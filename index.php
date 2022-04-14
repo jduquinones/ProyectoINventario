@@ -94,15 +94,15 @@
 
     incluirTemplate('header');
 ?>
-
-<main class="contenedor">
-    <div class="buscador">
+<div class="buscador">
         <form method="POST">
             <input type="text" name="buscar" placeholder="Ingrese Activo..." autocomplete="off" >
             <i class="fa-solid fa-magnifying-glass"></i> 
             <input class="buscar" type="submit" value="Buscar">          
         </form>
     </div>
+<main class="contenedor">
+    
     <?php foreach($error as $e) : ?>
     <p class="error"><?php echo $e; ?></p>
     <?php endforeach; ?>
