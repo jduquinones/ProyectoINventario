@@ -59,7 +59,7 @@
                 FROM equipos AS e 
                 LEFT JOIN ubicacion AS u 
                     ON  e.idEquipos = u.id 
-                WHERE tipo LIKE '%${buscar}%' OR ip LIKE '%${buscar}%' OR sistemaOperativo LIKE '%${buscar}%' OR serial LIKE '%${buscar}%' OR ofimatica LIKE '%${buscar}%' OR nombre LIKE '%${buscar}%'";                
+                WHERE tipo LIKE '%${buscar}%' OR ip LIKE '%${buscar}%'  OR centro LIKE '%${buscar}%'  OR departamento LIKE '%${buscar}%' OR sistemaOperativo LIKE '%${buscar}%' OR serial LIKE '%${buscar}%' OR ofimatica LIKE '%${buscar}%'  OR activo LIKE '%${buscar}%'  OR marca LIKE '%${buscar}%' OR modelo LIKE '%${buscar}%'  OR nombreEquipo LIKE '%${buscar}%'";                
                 $resultado = mysqli_query($db, $query);
 
                 if ($resultado->num_rows) {

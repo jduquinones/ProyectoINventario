@@ -11,6 +11,12 @@ body {
     font-size: 1.6rem;
     line-height: 1.8;
     background-color: $grisClaro;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+main{
+    overflow-x: scroll; 
 }
 p {
     color: $negro;
@@ -19,10 +25,9 @@ p {
 }
 .contenedor {
     width: 95%;
-    max-width: 120rem;
-    margin: 0 auto;
-    margin-bottom: 15rem;
+    max-width: auto;
     position: relative;
+    margin: 0 auto;
 }
 .contenido-centrado {
     max-width: 80rem;

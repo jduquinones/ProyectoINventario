@@ -66,7 +66,7 @@
                     ON r.ubicacionResponsables_id = u.id
                 LEFT JOIN equipos AS e 
                     ON r.ubicacionResponsables_id = e.idEquipos
-                WHERE r.nombre LIKE '%${buscar}%' OR r.apellido LIKE '%${buscar}%' OR r.cargo LIKE '%${buscar}%' OR r.cargo LIKE '%${buscar}%' OR u.area LIKE '%${buscar}%' OR e.ip LIKE '%${buscar}%' OR sistemaOperativo LIKE '%${buscar}%' OR serial LIKE '%${buscar}%' OR extencion LIKE '%${buscar}%' OR ofimatica LIKE '%${buscar}%'";     
+                WHERE nombre LIKE '%${buscar}%' OR apellido LIKE '%${buscar}%' OR cargo LIKE '%${buscar}%' OR area LIKE '%${buscar}%' OR centro LIKE '%${buscar}%' OR departamento LIKE '%${buscar}%' OR ip LIKE '%${buscar}%' OR sistemaOperativo LIKE '%${buscar}%' OR serial LIKE '%${buscar}%' OR extencion LIKE '%${buscar}%' OR ofimatica LIKE '%${buscar}%' OR activo LIKE '%${buscar}%' OR marca LIKE '%${buscar}%' OR modelo LIKE '%${buscar}%'";     
 
                 $resultado = mysqli_query($db, $query);              
 

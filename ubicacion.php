@@ -47,7 +47,7 @@
             $buscar = $_POST['buscar'];
             
             if ($buscar) {
-                $query = "SELECT * FROM ubicacion WHERE centro LIKE '%${buscar}%' OR area LIKE '%${buscar}%' OR descripcion LIKE '%${buscar}%'";                
+                $query = "SELECT * FROM ubicacion WHERE centro LIKE '%${buscar}%' OR area LIKE '%${buscar}%' OR departamento LIKE '%${buscar}%' OR extencion LIKE '%${buscar}%'";                
                 $resultado = mysqli_query($db, $query);
 
                 if ($resultado->num_rows) {
