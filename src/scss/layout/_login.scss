@@ -6,7 +6,7 @@
     border-radius: 2rem;
     padding: 3rem;
 }
-.contenido__login {
+.contenido__login_noScroll {
     @include grid(2, 2);    
     margin-top:  15rem;
 

@@ -71,7 +71,7 @@
     <link rel="stylesheet" href="/build/css/app.css">   
 </head>
 <body class="contenido  background-color bg-login">
-    <main class="contenido__login contenedor">
+    <main class="contenido__login contenido__login_noScroll ">
         <div class="contenido__imagen">
             <picture>
                 <source srcset="build/img/inventory-management-system.webp" type="imagen/webp">
