@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: inventario
 -- ------------------------------------------------------
--- Server version	5.7.37-log
+-- Server version	8.0.28
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,32 +16,30 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `responsables`
+-- Table structure for table `ubicacion`
 --
 
-DROP TABLE IF EXISTS `responsables`;
+DROP TABLE IF EXISTS `ubicacion`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `responsables` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(45) DEFAULT NULL,
-  `apellido` varchar(45) DEFAULT NULL,
-  `cargo` varchar(45) DEFAULT NULL,
-  `ubicacionResponsables_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_responsables_ubicacion_idx` (`ubicacionResponsables_id`),
-  CONSTRAINT `fk_responsables_ubicacion` FOREIGN KEY (`ubicacionResponsables_id`) REFERENCES `ubicacion` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+CREATE TABLE `ubicacion` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `centro` varchar(5) DEFAULT NULL,
+  `area` varchar(20) DEFAULT NULL,
+  `departamento` varchar(30) DEFAULT NULL,
+  `extencion` varchar(15) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `responsables`
+-- Dumping data for table `ubicacion`
 --
 
-LOCK TABLES `responsables` WRITE;
-/*!40000 ALTER TABLE `responsables` DISABLE KEYS */;
-INSERT INTO `responsables` VALUES (12,'Erika','Marin','Gestor PDV',10),(17,'Erika','Marin','Gestor PDV',11);
-/*!40000 ALTER TABLE `responsables` ENABLE KEYS */;
+LOCK TABLES `ubicacion` WRITE;
+/*!40000 ALTER TABLE `ubicacion` DISABLE KEYS */;
+INSERT INTO `ubicacion` VALUES (14,'P512','Pdv','Roosvelt','6275'),(16,'P514','Pdv','Caney','6279'),(18,'P515','Pdv','Floresta','8080');
+/*!40000 ALTER TABLE `ubicacion` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -53,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-09  3:36:52
+-- Dump completed on 2022-04-18 16:06:25

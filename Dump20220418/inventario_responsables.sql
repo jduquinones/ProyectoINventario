@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: inventario
 -- ------------------------------------------------------
--- Server version	5.7.37-log
+-- Server version	8.0.28
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,34 +16,32 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `usuarios`
+-- Table structure for table `responsables`
 --
 
-DROP TABLE IF EXISTS `usuarios`;
+DROP TABLE IF EXISTS `responsables`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `usuarios` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `correo` varchar(50) NOT NULL,
-  `password` varchar(100) NOT NULL,
-  `nombre` varchar(20) DEFAULT NULL,
-  `apellido` varchar(20) DEFAULT NULL,
-  `cargo` varchar(30) DEFAULT NULL,
-  `regional` varchar(20) DEFAULT NULL,
-  `idUsuario` int(11) DEFAULT NULL,
+CREATE TABLE `responsables` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(45) DEFAULT NULL,
+  `apellido` varchar(45) DEFAULT NULL,
+  `cargo` varchar(45) DEFAULT NULL,
+  `ubicacionResponsables_id` int NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `correo_UNIQUE` (`correo`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+  KEY `fk_responsables_ubicacion_idx` (`ubicacionResponsables_id`),
+  CONSTRAINT `fk_responsables_ubicacion` FOREIGN KEY (`ubicacionResponsables_id`) REFERENCES `ubicacion` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `usuarios`
+-- Dumping data for table `responsables`
 --
 
-LOCK TABLES `usuarios` WRITE;
-/*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (14,'soporte.cali@macpollo.com','$2y$10$0nr94Zp9W8OM/GEEtXbxLed3aDuNiJ0bNexbsEz8oS9uIr5S/z0TO','Jose','Quiñones',NULL,'Acopi',NULL);
-/*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
+LOCK TABLES `responsables` WRITE;
+/*!40000 ALTER TABLE `responsables` DISABLE KEYS */;
+INSERT INTO `responsables` VALUES (41,'Jose','Garcia','Soporte Usuarios',14);
+/*!40000 ALTER TABLE `responsables` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -55,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-09  3:36:52
+-- Dump completed on 2022-04-18 16:06:24

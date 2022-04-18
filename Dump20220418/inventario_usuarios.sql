@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: inventario
 -- ------------------------------------------------------
--- Server version	5.7.37-log
+-- Server version	8.0.28
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -16,30 +16,34 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `ubicacion`
+-- Table structure for table `usuarios`
 --
 
-DROP TABLE IF EXISTS `ubicacion`;
+DROP TABLE IF EXISTS `usuarios`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `ubicacion` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `centro` varchar(5) DEFAULT NULL,
-  `area` varchar(20) DEFAULT NULL,
-  `departamento` varchar(30) DEFAULT NULL,
-  `extencion` varchar(15) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+CREATE TABLE `usuarios` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `correo` varchar(50) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `nombre` varchar(20) DEFAULT NULL,
+  `apellido` varchar(20) DEFAULT NULL,
+  `cargo` varchar(30) DEFAULT NULL,
+  `regional` varchar(20) DEFAULT NULL,
+  `idUsuario` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `correo_UNIQUE` (`correo`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `ubicacion`
+-- Dumping data for table `usuarios`
 --
 
-LOCK TABLES `ubicacion` WRITE;
-/*!40000 ALTER TABLE `ubicacion` DISABLE KEYS */;
-INSERT INTO `ubicacion` VALUES (10,'P508','Pdv','Delicias','6270'),(11,'P509','Pdv','Vallegrande','6271'),(12,'P510','Pdv','Floralia','6273'),(13,'P511','Pdv','Ciudad Jardin','6274'),(14,'P512','Pdv','Roosvelt','6275'),(15,'P513','Pdv','Floresta','6278'),(16,'P514','Pdv','Caney','6279');
-/*!40000 ALTER TABLE `ubicacion` ENABLE KEYS */;
+LOCK TABLES `usuarios` WRITE;
+/*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
+INSERT INTO `usuarios` VALUES (14,'soporte.cali@macpollo.com','$2y$10$0nr94Zp9W8OM/GEEtXbxLed3aDuNiJ0bNexbsEz8oS9uIr5S/z0TO','Jose','Quiñones',NULL,'Acopi',NULL);
+/*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -51,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-09  3:36:53
+-- Dump completed on 2022-04-18 16:06:23
