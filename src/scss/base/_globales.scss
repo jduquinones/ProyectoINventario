@@ -26,6 +26,7 @@ p {
     position: relative;
     margin: 0 auto;
     overflow-x: scroll; 
+    z-index: -1;
 }
 .contenido__login_noScroll  {
     width: 95%;

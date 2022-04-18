@@ -14,14 +14,11 @@
     $apellido = '';
     $cargo = '';
     $ubicacionResponsables_id = '';
-    $ubicacionEquipo_id = '';
+    $equipos_id = '';
 
     $queryUbicacion = "SELECT * FROM ubicacion";
     $resultadoUbicacion = mysqli_query($db, $queryUbicacion);
     
-    $queryEquipos = "SELECT * FROM equipos";
-    $resultadoEquipos = mysqli_query($db, $queryEquipos); 
-
    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
         $nombre = mysqli_real_escape_string($db, $_POST['nombre']);
@@ -65,17 +62,6 @@
                     <div>
                         <?php while( $row = mysqli_fetch_assoc($resultadoUbicacion)) : ?>
                             <option value="<?php echo $row['id']; ?>"><?php echo $row['departamento']; ?></option>
-                        <?php endwhile;?>
-                    </div>
-                </select>               
-            </div>
-            <div class="orden">
-                <label for="">Serial de Equipo</label>
-                <select name="ubicacionEquipo_id">
-                    <option disabled selected>-- Seleccion --</option>
-                    <div>
-                        <?php while( $row = mysqli_fetch_assoc($resultadoEquipos)) : ?>
-                            <option value="<?php echo $row['id']; ?>"><?php echo $row['serial']; ?></option>
                         <?php endwhile;?>
                     </div>
                 </select>               

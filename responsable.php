@@ -27,7 +27,7 @@
     }
     $empezarDesde = ($pagina -1) * $tamañoPaginas;
 
-    $query = "SELECT r.id, r.nombre, r.apellido, r.cargo, u.area, u.centro, u.departamento, e.ip, e.sistemaOperativo, e.serial, u.extencion, e.ofimatica, e.activo, e.marca, e.modelo, e.nombreEquipo  
+    $query = "SELECT r.id, r.nombre, r.apellido, r.cargo, u.area, u.centro, u.departamento, e.ip, e.sistemaOperativo, e.serial, u.extencion, e.ofimatica, e.activo, e.marca, e.modelo, e.nombreEquipo, r.ubicacionResponsables_id  
     FROM responsables AS r 
     LEFT JOIN ubicacion AS u 
         ON r.ubicacionResponsables_id = u.id
@@ -40,7 +40,7 @@
     $anterior = $pagina - 1;
     $siguiente = $pagina + 1;
 
-    $queryLimit = "SELECT r.id, r.nombre, r.apellido, r.cargo, u.area, u.centro, u.departamento, e.ip, e.sistemaOperativo, e.serial, u.extencion, e.ofimatica, e.activo, e.marca, e.modelo, e.nombreEquipo  
+    $queryLimit = "SELECT r.id, r.nombre, r.apellido, r.cargo, u.area, u.centro, u.departamento, e.ip, e.sistemaOperativo, e.serial, u.extencion, e.ofimatica, e.activo, e.marca, e.modelo, e.nombreEquipo, r.ubicacionResponsables_id  
     FROM responsables AS r 
     LEFT JOIN ubicacion AS u 
         ON r.ubicacionResponsables_id = u.id
@@ -80,11 +80,10 @@
             }
         }
 
-        if (  isset($_POST['id'])) {
-            
+        if (  isset($_POST['id'])) {            
             $id = $_POST['id'];             
             $id = filter_var($id, FILTER_VALIDATE_INT);
-    
+
             if ($id) {
                 $query = "DELETE FROM responsables WHERE id = ${id}";
 

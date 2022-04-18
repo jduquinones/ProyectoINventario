@@ -11,7 +11,7 @@
 
     $buscar = true;
     $error = [];
-   
+
     //******Paginacion**********// 
 
     $tamañoPaginas = 10;
@@ -63,12 +63,23 @@
         if (  isset($_POST['id'])) {
             $id = $_POST['id'];  
             $id = filter_var($id, FILTER_VALIDATE_INT);
+            $error = [];
     
             if ($id) {
-                $query = "DELETE FROM ubicacion WHERE id = ${id}";
-                $resultado = mysqli_query($db, $query);
-                if ($resultado) {
-                header('Location: ubicacion.php');
+
+                $query = "SELECT serial FROM equipos WHERE idEquipos = ${id}";
+                $consulta = mysqli_query($db, $query);
+                $dato = mysqli_fetch_assoc($consulta);
+                $serial = $dato['serial'];
+
+                if (!$consulta -> num_rows) {  
+                    $query = "DELETE FROM ubicacion WHERE id = ${id}";
+                    $consulta = mysqli_query($db, $query);
+                    if ($consulta) {
+                    header('Location: ubicacion.php');
+                    }
+                }else {
+                    $error[] = "No se puede eliminar ya que el serial: ${serial}  esta asignado a un equipo,  elimine el equipo y vuelva a intentarlo";
                 }
             }
         }

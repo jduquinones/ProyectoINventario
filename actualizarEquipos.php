@@ -15,13 +15,23 @@
     require 'includes/config/database.php';
     $db = connectDB(); 
 
-    $query = "SELECT * FROM equipos WHERE id = ${id}";
+    $query = "SELECT e.id, e.tipo, e.ip, e.sistemaOperativo, e.serial, e.ofimatica, e.activo, e.imagen, e.marca, e.modelo, e.nombreEquipo, u.departamento FROM equipos e 
+    JOIN ubicacion u 
+        ON e.idEquipos = u.id
+    WHERE e.id = ${id}";        
     $resultadoConsulta = mysqli_query($db, $query);
     $dato = mysqli_fetch_assoc($resultadoConsulta);
 
-    $queryUbicacion = "SELECT * FROM ubicacion";
-    $resultadoUbicacion = mysqli_query($db, $queryUbicacion);
-    $row = mysqli_fetch_assoc($resultadoUbicacion);
+    $depatamento = "SELECT u.id, u.departamento 
+    FROM  ubicacion u
+    LEFT JOIN equipos e 
+    ON u.id = e.idEquipos
+    WHERE e.id = ${id}";
+    $resultadoDepartamento = mysqli_query($db, $depatamento);
+    $ubicacion = mysqli_fetch_assoc($resultadoDepartamento);
+
+    $option = "SELECT * FROM  ubicacion ";
+    $optionDepartamento = mysqli_query($db, $option);
 
     $tipo = $dato['tipo'];
     $ip = $dato['ip'];
@@ -32,8 +42,6 @@
     $marca = $dato['marca'];
     $modelo = $dato['modelo'];
     $nombreEquipo = $dato['nombreEquipo'];
-    $idEquipos = $row['departamento'];
-
 
     $error = [];
 
@@ -79,7 +87,6 @@
         }
 
         $query = "UPDATE equipos SET tipo = '${tipo}', ip = '${ip}', sistemaOperativo = '${sistemaOperativo}', serial = '${serial}', ofimatica = '${ofimatica}', activo = '${activo}', imagen = '${nombreImagen}', marca = '${marca}', modelo = '${modelo}', nombreEquipo = '${nombreEquipo}', idEquipos = '${idEquipos}' WHERE id = ${id}";    
-        var_dump($query);
        
         $resultado = mysqli_query($db, $query);   
         if ($resultado) {
@@ -137,14 +144,12 @@
             <div class="orden">
                 <label for="">Departamento</label>
                 <select name="idEquipos"">
-                    <option disabled >-- Seleccion --</option>
-                    <div>
-                        <?php while( $row) : ?>
-                            <option value="<?php echo $row['id']; ?>"><?php echo $row['departamento']; ?></option>
-                        <?php endwhile;?>
-                    </div>
+                    <option  value="<?php echo $ubicacion['id']; ?>" ><?php echo $ubicacion['departamento']; ?></option> 
+                        <?php while($dato = mysqli_fetch_assoc($optionDepartamento)) : ?>    
+                            <option value="<?php echo $dato['id'];?>"> <?php echo $dato['departamento']; ?> </option>
+                        <?php endwhile; ?>
                 </select>               
-            </div>
+            </div> 
             <input class="boton boton-eliminar" type="submit" value="Enviar">
         </fieldset>
     </form>
