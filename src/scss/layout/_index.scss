@@ -2,6 +2,7 @@
 .buscador {
     transform: translateY(5rem);
     margin-left: 5rem;
+    z-index: 10;
     input[type="text"] {
         height: 3rem;
         width: 25rem;
