@@ -14,14 +14,14 @@
     require 'includes/config/database.php';
     $db = connectDB(); 
 
-    $query = "SELECT r.id, r.nombre, r.apellido, r.cargo, r.extencion, e.idEquipos, e.serial, u.departamento
+    $query = " SELECT r.id, r.nombre, r.apellido, r.cargo, r.extencion, e.idUbicacion, e.serial, u.departamento
     FROM responsables r 
     left JOIN equipos e 
-        ON r.ubicacionResponsables_id = e.idEquipos       
+        ON r.equipos_id = e.id    
     LEFT JOIN ubicacion u 
     	ON r.ubicacionResponsables_id = u.id
     Where r.id = ${id}";
-    
+
     $resultadoConsulta = mysqli_query($db, $query);
     $dato = mysqli_fetch_assoc($resultadoConsulta);
 
@@ -34,8 +34,19 @@
     $ubicacion = mysqli_fetch_assoc($resultadoDepartamento);
 
     $option = "SELECT * FROM  ubicacion ";
-    $optionDepartamento = mysqli_query($db, $option);    
+    $optionDepartamento = mysqli_query($db, $option);
+    
+    $serial = "SELECT e.id, e.serial 
+    FROM  responsables r 
+    LEFT JOIN equipos e   
+    ON e.idUbicacion = r.ubicacionResponsables_id
+    WHERE r.id = ${id}";
+    $resultadoSerial = mysqli_query($db, $serial);
+    $ubicacionSerial = mysqli_fetch_assoc($resultadoSerial);
 
+    $option = "SELECT * FROM  equipos ";
+    $optionSerial = mysqli_query($db, $option);
+    
     $nombre = $dato['nombre'];
     $apellido = $dato['apellido'];
     $cargo = $dato['cargo'];  
@@ -44,18 +55,20 @@
     $error = [];
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
         $nombre = mysqli_real_escape_string($db, $_POST['nombre']);
         $apellido = mysqli_real_escape_string($db, $_POST['apellido']);
         $cargo = mysqli_real_escape_string($db, $_POST['cargo']);
         $extencion = mysqli_real_escape_string($db, $_POST['extencion']);
         $ubicacionResponsables_id = mysqli_real_escape_string($db, $_POST['ubicacionResponsables_id']);
+        $equipos_id = mysqli_real_escape_string($db, $_POST['equipos_id']);
 
         if (empty($error)) {             
             $query = "UPDATE responsables
-            SET nombre = '${nombre}', apellido = '${apellido}', cargo = '${cargo}', extencion = '${extencion}, ubicacionResponsables_id = ${ubicacionResponsables_id} 
+            SET nombre = '${nombre}', apellido = '${apellido}', cargo = '${cargo}', extencion = '${extencion}', ubicacionResponsables_id = ${ubicacionResponsables_id}, equipos_id = ${equipos_id} 
             WHERE id = ${id}";    
             $resultado = mysqli_query($db, $query);
+            
+        var_dump($resultado);
             
             if ($resultado) {
                 header('Location: /responsable.php');
@@ -98,7 +111,16 @@
                             <option value="<?php echo $dato['id'];?>"> <?php echo $dato['departamento']; ?> </option>
                         <?php endwhile; ?>
                 </select>               
-            </div>            
+            </div>    
+            <div class="orden">
+                <label for="">Serial</label>
+                <select name="equipos_id">
+                    <option  value="<?php echo $ubicacionSerial['id']; ?>" ><?php echo $ubicacionSerial['serial']; ?></option> 
+                        <?php while($dato = mysqli_fetch_assoc($optionSerial)) : ?>    
+                            <option value="<?php echo $dato['id'];?>"> <?php echo $dato['serial']; ?> </option>
+                        <?php endwhile; ?>
+                </select>               
+            </div>        
             <input class="boton boton-eliminar" type="submit" value="Enviar">
         </fieldset>
     </form>

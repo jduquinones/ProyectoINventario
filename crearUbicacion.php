@@ -12,22 +12,19 @@
     $centro = '';
     $area = '';
     $departamento = '';
-    $extencion = '';
 
    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
         $centro = mysqli_real_escape_string($db, $_POST['centro']);
         $area = mysqli_real_escape_string($db, $_POST['area']);
         $departamento = mysqli_real_escape_string($db, $_POST['departamento']);
-        $extencion = mysqli_real_escape_string($db, $_POST['extencion']);
         
-        $query = "INSERT INTO ubicacion (centro, area, departamento, extencion) VALUES ('${centro}', '${area}', '${departamento}', '${extencion}')";
+        $query = "INSERT INTO ubicacion (centro, area, departamento) VALUES ('${centro}', '${area}', '${departamento}')";
         $resultado = mysqli_query($db, $query);
         if ($resultado) {            
             $centro = '';
             $area = '';
             $departamento = '';
-            $extencion = '';
         } 
    }
    incluirTemplate('header');
@@ -48,11 +45,7 @@
             <div class="orden">
                 <label for="">Departamento</label>
                 <input type="text" placeholder="Departamento" name="departamento" id="departamento" value="<?php echo $departamento; ?>">
-            </div> 
-            <div class="orden">
-                <label for="">Extencion</label>
-                <input type="text" placeholder="Extencion" name="extencion" id="extencion" value="<?php echo $extencion; ?>">
-            </div>         
+            </div>                  
             <input type="submit" value="Enviar">
         </fieldset>
     </form>

@@ -20,6 +20,9 @@
     $queryUbicacion = "SELECT * FROM ubicacion";
     $resultadoUbicacion = mysqli_query($db, $queryUbicacion);
     
+    $queryEquipos = "SELECT * FROM equipos";
+    $resultadoEquipos = mysqli_query($db, $queryEquipos);
+
    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
         $nombre = mysqli_real_escape_string($db, $_POST['nombre']);
@@ -27,8 +30,9 @@
         $cargo = mysqli_real_escape_string($db, $_POST['cargo']);
         $extencion = mysqli_real_escape_string($db, $_POST['extencion']);
         $ubicacionResponsables_id = mysqli_real_escape_string($db, $_POST['ubicacionResponsables_id']);
+        $equipos_id = mysqli_real_escape_string($db, $_POST['equipos_id']);
 
-        $query = "INSERT INTO responsables (nombre, apellido, cargo, extencion, ubicacionResponsables_id) VALUES ('${nombre}','${apellido}','${cargo}', '${extencion}', ${ubicacionResponsables_id})";
+        $query = "INSERT INTO responsables (nombre, apellido, cargo, extencion, ubicacionResponsables_id, equipos_id) VALUES ('${nombre}','${apellido}','${cargo}', '${extencion}', ${ubicacionResponsables_id}, ${equipos_id})";
 
         $resultado = mysqli_query($db, $query);        
         if ($resultado) {            
@@ -37,6 +41,7 @@
             $cargo = '';
             $extencion = '';
             $ubicacionResponsables_id = '';
+            $equipos_id = '';
         } 
    }
    incluirTemplate('header');
@@ -69,6 +74,17 @@
                     <div>
                         <?php while( $row = mysqli_fetch_assoc($resultadoUbicacion)) : ?>
                             <option value="<?php echo $row['id']; ?>"><?php echo $row['departamento']; ?></option>
+                        <?php endwhile;?>
+                    </div>
+                </select>               
+            </div>            
+            <div class="orden">
+                <label for="">Area Asignada</label>
+                <select name="equipos_id">
+                    <option disabled selected>-- Seleccion --</option>
+                    <div>
+                        <?php while( $row = mysqli_fetch_assoc($resultadoEquipos)) : ?>
+                            <option value="<?php echo $row['id']; ?>"><?php echo $row['serial']; ?></option>
                         <?php endwhile;?>
                     </div>
                 </select>               

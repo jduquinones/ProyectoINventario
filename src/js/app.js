@@ -1,18 +1,6 @@
 document.addEventListener('DOMContentLoaded', function(){
-    // menuheader();
    
 });
-
-// Coloca una clase al dar clic en el menu, esto para hacer el efecto en el que aparace 'Registrar Equipo'
-// function menuheader(){
-//     menu = document.querySelector('.menu');
-//     menu.addEventListener('click', desplegar);
-
-//     function desplegar() {
-//         const verclase = document.querySelector('.navegacion');
-//         verclase.classList.toggle('mostrar');
-//     }
-// }
 
 // Funcion que me realiza un overlay
 function ampliarImagen(id){
@@ -42,10 +30,3 @@ function trae(){
     body.appendChild(div);
    
 }
-
-// const lista = document.querySelectorAll('.lista');
-// function navegacion() {
-//     lista.forEach((item) => item.classList.remove('activo'));
-//     this.classList.add('activo');    
-// }
-// lista.forEach((item) => item.addEventListener('click', navegacion)); 

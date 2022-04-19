@@ -17,7 +17,7 @@
 
     $query = "SELECT e.id, e.tipo, e.ip, e.sistemaOperativo, e.serial, e.ofimatica, e.activo, e.imagen, e.marca, e.modelo, e.nombreEquipo, u.departamento FROM equipos e 
     JOIN ubicacion u 
-        ON e.idEquipos = u.id
+        ON e.idUbicacion = u.id
     WHERE e.id = ${id}";        
     $resultadoConsulta = mysqli_query($db, $query);
     $dato = mysqli_fetch_assoc($resultadoConsulta);
@@ -25,7 +25,7 @@
     $depatamento = "SELECT u.id, u.departamento 
     FROM  ubicacion u
     LEFT JOIN equipos e 
-    ON u.id = e.idEquipos
+    ON u.id = e.idUbicacion
     WHERE e.id = ${id}";
     $resultadoDepartamento = mysqli_query($db, $depatamento);
     $ubicacion = mysqli_fetch_assoc($resultadoDepartamento);
@@ -56,7 +56,7 @@
         $marca = mysqli_real_escape_string($db, $_POST['marca']);    
         $modelo = mysqli_real_escape_string($db, $_POST['modelo']);    
         $nombreEquipo = mysqli_real_escape_string($db, $_POST['nombreEquipo']); 
-        $idEquipos = mysqli_real_escape_string($db, $_POST['idEquipos']);    
+        $idUbicacion = mysqli_real_escape_string($db, $_POST['idUbicacion']);    
        
         // Crear carpeta
         $carpetaImagen = 'imagenesSubmit/';
@@ -86,7 +86,7 @@
             $error[] = 'La imagen es muy pesada';
         }
 
-        $query = "UPDATE equipos SET tipo = '${tipo}', ip = '${ip}', sistemaOperativo = '${sistemaOperativo}', serial = '${serial}', ofimatica = '${ofimatica}', activo = '${activo}', imagen = '${nombreImagen}', marca = '${marca}', modelo = '${modelo}', nombreEquipo = '${nombreEquipo}', idEquipos = '${idEquipos}' WHERE id = ${id}";    
+        $query = "UPDATE equipos SET tipo = '${tipo}', ip = '${ip}', sistemaOperativo = '${sistemaOperativo}', serial = '${serial}', ofimatica = '${ofimatica}', activo = '${activo}', imagen = '${nombreImagen}', marca = '${marca}', modelo = '${modelo}', nombreEquipo = '${nombreEquipo}', idUbicacion = '${idUbicacion}' WHERE id = ${id}";    
        
         $resultado = mysqli_query($db, $query);   
         if ($resultado) {
@@ -143,7 +143,7 @@
             </div>
             <div class="orden">
                 <label for="">Departamento</label>
-                <select name="idEquipos"">
+                <select name="idUbicacion"">
                     <option  value="<?php echo $ubicacion['id']; ?>" ><?php echo $ubicacion['departamento']; ?></option> 
                         <?php while($dato = mysqli_fetch_assoc($optionDepartamento)) : ?>    
                             <option value="<?php echo $dato['id'];?>"> <?php echo $dato['departamento']; ?> </option>

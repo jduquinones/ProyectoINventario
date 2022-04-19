@@ -31,17 +31,18 @@
     $query = "SELECT  e.id, e.tipo, e.imagen, e.ip, u.centro, u.departamento, e.sistemaOperativo, e.serial, e.ofimatica, e.activo, e.marca, e.modelo, e.nombreEquipo, u.area  
     FROM equipos AS e 
     LEFT JOIN ubicacion AS u 
-        ON  e.idEquipos = u.id";
+        ON  e.idUbicacion = u.id";
     $resultado = mysqli_query($db, $query);
     $numeroFilas = $resultado->num_rows;
     $totalPaginas = ceil($numeroFilas / $tamañoPaginas);
     $anterior = $pagina - 1;
     $siguiente = $pagina + 1;
+    
 
     $queryLimit = "SELECT  e.id, e.tipo, e.imagen, e.ip, u.centro, u.departamento, e.sistemaOperativo, e.serial, e.ofimatica, e.activo, e.marca, e.modelo, e.nombreEquipo, u.area  
     FROM equipos AS e 
     LEFT JOIN ubicacion AS u 
-        ON  e.idEquipos = u.id 
+        ON  e.idUbicacion = u.id 
     LIMIT $empezarDesde, $tamañoPaginas ";
     $resultado = mysqli_query($db, $queryLimit);
         
@@ -58,7 +59,7 @@
                 $query = "SELECT  e.id, e.tipo, e.imagen, e.ip, u.centro, u.departamento, e.sistemaOperativo, e.serial, e.ofimatica, e.activo, e.marca, e.modelo, e.nombreEquipo, u.area  
                 FROM equipos AS e 
                 LEFT JOIN ubicacion AS u 
-                    ON  e.idEquipos = u.id 
+                    ON  e.idUbicacion = u.id 
                 WHERE tipo LIKE '%${buscar}%' OR ip LIKE '%${buscar}%'  OR centro LIKE '%${buscar}%'  OR departamento LIKE '%${buscar}%' OR sistemaOperativo LIKE '%${buscar}%' OR serial LIKE '%${buscar}%' OR ofimatica LIKE '%${buscar}%'  OR activo LIKE '%${buscar}%'  OR marca LIKE '%${buscar}%' OR modelo LIKE '%${buscar}%'  OR nombreEquipo LIKE '%${buscar}%'";                
                 $resultado = mysqli_query($db, $query);
 
@@ -76,17 +77,33 @@
 
             $id = $_POST['id'];           
             $id = filter_var($id, FILTER_VALIDATE_INT);
+            $error = [];
             
             if ($id) {
-                $query = "SELECT imagen FROM equipos WHERE id = ${id}";
-                $resultado = mysqli_query($db, $query);
-                $dato = mysqli_fetch_assoc($resultado);
-                unlink('imagenesSubmit/' . $dato['imagen']);
 
-                $query = "DELETE FROM equipos WHERE id = ${id}";
-                $resultado = mysqli_query($db, $query);
-                if ($resultado) {
-                header('Location: index.php');
+                $querySerial = "SELECT r.equipos_id, e.serial 
+                FROM responsables r
+                Left Join equipos e 
+                ON r.equipos_id = e.id
+                Where e.id = ${id}";
+                $resultadoSerial = mysqli_query($db, $querySerial);
+                $datoSerial = mysqli_fetch_assoc($resultadoSerial);
+                $serial = $datoSerial['serial'];
+
+                if (!$resultadoSerial -> num_rows) {
+                    $queryImagen = "SELECT imagen FROM equipos WHERE id = ${id}";
+                    $resultadoImagen = mysqli_query($db, $queryImagen);
+    
+                    $dato = mysqli_fetch_assoc($resultadoImagen);                
+                    unlink('imagenesSubmit/' . $dato['imagen']);
+    
+                    $query = "DELETE FROM equipos WHERE id = ${id}";
+                    $resultado = mysqli_query($db, $query);
+                    if ($resultado) {
+                    header('Location: index.php');
+                    }
+                }else {
+                    $error[] = "No se puede eliminar ya que el equipo con serial: ${serial}  esta asignado a un responsable,  elimine el equipo del responsable y vuelva a intentarlo";
                 }
             }
         } 
@@ -129,7 +146,7 @@
         <?php while($row = mysqli_fetch_assoc($resultado)): ?>                                
             <tr> 
                 <td><?php echo $row['tipo']; ?></td>   
-                <td><img class="resultado-imagen" onclick="ampliarImagen('<?php echo $row['imagen'];?>')"  src="imagenesSubmit/<?php echo $row['imagen']; ?>" > </td>                 
+                <td><img class="resultado-imagen" onclick="ampliarImagen('<?php echo $row['imagen'];?>')"  src="/imagenesSubmit/<?php echo $row['imagen']; ?>" > </td>                 
                 <td><?php echo $row['ip']; ?></td>
                 <td><?php echo $row['centro']; ?></td>
                 <td><?php echo $row['departamento']; ?></td>
