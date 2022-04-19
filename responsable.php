@@ -27,7 +27,7 @@
     }
     $empezarDesde = ($pagina -1) * $tamañoPaginas;
 
-    $query = "SELECT r.id, r.nombre, r.apellido, r.cargo, u.area, u.centro, u.departamento, e.ip, e.sistemaOperativo, e.serial, u.extencion, e.ofimatica, e.activo, e.marca, e.modelo, e.nombreEquipo, r.ubicacionResponsables_id  
+    $query = "SELECT r.id, r.nombre, r.apellido, r.cargo, u.area, u.centro, u.departamento, e.ip, e.sistemaOperativo, e.serial, r.extencion, e.ofimatica, e.activo, e.marca, e.modelo, e.nombreEquipo, r.ubicacionResponsables_id  
     FROM responsables AS r 
     LEFT JOIN ubicacion AS u 
         ON r.ubicacionResponsables_id = u.id
@@ -40,7 +40,7 @@
     $anterior = $pagina - 1;
     $siguiente = $pagina + 1;
 
-    $queryLimit = "SELECT r.id, r.nombre, r.apellido, r.cargo, u.area, u.centro, u.departamento, e.ip, e.sistemaOperativo, e.serial, u.extencion, e.ofimatica, e.activo, e.marca, e.modelo, e.nombreEquipo, r.ubicacionResponsables_id  
+    $queryLimit = "SELECT r.id, r.nombre, r.apellido, r.cargo, u.area, u.centro, u.departamento, e.ip, e.sistemaOperativo, e.serial, r.extencion, e.ofimatica, e.activo, e.marca, e.modelo, e.nombreEquipo, r.ubicacionResponsables_id  
     FROM responsables AS r 
     LEFT JOIN ubicacion AS u 
         ON r.ubicacionResponsables_id = u.id
@@ -60,13 +60,13 @@
             $buscar = $_POST['buscar'];
             
             if ($buscar) {
-                $query = "SELECT r.id, r.nombre, r.apellido, r.cargo, u.area, u.centro, u.departamento, e.ip, e.sistemaOperativo, e.serial, u.extencion, e.ofimatica, e.activo, e.marca, e.modelo, e.nombreEquipo  
+                $query = "SELECT r.id, r.nombre, r.apellido, r.cargo, u.area, u.centro, u.departamento, e.ip, e.sistemaOperativo, e.serial, r.extencion, e.ofimatica, e.activo, e.marca, e.modelo, e.nombreEquipo  
                 FROM responsables AS r 
                 LEFT JOIN ubicacion AS u 
                     ON r.ubicacionResponsables_id = u.id
                 LEFT JOIN equipos AS e 
                     ON r.ubicacionResponsables_id = e.idEquipos
-                WHERE nombre LIKE '%${buscar}%' OR apellido LIKE '%${buscar}%' OR cargo LIKE '%${buscar}%' OR area LIKE '%${buscar}%' OR centro LIKE '%${buscar}%' OR departamento LIKE '%${buscar}%' OR ip LIKE '%${buscar}%' OR sistemaOperativo LIKE '%${buscar}%' OR serial LIKE '%${buscar}%' OR extencion LIKE '%${buscar}%' OR ofimatica LIKE '%${buscar}%' OR activo LIKE '%${buscar}%' OR marca LIKE '%${buscar}%' OR modelo LIKE '%${buscar}%'";     
+                WHERE nombre LIKE '%${buscar}%' OR apellido LIKE '%${buscar}%' OR cargo LIKE '%${buscar}%' OR area LIKE '%${buscar}%' OR centro LIKE '%${buscar}%' OR departamento LIKE '%${buscar}%' OR ip LIKE '%${buscar}%' OR sistemaOperativo LIKE '%${buscar}%' OR serial LIKE '%${buscar}%' OR extencion LIKE '%${buscar}%' OR ofimatica LIKE '%${buscar}%' OR activo LIKE '%${buscar}%' OR marca LIKE '%${buscar}%' OR modelo LIKE '%${buscar}%' OR extencion LIKE '%${buscar}%'";     
 
                 $resultado = mysqli_query($db, $query);              
 
@@ -114,7 +114,8 @@
                 <tr>
                     <th>Nombre Responsable</th>
                     <th>Cargo</th>                    
-                    <th>Area</th>                    
+                    <th>Area</th>  
+                    <th>Extencion</th>                  
                     <th>Centro</th>                    
                     <th>Departamento</th>                    
                     <th>Ip</th>                    
@@ -135,6 +136,7 @@
                     <td><?php echo $row['nombre'] . " " . $row['apellido']; ?></td>    
                     <td><?php echo $row['cargo']; ?></td>
                     <td><?php echo $row['area']; ?></td>
+                    <td><?php echo $row['extencion']; ?></td>
                     <td><?php echo $row['centro']; ?></td>
                     <td><?php echo $row['departamento']; ?></td>
                     <td><?php echo $row['ip']; ?></td>

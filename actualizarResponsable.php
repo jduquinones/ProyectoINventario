@@ -14,7 +14,7 @@
     require 'includes/config/database.php';
     $db = connectDB(); 
 
-    $query = "SELECT r.id, r.nombre, r.apellido, r.cargo, e.idEquipos, e.serial, u.departamento
+    $query = "SELECT r.id, r.nombre, r.apellido, r.cargo, r.extencion, e.idEquipos, e.serial, u.departamento
     FROM responsables r 
     left JOIN equipos e 
         ON r.ubicacionResponsables_id = e.idEquipos       
@@ -40,12 +40,6 @@
     $apellido = $dato['apellido'];
     $cargo = $dato['cargo'];  
 
-    // $queryUbicacion = "SELECT r.ubicacionResponsables_id, r.nombre, r.apellido, r.cargo, u.id, u.departamento
-    // FROM responsables r 
-    // left JOIN ubicacion u 
-    //     ON r.ubicacionResponsables_id = u.id";
-    // $resultadoUbicacion = mysqli_query($db, $queryUbicacion);
-
     $error = [];
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -53,11 +47,12 @@
         $nombre = mysqli_real_escape_string($db, $_POST['nombre']);
         $apellido = mysqli_real_escape_string($db, $_POST['apellido']);
         $cargo = mysqli_real_escape_string($db, $_POST['cargo']);
+        $extencion = mysqli_real_escape_string($db, $_POST['extencion']);
         $ubicacionResponsables_id = mysqli_real_escape_string($db, $_POST['ubicacionResponsables_id']);
 
         if (empty($error)) {             
             $query = "UPDATE responsables
-            SET nombre = '${nombre}', apellido = '${apellido}', cargo = '${cargo}', ubicacionResponsables_id = ${ubicacionResponsables_id} 
+            SET nombre = '${nombre}', apellido = '${apellido}', cargo = '${cargo}', extencion = '${extencion}, ubicacionResponsables_id = ${ubicacionResponsables_id} 
             WHERE id = ${id}";    
             $resultado = mysqli_query($db, $query);
             
@@ -87,8 +82,12 @@
                 <input type="text" placeholder="Apellido" name="apellido" id="apellido" value="<?php echo $apellido; ?>">
             </div>
             <div class="orden">
-                <label for="">cargo</label>
-                <input type="text" placeholder="cargo" name="cargo" id="cargo" value="<?php echo $cargo; ?>">
+                <label for="">Cargo</label>
+                <input type="text" placeholder="Cargo" name="cargo" id="cargo" value="<?php echo $cargo; ?>">
+            </div>
+            <div class="orden">
+                <label for="">Extencion</label>
+                <input type="text" placeholder="Extencion" name="extencion" id="extencion" value="<?php echo $extencion; ?>">
             </div>
             <div class="orden">
                 <label for="">Departamento</label>
