@@ -39,6 +39,7 @@
     $nombre = $dato['nombre'];
     $apellido = $dato['apellido'];
     $cargo = $dato['cargo'];  
+    $extencion = $dato['extencion'];  
 
     $error = [];
 

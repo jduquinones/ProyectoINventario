@@ -13,6 +13,7 @@
     $nombre = '';
     $apellido = '';
     $cargo = '';
+    $extencion = '';
     $ubicacionResponsables_id = '';
     $equipos_id = '';
 
@@ -24,15 +25,17 @@
         $nombre = mysqli_real_escape_string($db, $_POST['nombre']);
         $apellido = mysqli_real_escape_string($db, $_POST['apellido']);
         $cargo = mysqli_real_escape_string($db, $_POST['cargo']);
+        $extencion = mysqli_real_escape_string($db, $_POST['extencion']);
         $ubicacionResponsables_id = mysqli_real_escape_string($db, $_POST['ubicacionResponsables_id']);
 
-        $query = "INSERT INTO responsables (nombre, apellido, cargo, ubicacionResponsables_id) VALUES ('${nombre}','${apellido}','${cargo}', ${ubicacionResponsables_id})";
+        $query = "INSERT INTO responsables (nombre, apellido, cargo, extencion, ubicacionResponsables_id) VALUES ('${nombre}','${apellido}','${cargo}', '${extencion}', ${ubicacionResponsables_id})";
 
         $resultado = mysqli_query($db, $query);        
         if ($resultado) {            
             $nombre = '';
             $apellido = '';
             $cargo = '';
+            $extencion = '';
             $ubicacionResponsables_id = '';
         } 
    }
@@ -54,6 +57,10 @@
             <div class="orden">
                 <label for="">Cargo</label>
                 <input type="text" placeholder="Cargo" name="cargo" id="cargo" value="<?php echo $cargo; ?>">
+            </div>
+            <div class="orden">
+                <label for="">Extencion</label>
+                <input type="text" placeholder="Extencion" name="extencion" id="extencion" value="<?php echo $extencion; ?>">
             </div>
             <div class="orden">
                 <label for="">Area Asignada</label>
