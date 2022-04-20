@@ -67,9 +67,9 @@
     
             if ($id) {
 
-                $query = "SELECT serial FROM equipos WHERE idEquipos = ${id}";
+                $query = "SELECT serial FROM equipos WHERE idUbicacion = ${id}";
                 $consulta = mysqli_query($db, $query);
-                $dato = mysqli_fetch_assoc($consulta);
+                $dato = mysqli_fetch_assoc($consulta);                
                 $serial = $dato['serial'];
 
                 if (!$consulta -> num_rows) {  
